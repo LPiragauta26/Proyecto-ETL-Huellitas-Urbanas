@@ -1,0 +1,73 @@
+project:
+  name: "ETL Bienestar Animal: Cali (CBA/Uaepa) vs Bogota (IDPYBA)"
+  version: "1.0"
+  description: "Pipeline Medallion (bronze, silver, gold) para integrar datos de bienestar animal de Cali y Bogota"
+  authors: Laura Fernanda Piragauta Pinzón, Omar Alejandro Yepez Ospino, Ana Maria Rivera Diaz y Thomas Marcos Florez
+  date: "2026-10-12"
+
+paths:
+  bronze_dir: data/bronze
+  silver_dir: data/silver
+  gold_dir: data/gold
+  kpis_dir: data/gold/kpis
+  evidencias_dir: evidencias
+  logs_dir: logs
+  log_file: logs/log.txt
+  warehouse_db: data/gold/warehouse.db
+  silver_cali: data/silver/silver_cali.csv
+  silver_bogota: data/silver/silver_bogota.csv
+  gold_final: data/gold/gold_final.csv
+
+sources:
+  cali:
+    original_csv: data/bronze/Dataset_cali.csv       # descarga original, no se modifica
+    path: data/bronze/Dataset_cali.xlsx
+    sheet_name: cali
+    file_type: excel
+    encoding: utf-8-sig                              # encoding del CSV original
+    owner: "UAEPA / Centro de Bienestar Animal - Datos Abiertos Cali"
+  bogota:
+    path: data/bronze/dataset_bogota.geojson
+    file_type: geojson
+    owner: "IDPYBA - Bogota"
+  # Opcional: poblacion por comuna (columnas: zona,poblacion). Si el archivo no existe,
+  # las metricas por 10.000 habitantes quedan vacias y el pipeline sigue funcionando.
+  poblacion_cali:
+    path: data/bronze/poblacion_comunas.csv
+    optional: true
+
+# Consumo de API (portal de Datos Abiertos de Cali, estilo CKAN datastore_search).
+# Desactivado por defecto: si enabled=false (o falla), se usa el archivo local de bronze.
+api:
+  enabled: false
+  base_url: "https://datos.cali.gov.co/api/3/action/datastore_search"
+  resource_id: ""
+  page_size: 5000
+  timeout: 30
+  guardar_en: data/bronze/Dataset_cali_api.csv
+
+# API de poblacion por comuna y corregimiento (portal de Datos Abiertos de Cali, CKAN)
+api_poblacion:
+  enabled: true
+  base_url: "https://datos.cali.gov.co/api/3/action/datastore_search"
+  resource_id: "63f3e50e-0452-49cf-993d-08dfc2842cb4"   # Proyecciones de poblacion de Cali por comuna y corregimiento 2006-2020
+  anio: "2020"
+  limit: 500
+  timeout: 30
+  guardar_en: data/bronze/poblacion_comunas_api.json
+
+quality:
+  fecha_min: "2024-01-01"
+  fecha_max: "2025-12-31"   # cierre real del corte 2024-2025 (evita que 5 errores de digitacion con año 2026 creen meses fantasma)
+  corregir_anio_225: true   # anio 0225 -> 2025 (falta un cero); se marca con fecha_corregida
+  meta_comuna_pct: 98
+  meta_barrio_pct: 80
+  barrio_min_obs: 3         # observaciones minimas para inferir comuna desde barrio
+  barrio_min_acuerdo: 0.95  # % de acuerdo minimo del barrio con una sola comuna
+
+gold:
+  # Indice de priorizacion territorial (pesos; si no hay poblacion se reparte entre los dos primeros)
+  pesos_priorizacion:
+    casos_total: 0.40
+    casos_criticos: 0.30   # denuncias + urgencias
+    tasa_10k: 0.30

@@ -1,0 +1,405 @@
+﻿ciudad,nivel_geografico,zona,tipo_zona,categoria,periodo,casos,pct_casos_ciudad,comparable
+Bogotá,localidad,Antonio Nariño,localidad,Urgencias,2025 (corte 30/06),6,0.634,True
+Bogotá,localidad,Barrios Unidos,localidad,Urgencias,2025 (corte 30/06),3,0.317,True
+Bogotá,localidad,Bosa,localidad,Urgencias,2025 (corte 30/06),22,2.323,True
+Bogotá,localidad,Chapinero,localidad,Urgencias,2025 (corte 30/06),2,0.211,True
+Bogotá,localidad,Ciudad Bolívar,localidad,Urgencias,2025 (corte 30/06),65,6.864,True
+Bogotá,localidad,Engativá,localidad,Urgencias,2025 (corte 30/06),656,69.271,True
+Bogotá,localidad,Fontibón,localidad,Urgencias,2025 (corte 30/06),22,2.323,True
+Bogotá,localidad,Kennedy,localidad,Urgencias,2025 (corte 30/06),25,2.64,True
+Bogotá,localidad,La Candelaria,localidad,Urgencias,2025 (corte 30/06),4,0.422,True
+Bogotá,localidad,Los Mártires,localidad,Urgencias,2025 (corte 30/06),11,1.162,True
+Bogotá,localidad,Puente Aranda,localidad,Urgencias,2025 (corte 30/06),6,0.634,True
+Bogotá,localidad,Rafael Uribe Uribe,localidad,Urgencias,2025 (corte 30/06),21,2.218,True
+Bogotá,localidad,San Cristóbal,localidad,Urgencias,2025 (corte 30/06),17,1.795,True
+Bogotá,localidad,Santa Fe,localidad,Urgencias,2025 (corte 30/06),22,2.323,True
+Bogotá,localidad,Suba,localidad,Urgencias,2025 (corte 30/06),13,1.373,True
+Bogotá,localidad,Sumapaz,localidad,Urgencias,2025 (corte 30/06),0,0.0,True
+Bogotá,localidad,Teusaquillo,localidad,Urgencias,2025 (corte 30/06),3,0.317,True
+Bogotá,localidad,Tunjuelito,localidad,Urgencias,2025 (corte 30/06),6,0.634,True
+Bogotá,localidad,Usaquén,localidad,Urgencias,2025 (corte 30/06),10,1.056,True
+Bogotá,localidad,Usme,localidad,Urgencias,2025 (corte 30/06),33,3.485,True
+Cali,comuna,Comuna 1,urbana,Adopciones,2024,3,0.017,False
+Cali,comuna,Comuna 1,urbana,Cita médica,2024,75,0.425,False
+Cali,comuna,Comuna 1,urbana,Cita médica,2025,135,0.765,False
+Cali,comuna,Comuna 1,urbana,Cita médica,Sin fecha válida,1,0.006,False
+Cali,comuna,Comuna 1,urbana,Denuncia,2024,37,0.21,False
+Cali,comuna,Comuna 1,urbana,Denuncia,2025,18,0.102,False
+Cali,comuna,Comuna 1,urbana,Esterilizaciones,2024,70,0.397,False
+Cali,comuna,Comuna 1,urbana,Esterilizaciones,2025,2,0.011,False
+Cali,comuna,Comuna 1,urbana,PQR,2024,274,1.553,False
+Cali,comuna,Comuna 1,urbana,PQR,2025,53,0.3,False
+Cali,comuna,Comuna 1,urbana,Urgencias,2024,16,0.091,True
+Cali,comuna,Comuna 1,urbana,Urgencias,2025,33,0.187,True
+Cali,comuna,Comuna 10,urbana,Adopciones,2024,3,0.017,False
+Cali,comuna,Comuna 10,urbana,Cita médica,2024,44,0.249,False
+Cali,comuna,Comuna 10,urbana,Cita médica,2025,87,0.493,False
+Cali,comuna,Comuna 10,urbana,Denuncia,2024,17,0.096,False
+Cali,comuna,Comuna 10,urbana,Denuncia,2025,23,0.13,False
+Cali,comuna,Comuna 10,urbana,Esterilizaciones,2024,58,0.329,False
+Cali,comuna,Comuna 10,urbana,Esterilizaciones,2025,4,0.023,False
+Cali,comuna,Comuna 10,urbana,PQR,2024,215,1.219,False
+Cali,comuna,Comuna 10,urbana,PQR,2025,59,0.334,False
+Cali,comuna,Comuna 10,urbana,Urgencias,2024,6,0.034,True
+Cali,comuna,Comuna 10,urbana,Urgencias,2025,14,0.079,True
+Cali,comuna,Comuna 11,urbana,Adopciones,2024,1,0.006,False
+Cali,comuna,Comuna 11,urbana,Cita médica,2024,32,0.181,False
+Cali,comuna,Comuna 11,urbana,Cita médica,2025,69,0.391,False
+Cali,comuna,Comuna 11,urbana,Cita médica,Sin fecha válida,1,0.006,False
+Cali,comuna,Comuna 11,urbana,Denuncia,2024,27,0.153,False
+Cali,comuna,Comuna 11,urbana,Denuncia,2025,11,0.062,False
+Cali,comuna,Comuna 11,urbana,Esterilizaciones,2024,55,0.312,False
+Cali,comuna,Comuna 11,urbana,Esterilizaciones,2025,4,0.023,False
+Cali,comuna,Comuna 11,urbana,PQR,2024,173,0.981,False
+Cali,comuna,Comuna 11,urbana,PQR,2025,47,0.266,False
+Cali,comuna,Comuna 11,urbana,Urgencias,2024,5,0.028,True
+Cali,comuna,Comuna 11,urbana,Urgencias,2025,16,0.091,True
+Cali,comuna,Comuna 12,urbana,Cita médica,2024,22,0.125,False
+Cali,comuna,Comuna 12,urbana,Cita médica,2025,61,0.346,False
+Cali,comuna,Comuna 12,urbana,Denuncia,2024,17,0.096,False
+Cali,comuna,Comuna 12,urbana,Denuncia,2025,7,0.04,False
+Cali,comuna,Comuna 12,urbana,Esterilizaciones,2024,33,0.187,False
+Cali,comuna,Comuna 12,urbana,Esterilizaciones,2025,2,0.011,False
+Cali,comuna,Comuna 12,urbana,PQR,2024,150,0.85,False
+Cali,comuna,Comuna 12,urbana,PQR,2025,55,0.312,False
+Cali,comuna,Comuna 12,urbana,Urgencias,2024,4,0.023,True
+Cali,comuna,Comuna 12,urbana,Urgencias,2025,20,0.113,True
+Cali,comuna,Comuna 13,urbana,Adopciones,2024,1,0.006,False
+Cali,comuna,Comuna 13,urbana,Cita médica,2024,92,0.521,False
+Cali,comuna,Comuna 13,urbana,Cita médica,2025,234,1.326,False
+Cali,comuna,Comuna 13,urbana,Denuncia,2024,23,0.13,False
+Cali,comuna,Comuna 13,urbana,Denuncia,2025,37,0.21,False
+Cali,comuna,Comuna 13,urbana,Esterilizaciones,2024,131,0.743,False
+Cali,comuna,Comuna 13,urbana,Esterilizaciones,2025,12,0.068,False
+Cali,comuna,Comuna 13,urbana,PQR,2024,425,2.409,False
+Cali,comuna,Comuna 13,urbana,PQR,2025,120,0.68,False
+Cali,comuna,Comuna 13,urbana,PQR,Sin fecha válida,1,0.006,False
+Cali,comuna,Comuna 13,urbana,Sin clasificar,2024,1,0.006,False
+Cali,comuna,Comuna 13,urbana,Urgencias,2024,27,0.153,True
+Cali,comuna,Comuna 13,urbana,Urgencias,2025,41,0.232,True
+Cali,comuna,Comuna 13,urbana,Urgencias,Sin fecha válida,1,0.006,True
+Cali,comuna,Comuna 14,urbana,Adopciones,2024,4,0.023,False
+Cali,comuna,Comuna 14,urbana,Cita médica,2024,98,0.555,False
+Cali,comuna,Comuna 14,urbana,Cita médica,2025,226,1.281,False
+Cali,comuna,Comuna 14,urbana,Cita médica,Sin fecha válida,1,0.006,False
+Cali,comuna,Comuna 14,urbana,Denuncia,2024,39,0.221,False
+Cali,comuna,Comuna 14,urbana,Denuncia,2025,29,0.164,False
+Cali,comuna,Comuna 14,urbana,Esterilizaciones,2024,124,0.703,False
+Cali,comuna,Comuna 14,urbana,Esterilizaciones,2025,13,0.074,False
+Cali,comuna,Comuna 14,urbana,PQR,2024,373,2.114,False
+Cali,comuna,Comuna 14,urbana,PQR,2025,113,0.641,False
+Cali,comuna,Comuna 14,urbana,PQR,Sin fecha válida,1,0.006,False
+Cali,comuna,Comuna 14,urbana,Urgencias,2024,13,0.074,True
+Cali,comuna,Comuna 14,urbana,Urgencias,2025,50,0.283,True
+Cali,comuna,Comuna 15,urbana,Adopciones,2024,1,0.006,False
+Cali,comuna,Comuna 15,urbana,Cita médica,2024,70,0.397,False
+Cali,comuna,Comuna 15,urbana,Cita médica,2025,122,0.692,False
+Cali,comuna,Comuna 15,urbana,Denuncia,2024,28,0.159,False
+Cali,comuna,Comuna 15,urbana,Denuncia,2025,30,0.17,False
+Cali,comuna,Comuna 15,urbana,Esterilizaciones,2024,105,0.595,False
+Cali,comuna,Comuna 15,urbana,Esterilizaciones,2025,9,0.051,False
+Cali,comuna,Comuna 15,urbana,PQR,2024,340,1.927,False
+Cali,comuna,Comuna 15,urbana,PQR,2025,94,0.533,False
+Cali,comuna,Comuna 15,urbana,Sin clasificar,2025,1,0.006,False
+Cali,comuna,Comuna 15,urbana,Urgencias,2024,8,0.045,True
+Cali,comuna,Comuna 15,urbana,Urgencias,2025,38,0.215,True
+Cali,comuna,Comuna 16,urbana,Adopciones,2024,1,0.006,False
+Cali,comuna,Comuna 16,urbana,Cita médica,2024,61,0.346,False
+Cali,comuna,Comuna 16,urbana,Cita médica,2025,87,0.493,False
+Cali,comuna,Comuna 16,urbana,Denuncia,2024,26,0.147,False
+Cali,comuna,Comuna 16,urbana,Denuncia,2025,19,0.108,False
+Cali,comuna,Comuna 16,urbana,Esterilizaciones,2024,58,0.329,False
+Cali,comuna,Comuna 16,urbana,Esterilizaciones,2025,3,0.017,False
+Cali,comuna,Comuna 16,urbana,PQR,2024,246,1.394,False
+Cali,comuna,Comuna 16,urbana,PQR,2025,71,0.402,False
+Cali,comuna,Comuna 16,urbana,Urgencias,2024,10,0.057,True
+Cali,comuna,Comuna 16,urbana,Urgencias,2025,26,0.147,True
+Cali,comuna,Comuna 17,urbana,Adopciones,2024,3,0.017,False
+Cali,comuna,Comuna 17,urbana,Cita médica,2024,14,0.079,False
+Cali,comuna,Comuna 17,urbana,Cita médica,2025,50,0.283,False
+Cali,comuna,Comuna 17,urbana,Denuncia,2024,51,0.289,False
+Cali,comuna,Comuna 17,urbana,Denuncia,2025,61,0.346,False
+Cali,comuna,Comuna 17,urbana,Esterilizaciones,2024,31,0.176,False
+Cali,comuna,Comuna 17,urbana,Esterilizaciones,2025,6,0.034,False
+Cali,comuna,Comuna 17,urbana,PQR,2024,157,0.89,False
+Cali,comuna,Comuna 17,urbana,PQR,2025,35,0.198,False
+Cali,comuna,Comuna 17,urbana,Urgencias,2024,4,0.023,True
+Cali,comuna,Comuna 17,urbana,Urgencias,2025,3,0.017,True
+Cali,comuna,Comuna 18,urbana,Adopciones,2024,4,0.023,False
+Cali,comuna,Comuna 18,urbana,Cita médica,2024,160,0.907,False
+Cali,comuna,Comuna 18,urbana,Cita médica,2025,221,1.253,False
+Cali,comuna,Comuna 18,urbana,Denuncia,2024,35,0.198,False
+Cali,comuna,Comuna 18,urbana,Denuncia,2025,33,0.187,False
+Cali,comuna,Comuna 18,urbana,Esterilizaciones,2024,176,0.998,False
+Cali,comuna,Comuna 18,urbana,Esterilizaciones,2025,17,0.096,False
+Cali,comuna,Comuna 18,urbana,PQR,2024,565,3.203,False
+Cali,comuna,Comuna 18,urbana,PQR,2025,134,0.76,False
+Cali,comuna,Comuna 18,urbana,Sin clasificar,2024,1,0.006,False
+Cali,comuna,Comuna 18,urbana,Sin clasificar,2025,1,0.006,False
+Cali,comuna,Comuna 18,urbana,Solicitud de información general,2024,1,0.006,False
+Cali,comuna,Comuna 18,urbana,Urgencias,2024,28,0.159,True
+Cali,comuna,Comuna 18,urbana,Urgencias,2025,65,0.368,True
+Cali,comuna,Comuna 19,urbana,Cita médica,2024,30,0.17,False
+Cali,comuna,Comuna 19,urbana,Cita médica,2025,120,0.68,False
+Cali,comuna,Comuna 19,urbana,Denuncia,2024,32,0.181,False
+Cali,comuna,Comuna 19,urbana,Denuncia,2025,31,0.176,False
+Cali,comuna,Comuna 19,urbana,Esterilizaciones,2024,63,0.357,False
+Cali,comuna,Comuna 19,urbana,Esterilizaciones,2025,3,0.017,False
+Cali,comuna,Comuna 19,urbana,PQR,2024,169,0.958,False
+Cali,comuna,Comuna 19,urbana,PQR,2025,40,0.227,False
+Cali,comuna,Comuna 19,urbana,Urgencias,2024,5,0.028,True
+Cali,comuna,Comuna 19,urbana,Urgencias,2025,9,0.051,True
+Cali,comuna,Comuna 2,urbana,Adopciones,2024,2,0.011,False
+Cali,comuna,Comuna 2,urbana,Cita médica,2024,12,0.068,False
+Cali,comuna,Comuna 2,urbana,Cita médica,2025,53,0.3,False
+Cali,comuna,Comuna 2,urbana,Denuncia,2024,34,0.193,False
+Cali,comuna,Comuna 2,urbana,Denuncia,2025,39,0.221,False
+Cali,comuna,Comuna 2,urbana,Esterilizaciones,2024,30,0.17,False
+Cali,comuna,Comuna 2,urbana,Esterilizaciones,2025,3,0.017,False
+Cali,comuna,Comuna 2,urbana,PQR,2024,144,0.816,False
+Cali,comuna,Comuna 2,urbana,PQR,2025,30,0.17,False
+Cali,comuna,Comuna 2,urbana,Sin clasificar,2024,1,0.006,False
+Cali,comuna,Comuna 2,urbana,Urgencias,2024,3,0.017,True
+Cali,comuna,Comuna 2,urbana,Urgencias,2025,13,0.074,True
+Cali,comuna,Comuna 20,urbana,Adopciones,2024,4,0.023,False
+Cali,comuna,Comuna 20,urbana,Cita médica,2024,356,2.018,False
+Cali,comuna,Comuna 20,urbana,Cita médica,2025,468,2.653,False
+Cali,comuna,Comuna 20,urbana,Denuncia,2024,28,0.159,False
+Cali,comuna,Comuna 20,urbana,Denuncia,2025,22,0.125,False
+Cali,comuna,Comuna 20,urbana,Esterilizaciones,2024,294,1.666,False
+Cali,comuna,Comuna 20,urbana,Esterilizaciones,2025,27,0.153,False
+Cali,comuna,Comuna 20,urbana,PQR,2024,826,4.682,False
+Cali,comuna,Comuna 20,urbana,PQR,2025,177,1.003,False
+Cali,comuna,Comuna 20,urbana,PQR,Sin fecha válida,1,0.006,False
+Cali,comuna,Comuna 20,urbana,Sin clasificar,2024,1,0.006,False
+Cali,comuna,Comuna 20,urbana,Urgencias,2024,32,0.181,True
+Cali,comuna,Comuna 20,urbana,Urgencias,2025,74,0.419,True
+Cali,comuna,Comuna 21,urbana,Adopciones,2024,1,0.006,False
+Cali,comuna,Comuna 21,urbana,Cita médica,2024,89,0.504,False
+Cali,comuna,Comuna 21,urbana,Cita médica,2025,139,0.788,False
+Cali,comuna,Comuna 21,urbana,Denuncia,2024,37,0.21,False
+Cali,comuna,Comuna 21,urbana,Denuncia,2025,36,0.204,False
+Cali,comuna,Comuna 21,urbana,Esterilizaciones,2024,116,0.658,False
+Cali,comuna,Comuna 21,urbana,Esterilizaciones,2025,6,0.034,False
+Cali,comuna,Comuna 21,urbana,PQR,2024,374,2.12,False
+Cali,comuna,Comuna 21,urbana,PQR,2025,95,0.538,False
+Cali,comuna,Comuna 21,urbana,PQR,Sin fecha válida,1,0.006,False
+Cali,comuna,Comuna 21,urbana,Sin clasificar,2024,1,0.006,False
+Cali,comuna,Comuna 21,urbana,Urgencias,2024,15,0.085,True
+Cali,comuna,Comuna 21,urbana,Urgencias,2025,51,0.289,True
+Cali,comuna,Comuna 22,urbana,Adopciones,2024,1,0.006,False
+Cali,comuna,Comuna 22,urbana,Cita médica,2024,6,0.034,False
+Cali,comuna,Comuna 22,urbana,Cita médica,2025,5,0.028,False
+Cali,comuna,Comuna 22,urbana,Denuncia,2024,33,0.187,False
+Cali,comuna,Comuna 22,urbana,Denuncia,2025,18,0.102,False
+Cali,comuna,Comuna 22,urbana,Esterilizaciones,2024,9,0.051,False
+Cali,comuna,Comuna 22,urbana,PQR,2024,41,0.232,False
+Cali,comuna,Comuna 22,urbana,PQR,2025,6,0.034,False
+Cali,comuna,Comuna 22,urbana,Urgencias,2024,2,0.011,True
+Cali,comuna,Comuna 22,urbana,Urgencias,2025,1,0.006,True
+Cali,comuna,Comuna 3,urbana,Adopciones,2024,3,0.017,False
+Cali,comuna,Comuna 3,urbana,Cita médica,2024,20,0.113,False
+Cali,comuna,Comuna 3,urbana,Cita médica,2025,38,0.215,False
+Cali,comuna,Comuna 3,urbana,Denuncia,2024,10,0.057,False
+Cali,comuna,Comuna 3,urbana,Denuncia,2025,12,0.068,False
+Cali,comuna,Comuna 3,urbana,Esterilizaciones,2024,28,0.159,False
+Cali,comuna,Comuna 3,urbana,PQR,2024,122,0.692,False
+Cali,comuna,Comuna 3,urbana,PQR,2025,33,0.187,False
+Cali,comuna,Comuna 3,urbana,Urgencias,2024,2,0.011,True
+Cali,comuna,Comuna 3,urbana,Urgencias,2025,10,0.057,True
+Cali,comuna,Comuna 4,urbana,Adopciones,2024,2,0.011,False
+Cali,comuna,Comuna 4,urbana,Cita médica,2024,18,0.102,False
+Cali,comuna,Comuna 4,urbana,Cita médica,2025,58,0.329,False
+Cali,comuna,Comuna 4,urbana,Denuncia,2024,14,0.079,False
+Cali,comuna,Comuna 4,urbana,Denuncia,2025,10,0.057,False
+Cali,comuna,Comuna 4,urbana,Esterilizaciones,2024,48,0.272,False
+Cali,comuna,Comuna 4,urbana,Esterilizaciones,2025,3,0.017,False
+Cali,comuna,Comuna 4,urbana,PQR,2024,116,0.658,False
+Cali,comuna,Comuna 4,urbana,PQR,2025,32,0.181,False
+Cali,comuna,Comuna 4,urbana,Solicitud de información general,2024,1,0.006,False
+Cali,comuna,Comuna 4,urbana,Urgencias,2024,7,0.04,True
+Cali,comuna,Comuna 4,urbana,Urgencias,2025,13,0.074,True
+Cali,comuna,Comuna 5,urbana,Adopciones,2024,1,0.006,False
+Cali,comuna,Comuna 5,urbana,Cita médica,2024,15,0.085,False
+Cali,comuna,Comuna 5,urbana,Cita médica,2025,47,0.266,False
+Cali,comuna,Comuna 5,urbana,Cita médica,Sin fecha válida,1,0.006,False
+Cali,comuna,Comuna 5,urbana,Denuncia,2024,21,0.119,False
+Cali,comuna,Comuna 5,urbana,Denuncia,2025,16,0.091,False
+Cali,comuna,Comuna 5,urbana,Esterilizaciones,2024,45,0.255,False
+Cali,comuna,Comuna 5,urbana,Esterilizaciones,2025,4,0.023,False
+Cali,comuna,Comuna 5,urbana,PQR,2024,144,0.816,False
+Cali,comuna,Comuna 5,urbana,PQR,2025,27,0.153,False
+Cali,comuna,Comuna 5,urbana,Urgencias,2024,5,0.028,True
+Cali,comuna,Comuna 5,urbana,Urgencias,2025,12,0.068,True
+Cali,comuna,Comuna 6,urbana,Adopciones,2024,2,0.011,False
+Cali,comuna,Comuna 6,urbana,Adopciones,2025,1,0.006,False
+Cali,comuna,Comuna 6,urbana,Cita médica,2024,54,0.306,False
+Cali,comuna,Comuna 6,urbana,Cita médica,2025,187,1.06,False
+Cali,comuna,Comuna 6,urbana,Denuncia,2024,40,0.227,False
+Cali,comuna,Comuna 6,urbana,Denuncia,2025,30,0.17,False
+Cali,comuna,Comuna 6,urbana,Esterilizaciones,2024,104,0.59,False
+Cali,comuna,Comuna 6,urbana,Esterilizaciones,2025,9,0.051,False
+Cali,comuna,Comuna 6,urbana,PQR,2024,337,1.91,False
+Cali,comuna,Comuna 6,urbana,PQR,2025,115,0.652,False
+Cali,comuna,Comuna 6,urbana,Urgencias,2024,19,0.108,True
+Cali,comuna,Comuna 6,urbana,Urgencias,2025,38,0.215,True
+Cali,comuna,Comuna 7,urbana,Cita médica,2024,36,0.204,False
+Cali,comuna,Comuna 7,urbana,Cita médica,2025,60,0.34,False
+Cali,comuna,Comuna 7,urbana,Denuncia,2024,12,0.068,False
+Cali,comuna,Comuna 7,urbana,Denuncia,2025,17,0.096,False
+Cali,comuna,Comuna 7,urbana,Denuncia,Sin fecha válida,1,0.006,False
+Cali,comuna,Comuna 7,urbana,Esterilizaciones,2024,48,0.272,False
+Cali,comuna,Comuna 7,urbana,Esterilizaciones,2025,4,0.023,False
+Cali,comuna,Comuna 7,urbana,PQR,2024,159,0.901,False
+Cali,comuna,Comuna 7,urbana,PQR,2025,42,0.238,False
+Cali,comuna,Comuna 7,urbana,Urgencias,2024,4,0.023,True
+Cali,comuna,Comuna 7,urbana,Urgencias,2025,9,0.051,True
+Cali,comuna,Comuna 8,urbana,Adopciones,2024,1,0.006,False
+Cali,comuna,Comuna 8,urbana,Cita médica,2024,35,0.198,False
+Cali,comuna,Comuna 8,urbana,Cita médica,2025,78,0.442,False
+Cali,comuna,Comuna 8,urbana,Denuncia,2024,22,0.125,False
+Cali,comuna,Comuna 8,urbana,Denuncia,2025,24,0.136,False
+Cali,comuna,Comuna 8,urbana,Esterilizaciones,2024,77,0.436,False
+Cali,comuna,Comuna 8,urbana,Esterilizaciones,2025,4,0.023,False
+Cali,comuna,Comuna 8,urbana,PQR,2024,212,1.202,False
+Cali,comuna,Comuna 8,urbana,PQR,2025,45,0.255,False
+Cali,comuna,Comuna 8,urbana,Urgencias,2024,7,0.04,True
+Cali,comuna,Comuna 8,urbana,Urgencias,2025,28,0.159,True
+Cali,comuna,Comuna 9,urbana,Cita médica,2024,49,0.278,False
+Cali,comuna,Comuna 9,urbana,Cita médica,2025,56,0.317,False
+Cali,comuna,Comuna 9,urbana,Denuncia,2024,12,0.068,False
+Cali,comuna,Comuna 9,urbana,Denuncia,2025,18,0.102,False
+Cali,comuna,Comuna 9,urbana,Esterilizaciones,2024,26,0.147,False
+Cali,comuna,Comuna 9,urbana,Esterilizaciones,2025,2,0.011,False
+Cali,comuna,Comuna 9,urbana,PQR,2024,109,0.618,False
+Cali,comuna,Comuna 9,urbana,PQR,2025,36,0.204,False
+Cali,comuna,Comuna 9,urbana,Solicitud de información general,2024,1,0.006,False
+Cali,comuna,Comuna 9,urbana,Urgencias,2024,8,0.045,True
+Cali,comuna,Comuna 9,urbana,Urgencias,2025,11,0.062,True
+Cali,otra zona,Corregimiento (sin especificar),rural,Cita médica,2024,23,0.13,False
+Cali,otra zona,Corregimiento (sin especificar),rural,Denuncia,2024,3,0.017,False
+Cali,otra zona,Corregimiento (sin especificar),rural,PQR,2024,35,0.198,False
+Cali,otra zona,El Hormiguero,rural,Cita médica,2024,1,0.006,False
+Cali,otra zona,El Hormiguero,rural,Cita médica,2025,6,0.034,False
+Cali,otra zona,El Hormiguero,rural,Denuncia,2025,1,0.006,False
+Cali,otra zona,El Hormiguero,rural,PQR,2024,5,0.028,False
+Cali,otra zona,El Hormiguero,rural,PQR,2025,3,0.017,False
+Cali,otra zona,El Hormiguero,rural,Urgencias,2024,1,0.006,True
+Cali,otra zona,El Saladito,rural,Cita médica,2025,2,0.011,False
+Cali,otra zona,El Saladito,rural,PQR,2024,2,0.011,False
+Cali,otra zona,Felidia,rural,Cita médica,2024,2,0.011,False
+Cali,otra zona,Felidia,rural,Cita médica,2025,22,0.125,False
+Cali,otra zona,Felidia,rural,Esterilizaciones,2024,1,0.006,False
+Cali,otra zona,Felidia,rural,PQR,2024,1,0.006,False
+Cali,otra zona,Felidia,rural,PQR,2025,2,0.011,False
+Cali,otra zona,Felidia,rural,Urgencias,2025,3,0.017,True
+Cali,otra zona,Fuera de jurisdicción,fuera_jurisdiccion,Adopciones,2024,3,0.017,False
+Cali,otra zona,Fuera de jurisdicción,fuera_jurisdiccion,Adopciones,2025,2,0.011,False
+Cali,otra zona,Fuera de jurisdicción,fuera_jurisdiccion,Cita médica,2024,1,0.006,False
+Cali,otra zona,Fuera de jurisdicción,fuera_jurisdiccion,Cita médica,2025,7,0.04,False
+Cali,otra zona,Fuera de jurisdicción,fuera_jurisdiccion,Denuncia,2024,11,0.062,False
+Cali,otra zona,Fuera de jurisdicción,fuera_jurisdiccion,Denuncia,2025,2,0.011,False
+Cali,otra zona,Fuera de jurisdicción,fuera_jurisdiccion,Esterilizaciones,2024,6,0.034,False
+Cali,otra zona,Fuera de jurisdicción,fuera_jurisdiccion,Esterilizaciones,2025,1,0.006,False
+Cali,otra zona,Fuera de jurisdicción,fuera_jurisdiccion,PQR,2024,101,0.572,False
+Cali,otra zona,Fuera de jurisdicción,fuera_jurisdiccion,PQR,2025,3,0.017,False
+Cali,otra zona,Fuera de jurisdicción,fuera_jurisdiccion,Solicitud de información general,2024,2,0.011,False
+Cali,otra zona,La Buitrera,rural,Cita médica,2024,17,0.096,False
+Cali,otra zona,La Buitrera,rural,Cita médica,2025,102,0.578,False
+Cali,otra zona,La Buitrera,rural,Cita médica,Sin fecha válida,2,0.011,False
+Cali,otra zona,La Buitrera,rural,Denuncia,2024,3,0.017,False
+Cali,otra zona,La Buitrera,rural,Denuncia,2025,4,0.023,False
+Cali,otra zona,La Buitrera,rural,Esterilizaciones,2024,14,0.079,False
+Cali,otra zona,La Buitrera,rural,Esterilizaciones,2025,2,0.011,False
+Cali,otra zona,La Buitrera,rural,PQR,2024,49,0.278,False
+Cali,otra zona,La Buitrera,rural,PQR,2025,8,0.045,False
+Cali,otra zona,La Buitrera,rural,Urgencias,2024,7,0.04,True
+Cali,otra zona,La Buitrera,rural,Urgencias,2025,5,0.028,True
+Cali,otra zona,La Castilla,rural,PQR,2024,3,0.017,False
+Cali,otra zona,La Castilla,rural,PQR,2025,2,0.011,False
+Cali,otra zona,La Castilla,rural,Urgencias,2025,1,0.006,True
+Cali,otra zona,La Elvira,rural,Cita médica,2025,2,0.011,False
+Cali,otra zona,La Elvira,rural,PQR,2024,1,0.006,False
+Cali,otra zona,La Elvira,rural,PQR,2025,1,0.006,False
+Cali,otra zona,La Elvira,rural,Urgencias,2025,1,0.006,True
+Cali,otra zona,La Leonera,rural,Cita médica,2024,3,0.017,False
+Cali,otra zona,La Leonera,rural,Denuncia,2025,1,0.006,False
+Cali,otra zona,La Leonera,rural,Esterilizaciones,2024,1,0.006,False
+Cali,otra zona,La Leonera,rural,PQR,2024,1,0.006,False
+Cali,otra zona,La Leonera,rural,PQR,2025,1,0.006,False
+Cali,otra zona,La Paz,rural,Cita médica,2024,1,0.006,False
+Cali,otra zona,La Paz,rural,Cita médica,2025,5,0.028,False
+Cali,otra zona,La Paz,rural,Esterilizaciones,2024,1,0.006,False
+Cali,otra zona,La Paz,rural,PQR,2024,1,0.006,False
+Cali,otra zona,La Paz,rural,PQR,2025,1,0.006,False
+Cali,otra zona,La Paz,rural,Urgencias,2024,1,0.006,True
+Cali,otra zona,Las Golondrinas,rural,Cita médica,2025,1,0.006,False
+Cali,otra zona,Las Golondrinas,rural,Denuncia,2024,1,0.006,False
+Cali,otra zona,Las Golondrinas,rural,Denuncia,2025,2,0.011,False
+Cali,otra zona,Las Golondrinas,rural,Esterilizaciones,2024,2,0.011,False
+Cali,otra zona,Las Golondrinas,rural,PQR,2024,4,0.023,False
+Cali,otra zona,Las Golondrinas,rural,PQR,2025,3,0.017,False
+Cali,otra zona,Las Golondrinas,rural,Urgencias,2025,3,0.017,True
+Cali,otra zona,Los Andes,rural,Cita médica,2025,10,0.057,False
+Cali,otra zona,Los Andes,rural,Denuncia,2025,2,0.011,False
+Cali,otra zona,Los Andes,rural,Esterilizaciones,2024,1,0.006,False
+Cali,otra zona,Los Andes,rural,PQR,2024,2,0.011,False
+Cali,otra zona,Los Andes,rural,PQR,2025,1,0.006,False
+Cali,otra zona,Los Andes,rural,Urgencias,2025,3,0.017,True
+Cali,otra zona,Montebello,rural,Cita médica,2024,10,0.057,False
+Cali,otra zona,Montebello,rural,Cita médica,2025,45,0.255,False
+Cali,otra zona,Montebello,rural,Denuncia,2024,1,0.006,False
+Cali,otra zona,Montebello,rural,Denuncia,2025,6,0.034,False
+Cali,otra zona,Montebello,rural,Esterilizaciones,2024,15,0.085,False
+Cali,otra zona,Montebello,rural,Esterilizaciones,2025,4,0.023,False
+Cali,otra zona,Montebello,rural,PQR,2024,32,0.181,False
+Cali,otra zona,Montebello,rural,PQR,2025,17,0.096,False
+Cali,otra zona,Montebello,rural,Urgencias,2024,5,0.028,True
+Cali,otra zona,Montebello,rural,Urgencias,2025,9,0.051,True
+Cali,otra zona,Navarro,rural,Cita médica,2025,6,0.034,False
+Cali,otra zona,Navarro,rural,Denuncia,2025,2,0.011,False
+Cali,otra zona,Navarro,rural,Esterilizaciones,2024,1,0.006,False
+Cali,otra zona,Navarro,rural,PQR,2024,4,0.023,False
+Cali,otra zona,Navarro,rural,PQR,2025,2,0.011,False
+Cali,otra zona,Navarro,rural,Urgencias,2024,1,0.006,True
+Cali,otra zona,Pance,rural,Cita médica,2024,3,0.017,False
+Cali,otra zona,Pance,rural,Cita médica,2025,2,0.011,False
+Cali,otra zona,Pance,rural,Denuncia,2024,4,0.023,False
+Cali,otra zona,Pance,rural,Denuncia,2025,7,0.04,False
+Cali,otra zona,Pance,rural,Esterilizaciones,2024,4,0.023,False
+Cali,otra zona,Pance,rural,PQR,2024,18,0.102,False
+Cali,otra zona,Pance,rural,PQR,2025,1,0.006,False
+Cali,otra zona,Pance,rural,Solicitud de información general,2024,1,0.006,False
+Cali,otra zona,Pance,rural,Urgencias,2025,1,0.006,True
+Cali,otra zona,Pichinde,rural,Cita médica,2025,1,0.006,False
+Cali,otra zona,Pichinde,rural,Esterilizaciones,2024,1,0.006,False
+Cali,otra zona,Pichinde,rural,PQR,2024,2,0.011,False
+Cali,otra zona,Pichinde,rural,Urgencias,2024,1,0.006,True
+Cali,otra zona,Sin dato,sin_dato,Adopciones,2024,17,0.096,False
+Cali,otra zona,Sin dato,sin_dato,Cita médica,2024,122,0.692,False
+Cali,otra zona,Sin dato,sin_dato,Cita médica,2025,11,0.062,False
+Cali,otra zona,Sin dato,sin_dato,Denuncia,2024,104,0.59,False
+Cali,otra zona,Sin dato,sin_dato,Denuncia,2025,8,0.045,False
+Cali,otra zona,Sin dato,sin_dato,Esterilizaciones,2024,31,0.176,False
+Cali,otra zona,Sin dato,sin_dato,Esterilizaciones,2025,4,0.023,False
+Cali,otra zona,Sin dato,sin_dato,PQR,2024,1434,8.128,False
+Cali,otra zona,Sin dato,sin_dato,PQR,2025,10,0.057,False
+Cali,otra zona,Sin dato,sin_dato,Sin clasificar,2024,17,0.096,False
+Cali,otra zona,Sin dato,sin_dato,Solicitud de información general,2024,1,0.006,False
+Cali,otra zona,Sin dato,sin_dato,Urgencias,2024,11,0.062,True
+Cali,otra zona,Sin dato,sin_dato,Urgencias,2025,9,0.051,True
+Cali,otra zona,Villacarmelo,rural,Cita médica,2024,9,0.051,False
+Cali,otra zona,Villacarmelo,rural,Cita médica,2025,43,0.244,False
+Cali,otra zona,Villacarmelo,rural,Denuncia,2024,2,0.011,False
+Cali,otra zona,Villacarmelo,rural,Denuncia,2025,7,0.04,False
+Cali,otra zona,Villacarmelo,rural,Esterilizaciones,2024,10,0.057,False
+Cali,otra zona,Villacarmelo,rural,PQR,2024,19,0.108,False
+Cali,otra zona,Villacarmelo,rural,PQR,2025,17,0.096,False
+Cali,otra zona,Villacarmelo,rural,Urgencias,2024,3,0.017,True
+Cali,otra zona,Villacarmelo,rural,Urgencias,2025,8,0.045,True
+Cali,otra zona,Zona rural (sin especificar),rural,Cita médica,2024,1,0.006,False
+Cali,otra zona,Zona rural (sin especificar),rural,Esterilizaciones,2024,5,0.028,False
+Cali,otra zona,Zona rural (sin especificar),rural,PQR,2024,14,0.079,False
+Cali,otra zona,Área de expansión urbana,expansion_urbana,Denuncia,2025,4,0.023,False
+Cali,otra zona,Área de expansión urbana,expansion_urbana,Esterilizaciones,2025,1,0.006,False
+Cali,otra zona,Área de expansión urbana,expansion_urbana,PQR,2025,1,0.006,False

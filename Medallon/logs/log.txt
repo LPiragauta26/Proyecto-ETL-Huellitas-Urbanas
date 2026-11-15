@@ -1,0 +1,1869 @@
+2026-10-12 21:48:43 | INFO | === INICIO PIPELINE: ETL Bienestar Animal: Cali (CBA/Uaepa) vs Bogota (IDPYBA) v1.0 ===
+2026-10-12 21:48:43 | INFO | BRONZE Cali: 17642 filas x 5 columnas | sha256=859dd3b1352848d5
+2026-10-12 21:48:43 | INFO | BRONZE Bogota: 20 features | sha256=1ced21585f46f559
+2026-10-12 21:48:43 | INFO | SILVER Cali: duplicados por id eliminados = 0
+2026-10-12 21:48:44 | INFO | SILVER Cali: comunas recuperadas desde barrio = 18
+2026-10-12 21:48:44 | INFO | SILVER Cali: 17642 filas | zonas distintas 83 -> 42
+2026-10-12 21:48:44 | INFO | SILVER Bogota: 20 localidades | atenciones totales = 947
+2026-10-12 21:48:44 | INFO | Archivo guardado: data/silver/silver_cali.csv (17642 filas)
+2026-10-12 21:48:44 | INFO | Archivo guardado: data/silver/silver_bogota.csv (20 filas)
+2026-10-12 21:48:44 | INFO | CALIDAD [OK] Cali: no se pierden registros bronze->silver 17642 -> 17642
+2026-10-12 21:48:44 | INFO | CALIDAD [OK] Cali: id unico 
+2026-10-12 21:48:44 | INFO | CALIDAD [OK] Cali: clase sin valores fuera del catalogo 
+2026-10-12 21:48:44 | INFO | CALIDAD [OK] Cali: fechas validas dentro del rango 
+2026-10-12 21:48:44 | INFO | CALIDAD [OK] Cali: fechas invalidas < 1% 0.051%
+2026-10-12 21:48:44 | INFO | CALIDAD [OK] Bogota: 20 localidades 20 localidades
+2026-10-12 21:48:44 | INFO | CALIDAD [OK] Bogota: sin nulos en atenciones 
+2026-10-12 21:48:44 | INFO | CALIDAD [OK] Bogota: especie suma atenciones 
+2026-10-12 21:48:44 | INFO | CALIDAD [OK] Bogota: sexo suma atenciones 
+2026-10-12 21:48:44 | WARNING | CALIDAD [ADVERTENCIA] Bogota: diagnosticos suman atenciones diferencias en Kennedy (-2), Fontibón (+2), Rafael Uribe Uribe (-1), Ciudad Bolívar (+1)
+2026-10-12 21:48:44 | WARNING | CALIDAD [ADVERTENCIA] Bogota: procedencia suman atenciones diferencias en Rafael Uribe Uribe (-1), Ciudad Bolívar (+1)
+2026-10-12 21:48:44 | INFO | GOLD final: 404 filas (Cali 17642 casos | Bogota 947 atenciones)
+2026-10-12 21:48:44 | WARNING | El archivo poblacion_comunas.csv no tiene poblacion diligenciada: se ignora (tasa por 10.000 hab. queda vacia)
+2026-10-12 21:48:44 | INFO | Archivo guardado: data/gold/gold_final.csv (404 filas)
+2026-10-12 21:48:44 | INFO | Archivo guardado: data/gold/kpis/kpi_calidad_datos.csv (14 filas)
+2026-10-12 21:48:44 | INFO | Archivo guardado: data/gold/kpis/kpi_casos_por_zona.csv (42 filas)
+2026-10-12 21:48:44 | INFO | Archivo guardado: data/gold/kpis/kpi_evolucion_mensual.csv (30 filas)
+2026-10-12 21:48:44 | INFO | Archivo guardado: data/gold/kpis/kpi_priorizacion_territorial.csv (37 filas)
+2026-10-12 21:48:44 | INFO | Archivo guardado: data/gold/kpis/kpi_comparativo_ciudades.csv (8 filas)
+2026-10-12 21:48:44 | INFO | Archivo guardado: data/gold/kpis/kpi_urgencias_por_zona.csv (56 filas)
+2026-10-12 21:48:44 | INFO | Archivo guardado: data/gold/kpis/kpi_bogota_detalle.csv (28 filas)
+2026-10-12 21:48:44 | INFO | Archivo guardado: evidencias/validaciones_calidad.csv (11 filas)
+2026-10-12 21:48:45 | INFO | DW: tabla silver_cali cargada (17642 filas)
+2026-10-12 21:48:45 | INFO | DW: tabla silver_bogota cargada (20 filas)
+2026-10-12 21:48:45 | INFO | DW: tabla gold_final cargada (404 filas)
+2026-10-12 21:48:45 | INFO | DW: tabla dim_categoria cargada (9 filas)
+2026-10-12 21:48:45 | INFO | DW: tabla kpi_casos_por_zona cargada (42 filas)
+2026-10-12 21:48:45 | INFO | DW: tabla kpi_evolucion_mensual cargada (30 filas)
+2026-10-12 21:48:45 | INFO | DW: tabla kpi_priorizacion cargada (37 filas)
+2026-10-12 21:48:45 | INFO | DW: tabla kpi_comparativo_ciudades cargada (8 filas)
+2026-10-12 21:48:45 | INFO | Evidencia grafica: evidencias/01_casos_por_comuna.png
+2026-10-12 21:48:45 | INFO | Evidencia grafica: evidencias/02_evolucion_mensual.png
+2026-10-12 21:48:46 | INFO | Evidencia grafica: evidencias/03_urgencias_cali_vs_bogota.png
+2026-10-12 21:48:46 | INFO | Evidencia grafica: evidencias/04_calidad_antes_despues.png
+2026-10-12 21:48:46 | INFO | === FIN PIPELINE: 9 reglas OK, 2 advertencias, 0 fallas ===
+2026-10-15 21:54:19 | INFO | === INICIO PIPELINE: ETL Bienestar Animal: Cali (CBA/Uaepa) vs Bogota (IDPYBA) v1.0 ===
+2026-10-15 21:54:19 | INFO | BRONZE Cali: 17642 filas x 5 columnas | sha256=859dd3b1352848d5
+2026-10-15 21:54:19 | INFO | BRONZE Bogota: 20 features | sha256=1ced21585f46f559
+2026-10-15 21:54:19 | INFO | SILVER Cali: duplicados por id eliminados = 0
+2026-10-15 21:54:20 | INFO | SILVER Cali: comunas recuperadas desde barrio = 18
+2026-10-15 21:54:20 | INFO | SILVER Cali: 17642 filas | zonas distintas 83 -> 42
+2026-10-15 21:54:20 | INFO | SILVER Bogota: 20 localidades | atenciones totales = 947
+2026-10-15 21:54:20 | INFO | Archivo guardado: data/silver/silver_cali.csv (17642 filas)
+2026-10-15 21:54:20 | INFO | Archivo guardado: data/silver/silver_bogota.csv (20 filas)
+2026-10-15 21:54:20 | INFO | CALIDAD [OK] Cali: no se pierden registros bronze->silver 17642 -> 17642
+2026-10-15 21:54:20 | INFO | CALIDAD [OK] Cali: id unico 
+2026-10-15 21:54:20 | INFO | CALIDAD [OK] Cali: clase sin valores fuera del catalogo 
+2026-10-15 21:54:20 | INFO | CALIDAD [OK] Cali: fechas validas dentro del rango 
+2026-10-15 21:54:20 | INFO | CALIDAD [OK] Cali: fechas invalidas < 1% 0.051%
+2026-10-15 21:54:20 | INFO | CALIDAD [OK] Bogota: 20 localidades 20 localidades
+2026-10-15 21:54:20 | INFO | CALIDAD [OK] Bogota: sin nulos en atenciones 
+2026-10-15 21:54:20 | INFO | CALIDAD [OK] Bogota: especie suma atenciones 
+2026-10-15 21:54:20 | INFO | CALIDAD [OK] Bogota: sexo suma atenciones 
+2026-10-15 21:54:20 | WARNING | CALIDAD [ADVERTENCIA] Bogota: diagnosticos suman atenciones diferencias en Kennedy (-2), Fontibón (+2), Rafael Uribe Uribe (-1), Ciudad Bolívar (+1)
+2026-10-15 21:54:20 | WARNING | CALIDAD [ADVERTENCIA] Bogota: procedencia suman atenciones diferencias en Rafael Uribe Uribe (-1), Ciudad Bolívar (+1)
+2026-10-15 21:54:20 | INFO | GOLD final: 404 filas (Cali 17642 casos | Bogota 947 atenciones)
+2026-10-15 21:54:20 | WARNING | El archivo poblacion_comunas.csv no tiene poblacion diligenciada: se ignora (tasa por 10.000 hab. queda vacia)
+2026-10-15 21:54:20 | INFO | Archivo guardado: data/gold/gold_final.csv (404 filas)
+2026-10-15 21:54:20 | INFO | Archivo guardado: data/gold/kpis/kpi_calidad_datos.csv (14 filas)
+2026-10-15 21:54:20 | INFO | Archivo guardado: data/gold/kpis/kpi_casos_por_zona.csv (42 filas)
+2026-10-15 21:54:20 | INFO | Archivo guardado: data/gold/kpis/kpi_evolucion_mensual.csv (30 filas)
+2026-10-15 21:54:20 | INFO | Archivo guardado: data/gold/kpis/kpi_priorizacion_territorial.csv (37 filas)
+2026-10-15 21:54:20 | INFO | Archivo guardado: data/gold/kpis/kpi_comparativo_ciudades.csv (8 filas)
+2026-10-15 21:54:20 | INFO | Archivo guardado: data/gold/kpis/kpi_urgencias_por_zona.csv (56 filas)
+2026-10-15 21:54:20 | INFO | Archivo guardado: data/gold/kpis/kpi_bogota_detalle.csv (28 filas)
+2026-10-15 21:54:20 | INFO | Archivo guardado: evidencias/validaciones_calidad.csv (11 filas)
+2026-10-15 21:54:21 | INFO | DW: tabla silver_cali cargada (17642 filas)
+2026-10-15 21:54:21 | INFO | DW: tabla silver_bogota cargada (20 filas)
+2026-10-15 21:54:22 | INFO | DW: tabla gold_final cargada (404 filas)
+2026-10-15 21:54:22 | INFO | DW: tabla dim_categoria cargada (9 filas)
+2026-10-15 21:54:23 | INFO | DW: tabla kpi_casos_por_zona cargada (42 filas)
+2026-10-15 21:54:23 | INFO | DW: tabla kpi_evolucion_mensual cargada (30 filas)
+2026-10-15 21:54:23 | INFO | DW: tabla kpi_priorizacion cargada (37 filas)
+2026-10-15 21:54:24 | INFO | DW: tabla kpi_comparativo_ciudades cargada (8 filas)
+2026-10-15 21:54:24 | INFO | Evidencia grafica: evidencias/01_casos_por_comuna.png
+2026-10-15 21:54:24 | INFO | Evidencia grafica: evidencias/02_evolucion_mensual.png
+2026-10-15 21:54:25 | INFO | Evidencia grafica: evidencias/03_urgencias_cali_vs_bogota.png
+2026-10-15 21:54:25 | INFO | Evidencia grafica: evidencias/04_calidad_antes_despues.png
+2026-10-15 21:54:25 | INFO | === FIN PIPELINE: 9 reglas OK, 2 advertencias, 0 fallas ===
+2026-10-15 22:26:06 | INFO | === INICIO PIPELINE: ETL Bienestar Animal: Cali (CBA/Uaepa) vs Bogota (IDPYBA) v1.0 ===
+2026-10-15 22:26:08 | INFO | BRONZE Cali (Excel): 17642 filas x 5 columnas | sha256=b3dda41a1f7fc2ce
+2026-10-15 22:26:08 | INFO | BRONZE Bogota: 20 features | sha256=1ced21585f46f559
+2026-10-15 22:26:08 | INFO | SILVER Cali: duplicados por id eliminados = 0
+2026-10-15 22:26:08 | INFO | SILVER Cali: comunas recuperadas desde barrio = 18
+2026-10-15 22:26:08 | INFO | SILVER Cali: 17642 filas | zonas distintas 83 -> 42
+2026-10-15 22:26:08 | INFO | SILVER Bogota: 20 localidades | atenciones totales = 947
+2026-10-15 22:26:09 | INFO | Archivo guardado: data/silver/silver_cali.csv (17642 filas)
+2026-10-15 22:26:09 | INFO | Archivo guardado: data/silver/silver_bogota.csv (20 filas)
+2026-10-15 22:26:09 | INFO | CALIDAD [OK] Cali: no se pierden registros bronze->silver 17642 -> 17642
+2026-10-15 22:26:09 | INFO | CALIDAD [OK] Cali: id unico 
+2026-10-15 22:26:09 | INFO | CALIDAD [OK] Cali: clase sin valores fuera del catalogo 
+2026-10-15 22:26:09 | INFO | CALIDAD [OK] Cali: fechas validas dentro del rango 
+2026-10-15 22:26:09 | INFO | CALIDAD [OK] Cali: fechas invalidas < 1% 0.051%
+2026-10-15 22:26:09 | INFO | CALIDAD [OK] Bogota: 20 localidades 20 localidades
+2026-10-15 22:26:09 | INFO | CALIDAD [OK] Bogota: sin nulos en atenciones 
+2026-10-15 22:26:09 | INFO | CALIDAD [OK] Bogota: especie suma atenciones 
+2026-10-15 22:26:09 | INFO | CALIDAD [OK] Bogota: sexo suma atenciones 
+2026-10-15 22:26:09 | WARNING | CALIDAD [ADVERTENCIA] Bogota: diagnosticos suman atenciones diferencias en Kennedy (-2), Fontibón (+2), Rafael Uribe Uribe (-1), Ciudad Bolívar (+1)
+2026-10-15 22:26:09 | WARNING | CALIDAD [ADVERTENCIA] Bogota: procedencia suman atenciones diferencias en Rafael Uribe Uribe (-1), Ciudad Bolívar (+1)
+2026-10-15 22:26:09 | INFO | GOLD final: 404 filas (Cali 17642 casos | Bogota 947 atenciones)
+2026-10-15 22:26:10 | INFO | BRONZE API población: 41 registros -> poblacion_comunas_api.json
+2026-10-15 22:26:10 | WARNING | API de población: falta la columna 'Descripción' o el año 2020
+2026-10-15 22:26:10 | WARNING | El archivo poblacion_comunas.csv no tiene poblacion diligenciada: se ignora (tasa por 10.000 hab. queda vacia)
+2026-10-15 22:26:10 | INFO | Archivo guardado: data/gold/gold_final.csv (404 filas)
+2026-10-15 22:26:10 | INFO | Archivo guardado: data/gold/kpis/kpi_calidad_datos.csv (14 filas)
+2026-10-15 22:26:10 | INFO | Archivo guardado: data/gold/kpis/kpi_casos_por_zona.csv (42 filas)
+2026-10-15 22:26:10 | INFO | Archivo guardado: data/gold/kpis/kpi_evolucion_mensual.csv (30 filas)
+2026-10-15 22:26:10 | INFO | Archivo guardado: data/gold/kpis/kpi_priorizacion_territorial.csv (37 filas)
+2026-10-15 22:26:10 | INFO | Archivo guardado: data/gold/kpis/kpi_comparativo_ciudades.csv (8 filas)
+2026-10-15 22:26:10 | INFO | Archivo guardado: data/gold/kpis/kpi_urgencias_por_zona.csv (56 filas)
+2026-10-15 22:26:10 | INFO | Archivo guardado: data/gold/kpis/kpi_bogota_detalle.csv (28 filas)
+2026-10-15 22:26:10 | INFO | Archivo guardado: evidencias/validaciones_calidad.csv (11 filas)
+2026-10-15 22:26:11 | INFO | DW: tabla silver_cali cargada (17642 filas)
+2026-10-15 22:26:11 | INFO | DW: tabla silver_bogota cargada (20 filas)
+2026-10-15 22:26:12 | INFO | DW: tabla gold_final cargada (404 filas)
+2026-10-15 22:26:13 | INFO | DW: tabla dim_categoria cargada (9 filas)
+2026-10-15 22:26:13 | INFO | DW: tabla kpi_casos_por_zona cargada (42 filas)
+2026-10-15 22:26:14 | INFO | DW: tabla kpi_evolucion_mensual cargada (30 filas)
+2026-10-15 22:26:14 | INFO | DW: tabla kpi_priorizacion cargada (37 filas)
+2026-10-15 22:26:15 | INFO | DW: tabla kpi_comparativo_ciudades cargada (8 filas)
+2026-10-15 22:26:15 | INFO | Evidencia grafica: evidencias/01_casos_por_comuna.png
+2026-10-15 22:26:15 | INFO | Evidencia grafica: evidencias/02_evolucion_mensual.png
+2026-10-15 22:26:16 | INFO | Evidencia grafica: evidencias/03_urgencias_cali_vs_bogota.png
+2026-10-15 22:26:16 | INFO | Evidencia grafica: evidencias/04_calidad_antes_despues.png
+2026-10-15 22:26:16 | INFO | === FIN PIPELINE: 9 reglas OK, 2 advertencias, 0 fallas ===
+2026-10-15 23:57:58 | INFO | === INICIO PIPELINE: ETL Bienestar Animal: Cali (CBA/Uaepa) vs Bogota (IDPYBA) v1.0 ===
+2026-10-15 23:58:00 | INFO | BRONZE Cali (Excel): 17642 filas x 5 columnas | sha256=b3dda41a1f7fc2ce
+2026-10-15 23:58:00 | INFO | BRONZE Bogota: 20 features | sha256=1ced21585f46f559
+2026-10-15 23:58:00 | INFO | SILVER Cali: duplicados por id eliminados = 0
+2026-10-15 23:58:00 | INFO | SILVER Cali: comunas recuperadas desde barrio = 18
+2026-10-15 23:58:00 | INFO | SILVER Cali: 17642 filas | zonas distintas 83 -> 42
+2026-10-15 23:58:00 | INFO | SILVER Bogota: 20 localidades | atenciones totales = 947
+2026-10-15 23:58:01 | INFO | Archivo guardado: data/silver/silver_cali.csv (17642 filas)
+2026-10-15 23:58:01 | INFO | Archivo guardado: data/silver/silver_bogota.csv (20 filas)
+2026-10-15 23:58:01 | INFO | CALIDAD [OK] Cali: no se pierden registros bronze->silver 17642 -> 17642
+2026-10-15 23:58:01 | INFO | CALIDAD [OK] Cali: id unico 
+2026-10-15 23:58:01 | INFO | CALIDAD [OK] Cali: clase sin valores fuera del catalogo 
+2026-10-15 23:58:01 | INFO | CALIDAD [OK] Cali: fechas validas dentro del rango 
+2026-10-15 23:58:01 | INFO | CALIDAD [OK] Cali: fechas invalidas < 1% 0.051%
+2026-10-15 23:58:01 | INFO | CALIDAD [OK] Bogota: 20 localidades 20 localidades
+2026-10-15 23:58:01 | INFO | CALIDAD [OK] Bogota: sin nulos en atenciones 
+2026-10-15 23:58:01 | INFO | CALIDAD [OK] Bogota: especie suma atenciones 
+2026-10-15 23:58:01 | INFO | CALIDAD [OK] Bogota: sexo suma atenciones 
+2026-10-15 23:58:01 | WARNING | CALIDAD [ADVERTENCIA] Bogota: diagnosticos suman atenciones diferencias en Kennedy (-2), Fontibón (+2), Rafael Uribe Uribe (-1), Ciudad Bolívar (+1)
+2026-10-15 23:58:01 | WARNING | CALIDAD [ADVERTENCIA] Bogota: procedencia suman atenciones diferencias en Rafael Uribe Uribe (-1), Ciudad Bolívar (+1)
+2026-10-15 23:58:01 | INFO | GOLD final: 404 filas (Cali 17642 casos | Bogota 947 atenciones)
+2026-10-15 23:58:02 | INFO | BRONZE API población: 41 registros -> poblacion_comunas_api.json
+2026-10-15 23:58:02 | INFO | API de población: 1 filas descartadas (no son comuna o corregimiento): ['Otros']
+2026-10-15 23:58:02 | INFO | API de población: 37 zonas con población (año 2020)
+2026-10-15 23:58:02 | INFO | Archivo guardado: data/gold/gold_final.csv (404 filas)
+2026-10-15 23:58:02 | INFO | Archivo guardado: data/gold/kpis/kpi_calidad_datos.csv (14 filas)
+2026-10-15 23:58:02 | INFO | Archivo guardado: data/gold/kpis/kpi_casos_por_zona.csv (42 filas)
+2026-10-15 23:58:02 | INFO | Archivo guardado: data/gold/kpis/kpi_evolucion_mensual.csv (30 filas)
+2026-10-15 23:58:02 | INFO | Archivo guardado: data/gold/kpis/kpi_priorizacion_territorial.csv (37 filas)
+2026-10-15 23:58:02 | INFO | Archivo guardado: data/gold/kpis/kpi_comparativo_ciudades.csv (8 filas)
+2026-10-15 23:58:02 | INFO | Archivo guardado: data/gold/kpis/kpi_urgencias_por_zona.csv (56 filas)
+2026-10-15 23:58:02 | INFO | Archivo guardado: data/gold/kpis/kpi_bogota_detalle.csv (28 filas)
+2026-10-15 23:58:02 | INFO | Archivo guardado: evidencias/validaciones_calidad.csv (11 filas)
+2026-10-15 23:58:02 | INFO | DW: tabla silver_cali cargada (17642 filas)
+2026-10-15 23:58:03 | INFO | DW: tabla silver_bogota cargada (20 filas)
+2026-10-15 23:58:03 | INFO | DW: tabla gold_final cargada (404 filas)
+2026-10-15 23:58:04 | INFO | DW: tabla dim_categoria cargada (9 filas)
+2026-10-15 23:58:04 | INFO | DW: tabla kpi_casos_por_zona cargada (42 filas)
+2026-10-15 23:58:05 | INFO | DW: tabla kpi_evolucion_mensual cargada (30 filas)
+2026-10-15 23:58:05 | INFO | DW: tabla kpi_priorizacion cargada (37 filas)
+2026-10-15 23:58:06 | INFO | DW: tabla kpi_comparativo_ciudades cargada (8 filas)
+2026-10-15 23:58:06 | INFO | Evidencia grafica: evidencias/01_casos_por_comuna.png
+2026-10-15 23:58:07 | INFO | Evidencia grafica: evidencias/02_evolucion_mensual.png
+2026-10-15 23:58:07 | INFO | Evidencia grafica: evidencias/03_urgencias_cali_vs_bogota.png
+2026-10-15 23:58:07 | INFO | Evidencia grafica: evidencias/04_calidad_antes_despues.png
+2026-10-15 23:58:07 | INFO | === FIN PIPELINE: 9 reglas OK, 2 advertencias, 0 fallas ===
+2026-10-16 00:07:46 | INFO | BRONZE Cali (Excel): 17642 filas x 5 columnas | sha256=b3dda41a1f7fc2ce
+2026-10-16 00:07:46 | INFO | BRONZE Bogota: 20 features | sha256=1ced21585f46f559
+2026-10-16 00:07:47 | INFO | BRONZE API población: 41 registros -> poblacion_comunas_api.json
+2026-10-16 00:07:47 | INFO | SILVER Cali: duplicados por id eliminados = 0
+2026-10-16 00:07:48 | INFO | SILVER Cali: comunas recuperadas desde barrio = 18
+2026-10-16 00:07:48 | INFO | SILVER Cali: 17642 filas | zonas distintas 83 -> 42
+2026-10-16 00:07:48 | INFO | SILVER Bogota: 20 localidades | atenciones totales = 947
+2026-10-16 00:07:48 | INFO | CALIDAD [OK] Cali: no se pierden registros bronze->silver 17642 -> 17642
+2026-10-16 00:07:48 | INFO | CALIDAD [OK] Cali: id unico 
+2026-10-16 00:07:48 | INFO | CALIDAD [OK] Cali: clase sin valores fuera del catalogo 
+2026-10-16 00:07:48 | INFO | CALIDAD [OK] Cali: fechas validas dentro del rango 
+2026-10-16 00:07:48 | INFO | CALIDAD [OK] Cali: fechas invalidas < 1% 0.051%
+2026-10-16 00:07:48 | INFO | CALIDAD [OK] Bogota: 20 localidades 20 localidades
+2026-10-16 00:07:48 | INFO | CALIDAD [OK] Bogota: sin nulos en atenciones 
+2026-10-16 00:07:48 | INFO | CALIDAD [OK] Bogota: especie suma atenciones 
+2026-10-16 00:07:48 | INFO | CALIDAD [OK] Bogota: sexo suma atenciones 
+2026-10-16 00:07:48 | WARNING | CALIDAD [ADVERTENCIA] Bogota: diagnosticos suman atenciones diferencias en Kennedy (-2), Fontibón (+2), Rafael Uribe Uribe (-1), Ciudad Bolívar (+1)
+2026-10-16 00:07:48 | WARNING | CALIDAD [ADVERTENCIA] Bogota: procedencia suman atenciones diferencias en Rafael Uribe Uribe (-1), Ciudad Bolívar (+1)
+2026-10-16 00:07:48 | INFO | GOLD final: 404 filas (Cali 17642 casos | Bogota 947 atenciones)
+2026-10-16 00:07:49 | INFO | BRONZE API población: 41 registros -> poblacion_comunas_api.json
+2026-10-16 00:07:49 | INFO | API de población: 1 filas descartadas (no son comuna o corregimiento): ['Otros']
+2026-10-16 00:07:49 | INFO | API de población: 37 zonas con población (año 2020)
+2026-10-16 00:07:49 | INFO | Evidencia grafica: evidencias/01_casos_por_comuna.png
+2026-10-16 00:07:50 | INFO | Evidencia grafica: evidencias/02_evolucion_mensual.png
+2026-10-16 00:07:50 | INFO | Evidencia grafica: evidencias/03_urgencias_cali_vs_bogota.png
+2026-10-16 00:07:50 | INFO | Evidencia grafica: evidencias/04_calidad_antes_despues.png
+2026-10-16 13:23:39 | INFO | === INICIO PIPELINE: ETL Bienestar Animal: Cali (CBA/Uaepa) vs Bogota (IDPYBA) v1.0 ===
+2026-10-16 13:23:44 | INFO | BRONZE Cali (Excel): 17642 filas x 5 columnas | sha256=b3dda41a1f7fc2ce
+2026-10-16 13:23:44 | INFO | BRONZE Bogota: 20 features | sha256=1ced21585f46f559
+2026-10-16 13:23:44 | INFO | SILVER Cali: duplicados por id eliminados = 0
+2026-10-16 13:23:44 | INFO | SILVER Cali: comunas recuperadas desde barrio = 18
+2026-10-16 13:23:44 | INFO | SILVER Cali: 17642 filas | zonas distintas 83 -> 42
+2026-10-16 13:23:44 | INFO | SILVER Bogota: 20 localidades | atenciones totales = 947
+2026-10-16 13:23:45 | INFO | Archivo guardado: data/silver/silver_cali.csv (17642 filas)
+2026-10-16 13:23:45 | INFO | Archivo guardado: data/silver/silver_bogota.csv (20 filas)
+2026-10-16 13:23:45 | INFO | CALIDAD [OK] Cali: no se pierden registros bronze->silver 17642 -> 17642
+2026-10-16 13:23:45 | INFO | CALIDAD [OK] Cali: id unico 
+2026-10-16 13:23:45 | INFO | CALIDAD [OK] Cali: clase sin valores fuera del catalogo 
+2026-10-16 13:23:45 | INFO | CALIDAD [OK] Cali: fechas validas dentro del rango 
+2026-10-16 13:23:45 | INFO | CALIDAD [OK] Cali: fechas invalidas < 1% 0.051%
+2026-10-16 13:23:45 | INFO | CALIDAD [OK] Bogota: 20 localidades 20 localidades
+2026-10-16 13:23:45 | INFO | CALIDAD [OK] Bogota: sin nulos en atenciones 
+2026-10-16 13:23:45 | INFO | CALIDAD [OK] Bogota: especie suma atenciones 
+2026-10-16 13:23:45 | INFO | CALIDAD [OK] Bogota: sexo suma atenciones 
+2026-10-16 13:23:45 | WARNING | CALIDAD [ADVERTENCIA] Bogota: diagnosticos suman atenciones diferencias en Kennedy (-2), Fontibón (+2), Rafael Uribe Uribe (-1), Ciudad Bolívar (+1)
+2026-10-16 13:23:45 | WARNING | CALIDAD [ADVERTENCIA] Bogota: procedencia suman atenciones diferencias en Rafael Uribe Uribe (-1), Ciudad Bolívar (+1)
+2026-10-16 13:23:45 | INFO | GOLD final: 404 filas (Cali 17642 casos | Bogota 947 atenciones)
+2026-10-16 13:23:47 | INFO | BRONZE API población: 41 registros -> poblacion_comunas_api.json
+2026-10-16 13:23:47 | INFO | API de población: 1 filas descartadas (no son comuna o corregimiento): ['Otros']
+2026-10-16 13:23:47 | INFO | API de población: 37 zonas con población (año 2020)
+2026-10-16 13:23:47 | INFO | Archivo guardado: data/gold/gold_final.csv (404 filas)
+2026-10-16 13:23:47 | INFO | Archivo guardado: data/gold/kpis/kpi_calidad_datos.csv (14 filas)
+2026-10-16 13:23:47 | INFO | Archivo guardado: data/gold/kpis/kpi_casos_por_zona.csv (42 filas)
+2026-10-16 13:23:47 | INFO | Archivo guardado: data/gold/kpis/kpi_evolucion_mensual.csv (30 filas)
+2026-10-16 13:23:47 | INFO | Archivo guardado: data/gold/kpis/kpi_priorizacion_territorial.csv (37 filas)
+2026-10-16 13:23:47 | INFO | Archivo guardado: data/gold/kpis/kpi_comparativo_ciudades.csv (8 filas)
+2026-10-16 13:23:47 | INFO | Archivo guardado: data/gold/kpis/kpi_urgencias_por_zona.csv (56 filas)
+2026-10-16 13:23:47 | INFO | Archivo guardado: data/gold/kpis/kpi_bogota_detalle.csv (28 filas)
+2026-10-16 13:23:47 | INFO | Archivo guardado: evidencias/validaciones_calidad.csv (11 filas)
+2026-10-16 13:23:48 | INFO | DW: tabla silver_cali cargada (17642 filas)
+2026-10-16 13:23:48 | INFO | DW: tabla silver_bogota cargada (20 filas)
+2026-10-16 13:23:49 | INFO | DW: tabla gold_final cargada (404 filas)
+2026-10-16 13:23:49 | INFO | DW: tabla dim_categoria cargada (9 filas)
+2026-10-16 13:23:50 | INFO | DW: tabla kpi_casos_por_zona cargada (42 filas)
+2026-10-16 13:23:50 | INFO | DW: tabla kpi_evolucion_mensual cargada (30 filas)
+2026-10-16 13:23:51 | INFO | DW: tabla kpi_priorizacion cargada (37 filas)
+2026-10-16 13:23:51 | INFO | DW: tabla kpi_comparativo_ciudades cargada (8 filas)
+2026-10-16 13:23:52 | INFO | Evidencia grafica: evidencias/01_casos_por_comuna.png
+2026-10-16 13:23:52 | INFO | Evidencia grafica: evidencias/02_evolucion_mensual.png
+2026-10-16 13:23:53 | INFO | Evidencia grafica: evidencias/03_urgencias_cali_vs_bogota.png
+2026-10-16 13:23:53 | INFO | Evidencia grafica: evidencias/04_calidad_antes_despues.png
+2026-10-16 13:23:53 | INFO | === FIN PIPELINE: 9 reglas OK, 2 advertencias, 0 fallas ===
+2026-10-16 13:25:56 | INFO | BRONZE Cali (Excel): 17642 filas x 5 columnas | sha256=b3dda41a1f7fc2ce
+2026-10-16 13:25:56 | INFO | BRONZE Bogota: 20 features | sha256=1ced21585f46f559
+2026-10-16 13:25:56 | INFO | BRONZE API población: 41 registros -> poblacion_comunas_api.json
+2026-10-16 13:25:56 | INFO | SILVER Cali: duplicados por id eliminados = 0
+2026-10-16 13:25:57 | INFO | SILVER Cali: comunas recuperadas desde barrio = 18
+2026-10-16 13:25:57 | INFO | SILVER Cali: 17642 filas | zonas distintas 83 -> 42
+2026-10-16 13:25:57 | INFO | SILVER Bogota: 20 localidades | atenciones totales = 947
+2026-10-16 13:25:57 | INFO | CALIDAD [OK] Cali: no se pierden registros bronze->silver 17642 -> 17642
+2026-10-16 13:25:57 | INFO | CALIDAD [OK] Cali: id unico 
+2026-10-16 13:25:57 | INFO | CALIDAD [OK] Cali: clase sin valores fuera del catalogo 
+2026-10-16 13:25:57 | INFO | CALIDAD [OK] Cali: fechas validas dentro del rango 
+2026-10-16 13:25:57 | INFO | CALIDAD [OK] Cali: fechas invalidas < 1% 0.051%
+2026-10-16 13:25:57 | INFO | CALIDAD [OK] Bogota: 20 localidades 20 localidades
+2026-10-16 13:25:57 | INFO | CALIDAD [OK] Bogota: sin nulos en atenciones 
+2026-10-16 13:25:57 | INFO | CALIDAD [OK] Bogota: especie suma atenciones 
+2026-10-16 13:25:57 | INFO | CALIDAD [OK] Bogota: sexo suma atenciones 
+2026-10-16 13:25:57 | WARNING | CALIDAD [ADVERTENCIA] Bogota: diagnosticos suman atenciones diferencias en Kennedy (-2), Fontibón (+2), Rafael Uribe Uribe (-1), Ciudad Bolívar (+1)
+2026-10-16 13:25:57 | WARNING | CALIDAD [ADVERTENCIA] Bogota: procedencia suman atenciones diferencias en Rafael Uribe Uribe (-1), Ciudad Bolívar (+1)
+2026-10-16 13:25:57 | INFO | GOLD final: 404 filas (Cali 17642 casos | Bogota 947 atenciones)
+2026-10-16 13:25:58 | INFO | BRONZE API población: 41 registros -> poblacion_comunas_api.json
+2026-10-16 13:25:58 | INFO | API de población: 1 filas descartadas (no son comuna o corregimiento): ['Otros']
+2026-10-16 13:25:58 | INFO | API de población: 37 zonas con población (año 2020)
+2026-10-16 13:25:58 | INFO | Evidencia grafica: evidencias/01_casos_por_comuna.png
+2026-10-16 13:25:59 | INFO | Evidencia grafica: evidencias/02_evolucion_mensual.png
+2026-10-16 13:25:59 | INFO | Evidencia grafica: evidencias/03_urgencias_cali_vs_bogota.png
+2026-10-16 13:25:59 | INFO | Evidencia grafica: evidencias/04_calidad_antes_despues.png
+2026-10-16 13:42:22 | INFO | === INICIO PIPELINE: ETL Bienestar Animal: Cali (CBA/Uaepa) vs Bogota (IDPYBA) v1.0 ===
+2026-10-16 13:42:23 | INFO | BRONZE Cali (Excel): 17642 filas x 5 columnas | sha256=b3dda41a1f7fc2ce
+2026-10-16 13:42:23 | INFO | BRONZE Bogota: 20 features | sha256=1ced21585f46f559
+2026-10-16 13:42:23 | INFO | SILVER Cali: duplicados por id eliminados = 0
+2026-10-16 13:42:24 | INFO | SILVER Cali: comunas recuperadas desde barrio = 18
+2026-10-16 13:42:24 | INFO | SILVER Cali: 17642 filas | zonas distintas 83 -> 42
+2026-10-16 13:42:24 | INFO | SILVER Bogota: 20 localidades | atenciones totales = 947
+2026-10-16 13:42:24 | INFO | Archivo guardado: data/silver/silver_cali.csv (17642 filas)
+2026-10-16 13:42:24 | INFO | Archivo guardado: data/silver/silver_bogota.csv (20 filas)
+2026-10-16 13:42:24 | INFO | CALIDAD [OK] Cali: no se pierden registros bronze->silver 17642 -> 17642
+2026-10-16 13:42:24 | INFO | CALIDAD [OK] Cali: id unico 
+2026-10-16 13:42:24 | INFO | CALIDAD [OK] Cali: clase sin valores fuera del catalogo 
+2026-10-16 13:42:24 | INFO | CALIDAD [OK] Cali: fechas validas dentro del rango 
+2026-10-16 13:42:24 | INFO | CALIDAD [OK] Cali: fechas invalidas < 1% 0.051%
+2026-10-16 13:42:24 | INFO | CALIDAD [OK] Bogota: 20 localidades 20 localidades
+2026-10-16 13:42:24 | INFO | CALIDAD [OK] Bogota: sin nulos en atenciones 
+2026-10-16 13:42:24 | INFO | CALIDAD [OK] Bogota: especie suma atenciones 
+2026-10-16 13:42:24 | INFO | CALIDAD [OK] Bogota: sexo suma atenciones 
+2026-10-16 13:42:24 | WARNING | CALIDAD [ADVERTENCIA] Bogota: diagnosticos suman atenciones diferencias en Kennedy (-2), Fontibón (+2), Rafael Uribe Uribe (-1), Ciudad Bolívar (+1)
+2026-10-16 13:42:24 | WARNING | CALIDAD [ADVERTENCIA] Bogota: procedencia suman atenciones diferencias en Rafael Uribe Uribe (-1), Ciudad Bolívar (+1)
+2026-10-16 13:42:24 | INFO | GOLD final: 404 filas (Cali 17642 casos | Bogota 947 atenciones)
+2026-10-16 13:42:25 | INFO | BRONZE API población: 41 registros -> poblacion_comunas_api.json
+2026-10-16 13:42:25 | INFO | API de población: 1 filas descartadas (no son comuna o corregimiento): ['Otros']
+2026-10-16 13:42:25 | INFO | API de población: 37 zonas con población (año 2020)
+2026-10-16 13:42:25 | INFO | Archivo guardado: data/gold/gold_final.csv (404 filas)
+2026-10-16 13:42:25 | INFO | Archivo guardado: data/gold/kpis/kpi_calidad_datos.csv (14 filas)
+2026-10-16 13:42:25 | INFO | Archivo guardado: data/gold/kpis/kpi_casos_por_zona.csv (42 filas)
+2026-10-16 13:42:25 | INFO | Archivo guardado: data/gold/kpis/kpi_evolucion_mensual.csv (30 filas)
+2026-10-16 13:42:25 | INFO | Archivo guardado: data/gold/kpis/kpi_priorizacion_territorial.csv (37 filas)
+2026-10-16 13:42:25 | INFO | Archivo guardado: data/gold/kpis/kpi_comparativo_ciudades.csv (8 filas)
+2026-10-16 13:42:25 | INFO | Archivo guardado: data/gold/kpis/kpi_urgencias_por_zona.csv (56 filas)
+2026-10-16 13:42:25 | INFO | Archivo guardado: data/gold/kpis/kpi_bogota_detalle.csv (28 filas)
+2026-10-16 13:42:25 | INFO | Archivo guardado: evidencias/validaciones_calidad.csv (11 filas)
+2026-10-16 13:42:26 | INFO | DW: tabla silver_cali cargada (17642 filas)
+2026-10-16 13:42:27 | INFO | DW: tabla silver_bogota cargada (20 filas)
+2026-10-16 13:42:27 | INFO | DW: tabla gold_final cargada (404 filas)
+2026-10-16 13:42:28 | INFO | DW: tabla dim_categoria cargada (9 filas)
+2026-10-16 13:42:28 | INFO | DW: tabla kpi_casos_por_zona cargada (42 filas)
+2026-10-16 13:42:29 | INFO | DW: tabla kpi_evolucion_mensual cargada (30 filas)
+2026-10-16 13:42:29 | INFO | DW: tabla kpi_priorizacion cargada (37 filas)
+2026-10-16 13:42:30 | INFO | DW: tabla kpi_comparativo_ciudades cargada (8 filas)
+2026-10-16 13:42:30 | INFO | Evidencia grafica: evidencias/01_casos_por_comuna.png
+2026-10-16 13:42:30 | INFO | Evidencia grafica: evidencias/02_evolucion_mensual.png
+2026-10-16 13:42:31 | INFO | Evidencia grafica: evidencias/03_urgencias_cali_vs_bogota.png
+2026-10-16 13:42:31 | INFO | Evidencia grafica: evidencias/04_calidad_antes_despues.png
+2026-10-16 13:42:31 | INFO | === FIN PIPELINE: 9 reglas OK, 2 advertencias, 0 fallas ===
+2026-10-16 15:00:48 | INFO | === INICIO PIPELINE: ETL Bienestar Animal: Cali (CBA/Uaepa) vs Bogota (IDPYBA) v1.0 ===
+2026-10-16 15:00:50 | INFO | BRONZE Cali (Excel): 17642 filas x 5 columnas | sha256=b3dda41a1f7fc2ce
+2026-10-16 15:00:50 | INFO | BRONZE Bogota: 20 features | sha256=1ced21585f46f559
+2026-10-16 15:00:50 | INFO | SILVER Cali: duplicados por id eliminados = 0
+2026-10-16 15:00:51 | INFO | SILVER Cali: comunas recuperadas desde barrio = 18
+2026-10-16 15:00:51 | INFO | SILVER Cali: 17642 filas | zonas distintas 83 -> 42
+2026-10-16 15:00:51 | INFO | SILVER Bogota: 20 localidades | atenciones totales = 947
+2026-10-16 15:00:51 | INFO | Archivo guardado: data/silver/silver_cali.csv (17642 filas)
+2026-10-16 15:00:51 | INFO | Archivo guardado: data/silver/silver_bogota.csv (20 filas)
+2026-10-16 15:00:51 | INFO | CALIDAD [OK] Cali: no se pierden registros bronze->silver 17642 -> 17642
+2026-10-16 15:00:51 | INFO | CALIDAD [OK] Cali: id unico 
+2026-10-16 15:00:51 | INFO | CALIDAD [OK] Cali: clase sin valores fuera del catalogo 
+2026-10-16 15:00:51 | INFO | CALIDAD [OK] Cali: fechas validas dentro del rango 
+2026-10-16 15:00:51 | INFO | CALIDAD [OK] Cali: fechas invalidas < 1% 0.051%
+2026-10-16 15:00:51 | INFO | CALIDAD [OK] Bogota: 20 localidades 20 localidades
+2026-10-16 15:00:51 | INFO | CALIDAD [OK] Bogota: sin nulos en atenciones 
+2026-10-16 15:00:51 | INFO | CALIDAD [OK] Bogota: especie suma atenciones 
+2026-10-16 15:00:51 | INFO | CALIDAD [OK] Bogota: sexo suma atenciones 
+2026-10-16 15:00:51 | WARNING | CALIDAD [ADVERTENCIA] Bogota: diagnosticos suman atenciones diferencias en Kennedy (-2), Fontibón (+2), Rafael Uribe Uribe (-1), Ciudad Bolívar (+1)
+2026-10-16 15:00:51 | WARNING | CALIDAD [ADVERTENCIA] Bogota: procedencia suman atenciones diferencias en Rafael Uribe Uribe (-1), Ciudad Bolívar (+1)
+2026-10-16 15:00:51 | INFO | GOLD final: 404 filas (Cali 17642 casos | Bogota 947 atenciones)
+2026-10-16 15:00:52 | INFO | BRONZE API población: 41 registros -> poblacion_comunas_api.json
+2026-10-16 15:00:52 | INFO | API de población: 1 filas descartadas (no son comuna o corregimiento): ['Otros']
+2026-10-16 15:00:52 | INFO | API de población: 37 zonas con población (año 2020)
+2026-10-16 15:00:52 | INFO | Archivo guardado: data/gold/gold_final.csv (404 filas)
+2026-10-16 15:00:52 | INFO | Archivo guardado: data/gold/kpis/kpi_calidad_datos.csv (14 filas)
+2026-10-16 15:00:52 | INFO | Archivo guardado: data/gold/kpis/kpi_casos_por_zona.csv (42 filas)
+2026-10-16 15:00:52 | INFO | Archivo guardado: data/gold/kpis/kpi_evolucion_mensual.csv (30 filas)
+2026-10-16 15:00:52 | INFO | Archivo guardado: data/gold/kpis/kpi_priorizacion_territorial.csv (37 filas)
+2026-10-16 15:00:52 | INFO | Archivo guardado: data/gold/kpis/kpi_comparativo_ciudades.csv (8 filas)
+2026-10-16 15:00:52 | INFO | Archivo guardado: data/gold/kpis/kpi_urgencias_por_zona.csv (56 filas)
+2026-10-16 15:00:52 | INFO | Archivo guardado: data/gold/kpis/kpi_bogota_detalle.csv (28 filas)
+2026-10-16 15:00:52 | INFO | Archivo guardado: evidencias/validaciones_calidad.csv (11 filas)
+2026-10-16 15:00:53 | INFO | DW: tabla silver_cali cargada (17642 filas)
+2026-10-16 15:00:53 | INFO | DW: tabla silver_bogota cargada (20 filas)
+2026-10-16 15:00:54 | INFO | DW: tabla gold_final cargada (404 filas)
+2026-10-16 15:00:54 | INFO | DW: tabla dim_categoria cargada (9 filas)
+2026-10-16 15:00:55 | INFO | DW: tabla kpi_casos_por_zona cargada (42 filas)
+2026-10-16 15:00:55 | INFO | DW: tabla kpi_evolucion_mensual cargada (30 filas)
+2026-10-16 15:00:56 | INFO | DW: tabla kpi_priorizacion cargada (37 filas)
+2026-10-16 15:00:56 | INFO | DW: tabla kpi_comparativo_ciudades cargada (8 filas)
+2026-10-16 15:00:57 | INFO | Evidencia grafica: evidencias/01_casos_por_comuna.png
+2026-10-16 15:00:57 | INFO | Evidencia grafica: evidencias/02_evolucion_mensual.png
+2026-10-16 15:00:57 | INFO | Evidencia grafica: evidencias/03_urgencias_cali_vs_bogota.png
+2026-10-16 15:00:57 | INFO | Evidencia grafica: evidencias/04_calidad_antes_despues.png
+2026-10-16 15:00:57 | INFO | === FIN PIPELINE: 9 reglas OK, 2 advertencias, 0 fallas ===
+2026-11-11 15:36:08 | INFO | SILVER Cali: duplicados por id eliminados = 0
+2026-11-11 15:36:08 | INFO | SILVER Cali: comunas recuperadas desde barrio = 18
+2026-11-11 15:36:08 | INFO | SILVER Cali: 17642 filas | zonas distintas 83 -> 42
+2026-11-11 15:37:46 | INFO | SILVER Cali: duplicados por id eliminados = 0
+2026-11-11 15:37:46 | INFO | SILVER Cali: comunas recuperadas desde barrio = 18
+2026-11-11 15:37:46 | INFO | SILVER Cali: 17642 filas | zonas distintas 83 -> 42
+2026-11-11 15:38:51 | INFO | SILVER Cali: duplicados por id eliminados = 0
+2026-11-11 15:38:51 | INFO | SILVER Cali: comunas recuperadas desde barrio = 18
+2026-11-11 15:38:51 | INFO | SILVER Cali: 17642 filas | zonas distintas 83 -> 42
+2026-11-11 15:38:51 | INFO | SILVER Bogota: 20 localidades | atenciones totales = 947
+2026-11-11 15:38:51 | INFO | API de población: 1 filas descartadas (no son comuna o corregimiento): ['Otros']
+2026-11-11 15:38:51 | INFO | API de población: 37 zonas con población (año 2020)
+2026-11-11 15:44:41 | INFO | === INICIO PIPELINE: ETL Bienestar Animal: Cali (CBA/Uaepa) vs Bogota (IDPYBA) v1.0 ===
+2026-11-11 15:44:44 | INFO | BRONZE Cali (Excel): 17642 filas x 5 columnas | sha256=b3dda41a1f7fc2ce
+2026-11-11 15:44:44 | INFO | BRONZE Bogota: 20 features | sha256=1ced21585f46f559
+2026-11-11 15:44:44 | INFO | SILVER Cali: duplicados por id eliminados = 0
+2026-11-11 15:44:44 | INFO | SILVER Cali: comunas recuperadas desde barrio = 18
+2026-11-11 15:44:44 | INFO | SILVER Cali: 17642 filas | zonas distintas 83 -> 42
+2026-11-11 15:44:44 | INFO | SILVER Bogota: 20 localidades | atenciones totales = 947
+2026-11-11 15:44:44 | INFO | Archivo guardado: data/silver/silver_cali.csv (17642 filas)
+2026-11-11 15:44:44 | INFO | Archivo guardado: data/silver/silver_bogota.csv (20 filas)
+2026-11-11 15:44:44 | INFO | CALIDAD [OK] Cali: no se pierden registros bronze->silver 17642 -> 17642
+2026-11-11 15:44:44 | INFO | CALIDAD [OK] Cali: id unico 
+2026-11-11 15:44:44 | INFO | CALIDAD [OK] Cali: clase sin valores fuera del catalogo 
+2026-11-11 15:44:44 | INFO | CALIDAD [OK] Cali: fechas validas dentro del rango 
+2026-11-11 15:44:44 | INFO | CALIDAD [OK] Cali: fechas invalidas < 1% 0.068%
+2026-11-11 15:44:44 | INFO | CALIDAD [OK] Bogota: 20 localidades 20 localidades
+2026-11-11 15:44:44 | INFO | CALIDAD [OK] Bogota: sin nulos en atenciones 
+2026-11-11 15:44:44 | INFO | CALIDAD [OK] Bogota: especie suma atenciones 
+2026-11-11 15:44:44 | INFO | CALIDAD [OK] Bogota: sexo suma atenciones 
+2026-11-11 15:44:44 | WARNING | CALIDAD [ADVERTENCIA] Bogota: diagnosticos suman atenciones diferencias en Kennedy (-2), Fontibón (+2), Rafael Uribe Uribe (-1), Ciudad Bolívar (+1)
+2026-11-11 15:44:44 | WARNING | CALIDAD [ADVERTENCIA] Bogota: procedencia suman atenciones diferencias en Rafael Uribe Uribe (-1), Ciudad Bolívar (+1)
+2026-11-11 15:44:44 | INFO | GOLD final: 404 filas (Cali 17642 casos | Bogota 947 atenciones)
+2026-11-11 15:44:45 | WARNING | API de población sin conexión (HTTPSConnectionPool(host='datos.cali.gov.co', port=443): Max retries exceeded with url: /api/3/action/datastore_search?resource_id=63f3e50e-0452-49cf-993d-08dfc2842cb4&limit=500 (Caused by NameResolutionError("HTTPSConnection(host='datos.cali.gov.co', port=443): Failed to resolve 'datos.cali.gov.co' ([Errno 11001] getaddrinfo failed)"))). Se usa snapshot local de bronze: poblacion_comunas_api.json
+2026-11-11 15:44:45 | INFO | API de población: 1 filas descartadas (no son comuna o corregimiento): ['Otros']
+2026-11-11 15:44:45 | INFO | API de población: 37 zonas con población (año 2020)
+2026-11-11 15:45:04 | INFO | === INICIO PIPELINE: ETL Bienestar Animal: Cali (CBA/Uaepa) vs Bogota (IDPYBA) v1.0 ===
+2026-11-11 15:45:06 | INFO | BRONZE Cali (Excel): 17642 filas x 5 columnas | sha256=b3dda41a1f7fc2ce
+2026-11-11 15:45:06 | INFO | BRONZE Bogota: 20 features | sha256=1ced21585f46f559
+2026-11-11 15:45:06 | INFO | SILVER Cali: duplicados por id eliminados = 0
+2026-11-11 15:45:06 | INFO | SILVER Cali: comunas recuperadas desde barrio = 18
+2026-11-11 15:45:06 | INFO | SILVER Cali: 17642 filas | zonas distintas 83 -> 42
+2026-11-11 15:45:06 | INFO | SILVER Bogota: 20 localidades | atenciones totales = 947
+2026-11-11 15:45:06 | INFO | Archivo guardado: data/silver/silver_cali.csv (17642 filas)
+2026-11-11 15:45:06 | INFO | Archivo guardado: data/silver/silver_bogota.csv (20 filas)
+2026-11-11 15:45:07 | INFO | CALIDAD [OK] Cali: no se pierden registros bronze->silver 17642 -> 17642
+2026-11-11 15:45:07 | INFO | CALIDAD [OK] Cali: id unico 
+2026-11-11 15:45:07 | INFO | CALIDAD [OK] Cali: clase sin valores fuera del catalogo 
+2026-11-11 15:45:07 | INFO | CALIDAD [OK] Cali: fechas validas dentro del rango 
+2026-11-11 15:45:07 | INFO | CALIDAD [OK] Cali: fechas invalidas < 1% 0.068%
+2026-11-11 15:45:07 | INFO | CALIDAD [OK] Bogota: 20 localidades 20 localidades
+2026-11-11 15:45:07 | INFO | CALIDAD [OK] Bogota: sin nulos en atenciones 
+2026-11-11 15:45:07 | INFO | CALIDAD [OK] Bogota: especie suma atenciones 
+2026-11-11 15:45:07 | INFO | CALIDAD [OK] Bogota: sexo suma atenciones 
+2026-11-11 15:45:07 | WARNING | CALIDAD [ADVERTENCIA] Bogota: diagnosticos suman atenciones diferencias en Kennedy (-2), Fontibón (+2), Rafael Uribe Uribe (-1), Ciudad Bolívar (+1)
+2026-11-11 15:45:07 | WARNING | CALIDAD [ADVERTENCIA] Bogota: procedencia suman atenciones diferencias en Rafael Uribe Uribe (-1), Ciudad Bolívar (+1)
+2026-11-11 15:45:07 | INFO | GOLD final: 404 filas (Cali 17642 casos | Bogota 947 atenciones)
+2026-11-11 15:45:07 | WARNING | API de población sin conexión (HTTPSConnectionPool(host='datos.cali.gov.co', port=443): Max retries exceeded with url: /api/3/action/datastore_search?resource_id=63f3e50e-0452-49cf-993d-08dfc2842cb4&limit=500 (Caused by NameResolutionError("HTTPSConnection(host='datos.cali.gov.co', port=443): Failed to resolve 'datos.cali.gov.co' ([Errno 11001] getaddrinfo failed)"))). Se usa snapshot local de bronze: poblacion_comunas_api.json
+2026-11-11 15:45:07 | INFO | API de población: 1 filas descartadas (no son comuna o corregimiento): ['Otros']
+2026-11-11 15:45:07 | INFO | API de población: 37 zonas con población (año 2020)
+2026-11-11 15:45:07 | INFO | Archivo guardado: data/gold/gold_final.csv (404 filas)
+2026-11-11 15:45:07 | INFO | Archivo guardado: data/gold/kpis/kpi_calidad_datos.csv (14 filas)
+2026-11-11 15:45:07 | INFO | Archivo guardado: data/gold/kpis/kpi_casos_por_zona.csv (42 filas)
+2026-11-11 15:45:07 | INFO | Archivo guardado: data/gold/kpis/kpi_evolucion_mensual.csv (24 filas)
+2026-11-11 15:45:07 | INFO | Archivo guardado: data/gold/kpis/kpi_priorizacion_territorial.csv (37 filas)
+2026-11-11 15:45:07 | INFO | Archivo guardado: data/gold/kpis/kpi_comparativo_ciudades.csv (8 filas)
+2026-11-11 15:45:07 | INFO | Archivo guardado: data/gold/kpis/kpi_urgencias_por_zona.csv (56 filas)
+2026-11-11 15:45:07 | INFO | Archivo guardado: data/gold/kpis/kpi_bogota_detalle.csv (28 filas)
+2026-11-11 15:45:07 | INFO | Archivo guardado: data/gold/kpis/kpi_cambio_anual_servicios.csv (8 filas)
+2026-11-11 15:45:07 | INFO | Archivo guardado: data/gold/kpis/kpi_brecha_prevencion_zona.csv (37 filas)
+2026-11-11 15:45:08 | INFO | Archivo guardado: data/gold/kpis/kpi_top_barrios_cali.csv (25 filas)
+2026-11-11 15:45:08 | INFO | Archivo guardado: data/gold/kpis/kpi_calidad_por_clase.csv (8 filas)
+2026-11-11 15:45:08 | INFO | Archivo guardado: data/gold/kpis/kpi_patron_semanal_cali.csv (7 filas)
+2026-11-11 15:45:08 | INFO | Archivo guardado: data/gold/kpis/kpi_bogota_engativa_vs_resto.csv (22 filas)
+2026-11-11 15:45:08 | INFO | Archivo guardado: evidencias/validaciones_calidad.csv (11 filas)
+2026-11-11 15:45:08 | INFO | DW: tabla silver_cali cargada (17642 filas)
+2026-11-11 15:45:08 | INFO | DW: tabla silver_bogota cargada (20 filas)
+2026-11-11 15:45:08 | INFO | DW: tabla gold_final cargada (404 filas)
+2026-11-11 15:45:08 | INFO | DW: tabla dim_categoria cargada (9 filas)
+2026-11-11 15:45:08 | INFO | DW: tabla validaciones_calidad cargada (11 filas)
+2026-11-11 15:45:08 | INFO | DW: tabla kpi_calidad_datos cargada (14 filas)
+2026-11-11 15:45:08 | INFO | DW: tabla kpi_casos_por_zona cargada (42 filas)
+2026-11-11 15:45:08 | INFO | DW: tabla kpi_evolucion_mensual cargada (24 filas)
+2026-11-11 15:45:08 | INFO | DW: tabla kpi_priorizacion_territorial cargada (37 filas)
+2026-11-11 15:45:08 | INFO | DW: tabla kpi_comparativo_ciudades cargada (8 filas)
+2026-11-11 15:45:08 | INFO | DW: tabla kpi_urgencias_por_zona cargada (56 filas)
+2026-11-11 15:45:08 | INFO | DW: tabla kpi_bogota_detalle cargada (28 filas)
+2026-11-11 15:45:08 | INFO | DW: tabla kpi_cambio_anual_servicios cargada (8 filas)
+2026-11-11 15:45:08 | INFO | DW: tabla kpi_brecha_prevencion_zona cargada (37 filas)
+2026-11-11 15:45:08 | INFO | DW: tabla kpi_top_barrios_cali cargada (25 filas)
+2026-11-11 15:45:08 | INFO | DW: tabla kpi_calidad_por_clase cargada (8 filas)
+2026-11-11 15:45:08 | INFO | DW: tabla kpi_patron_semanal_cali cargada (7 filas)
+2026-11-11 15:45:08 | INFO | DW: tabla kpi_bogota_engativa_vs_resto cargada (22 filas)
+2026-11-11 15:45:08 | INFO | Evidencia grafica: evidencias/01_casos_por_comuna.png
+2026-11-11 15:45:08 | INFO | Evidencia grafica: evidencias/02_evolucion_mensual.png
+2026-11-11 15:45:09 | INFO | Evidencia grafica: evidencias/03_urgencias_cali_vs_bogota.png
+2026-11-11 15:45:09 | INFO | Evidencia grafica: evidencias/04_calidad_antes_despues.png
+2026-11-11 15:45:09 | INFO | Evidencia grafica: evidencias/05_cambio_mix_2024_vs_2025.png
+2026-11-11 15:45:10 | INFO | Evidencia grafica: evidencias/06_brecha_prevencion_vs_criticos.png
+2026-11-11 15:45:10 | INFO | Evidencia grafica: evidencias/07_top_barrios_criticos_cali.png
+2026-11-11 15:45:10 | INFO | Evidencia grafica: evidencias/08_bogota_sesgo_uca_vs_resto.png
+2026-11-11 15:45:10 | INFO | === FIN PIPELINE: 9 reglas OK, 2 advertencias, 0 fallas ===
+2026-11-11 15:48:32 | INFO | === INICIO PIPELINE: ETL Bienestar Animal: Cali (CBA/Uaepa) vs Bogota (IDPYBA) v1.0 ===
+2026-11-11 15:48:34 | INFO | BRONZE Cali (Excel): 17642 filas x 5 columnas | sha256=b3dda41a1f7fc2ce
+2026-11-11 15:48:34 | INFO | BRONZE Bogota: 20 features | sha256=1ced21585f46f559
+2026-11-11 15:48:34 | INFO | SILVER Cali: duplicados por id eliminados = 0
+2026-11-11 15:48:34 | INFO | SILVER Cali: comunas recuperadas desde barrio = 18
+2026-11-11 15:48:34 | INFO | SILVER Cali: 17642 filas | zonas distintas 83 -> 42
+2026-11-11 15:48:34 | INFO | SILVER Bogota: 20 localidades | atenciones totales = 947
+2026-11-11 15:48:34 | INFO | Archivo guardado: data/silver/silver_cali.csv (17642 filas)
+2026-11-11 15:48:34 | INFO | Archivo guardado: data/silver/silver_bogota.csv (20 filas)
+2026-11-11 15:48:34 | INFO | CALIDAD [OK] Cali: no se pierden registros bronze->silver 17642 -> 17642
+2026-11-11 15:48:34 | INFO | CALIDAD [OK] Cali: id unico 
+2026-11-11 15:48:34 | INFO | CALIDAD [OK] Cali: clase sin valores fuera del catalogo 
+2026-11-11 15:48:34 | INFO | CALIDAD [OK] Cali: fechas validas dentro del rango 
+2026-11-11 15:48:34 | INFO | CALIDAD [OK] Cali: fechas invalidas < 1% 0.068%
+2026-11-11 15:48:34 | INFO | CALIDAD [OK] Bogota: 20 localidades 20 localidades
+2026-11-11 15:48:34 | INFO | CALIDAD [OK] Bogota: sin nulos en atenciones 
+2026-11-11 15:48:34 | INFO | CALIDAD [OK] Bogota: especie suma atenciones 
+2026-11-11 15:48:34 | INFO | CALIDAD [OK] Bogota: sexo suma atenciones 
+2026-11-11 15:48:34 | WARNING | CALIDAD [ADVERTENCIA] Bogota: diagnosticos suman atenciones diferencias en Kennedy (-2), Fontibón (+2), Rafael Uribe Uribe (-1), Ciudad Bolívar (+1)
+2026-11-11 15:48:34 | WARNING | CALIDAD [ADVERTENCIA] Bogota: procedencia suman atenciones diferencias en Rafael Uribe Uribe (-1), Ciudad Bolívar (+1)
+2026-11-11 15:48:34 | INFO | GOLD final: 404 filas (Cali 17642 casos | Bogota 947 atenciones)
+2026-11-11 15:48:34 | WARNING | API de población sin conexión (HTTPSConnectionPool(host='datos.cali.gov.co', port=443): Max retries exceeded with url: /api/3/action/datastore_search?resource_id=63f3e50e-0452-49cf-993d-08dfc2842cb4&limit=500 (Caused by NameResolutionError("HTTPSConnection(host='datos.cali.gov.co', port=443): Failed to resolve 'datos.cali.gov.co' ([Errno 11001] getaddrinfo failed)"))). Se usa snapshot local de bronze: poblacion_comunas_api.json
+2026-11-11 15:48:34 | INFO | API de población: 1 filas descartadas (no son comuna o corregimiento): ['Otros']
+2026-11-11 15:48:34 | INFO | API de población: 37 zonas con población (año 2020)
+2026-11-11 15:48:35 | INFO | Archivo guardado: data/gold/gold_final.csv (404 filas)
+2026-11-11 15:48:35 | INFO | Archivo guardado: data/gold/kpis/kpi_calidad_datos.csv (14 filas)
+2026-11-11 15:48:35 | INFO | Archivo guardado: data/gold/kpis/kpi_casos_por_zona.csv (42 filas)
+2026-11-11 15:48:35 | INFO | Archivo guardado: data/gold/kpis/kpi_evolucion_mensual.csv (24 filas)
+2026-11-11 15:48:35 | INFO | Archivo guardado: data/gold/kpis/kpi_priorizacion_territorial.csv (37 filas)
+2026-11-11 15:48:35 | INFO | Archivo guardado: data/gold/kpis/kpi_comparativo_ciudades.csv (8 filas)
+2026-11-11 15:48:35 | INFO | Archivo guardado: data/gold/kpis/kpi_urgencias_por_zona.csv (56 filas)
+2026-11-11 15:48:35 | INFO | Archivo guardado: data/gold/kpis/kpi_bogota_detalle.csv (28 filas)
+2026-11-11 15:48:35 | INFO | Archivo guardado: data/gold/kpis/kpi_cambio_anual_servicios.csv (8 filas)
+2026-11-11 15:48:35 | INFO | Archivo guardado: data/gold/kpis/kpi_brecha_prevencion_zona.csv (37 filas)
+2026-11-11 15:48:35 | INFO | Archivo guardado: data/gold/kpis/kpi_top_barrios_cali.csv (25 filas)
+2026-11-11 15:48:35 | INFO | Archivo guardado: data/gold/kpis/kpi_calidad_por_clase.csv (8 filas)
+2026-11-11 15:48:35 | INFO | Archivo guardado: data/gold/kpis/kpi_patron_semanal_cali.csv (7 filas)
+2026-11-11 15:48:35 | INFO | Archivo guardado: data/gold/kpis/kpi_bogota_engativa_vs_resto.csv (22 filas)
+2026-11-11 15:48:35 | INFO | Archivo guardado: evidencias/validaciones_calidad.csv (11 filas)
+2026-11-11 15:48:35 | INFO | DW: tabla silver_cali cargada (17642 filas)
+2026-11-11 15:48:35 | INFO | DW: tabla silver_bogota cargada (20 filas)
+2026-11-11 15:48:35 | INFO | DW: tabla gold_final cargada (404 filas)
+2026-11-11 15:48:35 | INFO | DW: tabla dim_categoria cargada (9 filas)
+2026-11-11 15:48:35 | INFO | DW: tabla validaciones_calidad cargada (11 filas)
+2026-11-11 15:48:35 | INFO | DW: tabla kpi_calidad_datos cargada (14 filas)
+2026-11-11 15:48:35 | INFO | DW: tabla kpi_casos_por_zona cargada (42 filas)
+2026-11-11 15:48:35 | INFO | DW: tabla kpi_evolucion_mensual cargada (24 filas)
+2026-11-11 15:48:35 | INFO | DW: tabla kpi_priorizacion_territorial cargada (37 filas)
+2026-11-11 15:48:35 | INFO | DW: tabla kpi_comparativo_ciudades cargada (8 filas)
+2026-11-11 15:48:35 | INFO | DW: tabla kpi_urgencias_por_zona cargada (56 filas)
+2026-11-11 15:48:35 | INFO | DW: tabla kpi_bogota_detalle cargada (28 filas)
+2026-11-11 15:48:35 | INFO | DW: tabla kpi_cambio_anual_servicios cargada (8 filas)
+2026-11-11 15:48:35 | INFO | DW: tabla kpi_brecha_prevencion_zona cargada (37 filas)
+2026-11-11 15:48:35 | INFO | DW: tabla kpi_top_barrios_cali cargada (25 filas)
+2026-11-11 15:48:35 | INFO | DW: tabla kpi_calidad_por_clase cargada (8 filas)
+2026-11-11 15:48:35 | INFO | DW: tabla kpi_patron_semanal_cali cargada (7 filas)
+2026-11-11 15:48:35 | INFO | DW: tabla kpi_bogota_engativa_vs_resto cargada (22 filas)
+2026-11-11 15:48:35 | INFO | Evidencia grafica: evidencias/01_casos_por_comuna.png
+2026-11-11 15:48:35 | INFO | Evidencia grafica: evidencias/02_evolucion_mensual.png
+2026-11-11 15:48:36 | INFO | Evidencia grafica: evidencias/03_urgencias_cali_vs_bogota.png
+2026-11-11 15:48:36 | INFO | Evidencia grafica: evidencias/04_calidad_antes_despues.png
+2026-11-11 15:48:36 | INFO | Evidencia grafica: evidencias/05_cambio_mix_2024_vs_2025.png
+2026-11-11 15:48:36 | INFO | Evidencia grafica: evidencias/06_brecha_prevencion_vs_criticos.png
+2026-11-11 15:48:36 | INFO | Evidencia grafica: evidencias/07_top_barrios_criticos_cali.png
+2026-11-11 15:48:37 | INFO | Evidencia grafica: evidencias/08_bogota_sesgo_uca_vs_resto.png
+2026-11-11 15:48:37 | INFO | === FIN PIPELINE: 9 reglas OK, 2 advertencias, 0 fallas ===
+2026-11-11 15:49:44 | INFO | BRONZE Cali (Excel): 17642 filas x 5 columnas | sha256=b3dda41a1f7fc2ce
+2026-11-11 15:49:44 | INFO | SILVER Cali: duplicados por id eliminados = 0
+2026-11-11 15:49:44 | INFO | SILVER Cali: comunas recuperadas desde barrio = 18
+2026-11-11 15:49:44 | INFO | SILVER Cali: 17642 filas | zonas distintas 83 -> 42
+2026-11-11 15:49:44 | INFO | SILVER Bogota: 20 localidades | atenciones totales = 947
+2026-11-11 15:49:44 | INFO | GOLD final: 404 filas (Cali 17642 casos | Bogota 947 atenciones)
+2026-11-11 15:49:44 | INFO | API de población: 1 filas descartadas (no son comuna o corregimiento): ['Otros']
+2026-11-11 15:49:44 | INFO | API de población: 37 zonas con población (año 2020)
+2026-11-11 16:10:31 | INFO | Iniciando tarea extract_api_bronze (corrida: 20261111_161031)...
+2026-11-11 16:10:31 | WARNING | API de población sin conexión (HTTPSConnectionPool(host='datos.cali.gov.co', port=443): Max retries exceeded with url: /api/3/action/datastore_search?resource_id=63f3e50e-0452-49cf-993d-08dfc2842cb4&limit=500 (Caused by NameResolutionError("HTTPSConnection(host='datos.cali.gov.co', port=443): Failed to resolve 'datos.cali.gov.co' ([Errno 11001] getaddrinfo failed)"))). Se usa snapshot local de bronze: poblacion_comunas_api.json
+2026-11-11 16:10:31 | INFO | BRONZE Bogota: 20 features | sha256=1ced21585f46f559
+2026-11-11 16:10:31 | INFO | extract_api_bronze completado: API población=41 registros, Bogotá GeoJSON=20 localidades, copia en data/bronze/runs/20261111_161031
+2026-11-11 16:10:31 | INFO | Iniciando tarea extract_excel_bronze (corrida: 20261111_161031)...
+2026-11-11 16:10:34 | INFO | BRONZE Cali (Excel): 17642 filas x 5 columnas | sha256=b3dda41a1f7fc2ce
+2026-11-11 16:10:34 | INFO | extract_excel_bronze completado: 17642 filas x 5 columnas, sha256=b3dda41a1f7f, copia en data/bronze/runs/20261111_161031/Dataset_cali.xlsx
+2026-11-11 16:10:35 | INFO | Iniciando tarea transform_silver...
+2026-11-11 16:10:38 | INFO | BRONZE Cali (Excel): 17642 filas x 5 columnas | sha256=b3dda41a1f7fc2ce
+2026-11-11 16:10:38 | INFO | BRONZE Bogota: 20 features | sha256=1ced21585f46f559
+2026-11-11 16:10:38 | INFO | SILVER Cali: duplicados por id eliminados = 0
+2026-11-11 16:10:39 | INFO | SILVER Cali: comunas recuperadas desde barrio = 18
+2026-11-11 16:10:39 | INFO | SILVER Cali: 17642 filas | zonas distintas 83 -> 42
+2026-11-11 16:10:39 | INFO | SILVER Bogota: 20 localidades | atenciones totales = 947
+2026-11-11 16:10:39 | INFO | Archivo guardado: data/silver/silver_cali.csv (17642 filas)
+2026-11-11 16:10:39 | INFO | Archivo guardado: data/silver/silver_bogota.csv (20 filas)
+2026-11-11 16:10:39 | INFO | Archivo guardado: evidencias/trazabilidad_fuentes.csv (3 filas)
+2026-11-11 16:10:40 | INFO | Archivo guardado: data/gold/kpis/kpi_calidad_datos.csv (14 filas)
+2026-11-11 16:10:40 | INFO | transform_silver completado: Cali=17642 filas (data/silver/silver_cali.csv), Bogotá=20 localidades (data/silver/silver_bogota.csv)
+2026-11-11 16:10:40 | INFO | Iniciando tarea build_gold...
+2026-11-11 16:10:43 | INFO | BRONZE Cali (Excel): 17642 filas x 5 columnas | sha256=b3dda41a1f7fc2ce
+2026-11-11 16:10:43 | INFO | GOLD final: 404 filas (Cali 17642 casos | Bogota 947 atenciones)
+2026-11-11 16:10:43 | INFO | API de población: 1 filas descartadas (no son comuna o corregimiento): ['Otros']
+2026-11-11 16:10:43 | INFO | API de población: 37 zonas con población (año 2020)
+2026-11-11 16:10:45 | INFO | Archivo guardado: data/gold/gold_final.csv (404 filas)
+2026-11-11 16:10:45 | INFO | Archivo guardado: data/gold/kpis/kpi_calidad_datos.csv (14 filas)
+2026-11-11 16:10:45 | INFO | Archivo guardado: data/gold/kpis/kpi_casos_por_zona.csv (42 filas)
+2026-11-11 16:10:45 | INFO | Archivo guardado: data/gold/kpis/kpi_evolucion_mensual.csv (24 filas)
+2026-11-11 16:10:45 | INFO | Archivo guardado: data/gold/kpis/kpi_priorizacion_territorial.csv (37 filas)
+2026-11-11 16:10:45 | INFO | Archivo guardado: data/gold/kpis/kpi_comparativo_ciudades.csv (8 filas)
+2026-11-11 16:10:45 | INFO | Archivo guardado: data/gold/kpis/kpi_urgencias_por_zona.csv (56 filas)
+2026-11-11 16:10:45 | INFO | Archivo guardado: data/gold/kpis/kpi_bogota_detalle.csv (28 filas)
+2026-11-11 16:10:45 | INFO | Archivo guardado: data/gold/kpis/kpi_cambio_anual_servicios.csv (8 filas)
+2026-11-11 16:10:45 | INFO | Archivo guardado: data/gold/kpis/kpi_brecha_prevencion_zona.csv (37 filas)
+2026-11-11 16:10:45 | INFO | Archivo guardado: data/gold/kpis/kpi_top_barrios_cali.csv (25 filas)
+2026-11-11 16:10:45 | INFO | Archivo guardado: data/gold/kpis/kpi_calidad_por_clase.csv (8 filas)
+2026-11-11 16:10:45 | INFO | Archivo guardado: data/gold/kpis/kpi_patron_semanal_cali.csv (7 filas)
+2026-11-11 16:10:45 | INFO | Archivo guardado: data/gold/kpis/kpi_bogota_engativa_vs_resto.csv (22 filas)
+2026-11-11 16:10:45 | INFO | build_gold completado: gold_final=404 filas (data/gold/gold_final.csv), 13 tablas KPI generadas
+2026-11-11 16:10:46 | INFO | Iniciando tarea validate_gold...
+2026-11-11 16:10:48 | INFO | BRONZE Cali (Excel): 17642 filas x 5 columnas | sha256=b3dda41a1f7fc2ce
+2026-11-11 16:10:48 | INFO | CALIDAD [OK] Cali: no se pierden registros bronze->silver 17642 -> 17642
+2026-11-11 16:10:48 | INFO | CALIDAD [OK] Cali: id unico 
+2026-11-11 16:10:48 | INFO | CALIDAD [OK] Cali: clase sin valores fuera del catalogo 
+2026-11-11 16:10:48 | INFO | CALIDAD [OK] Cali: fechas validas dentro del rango 
+2026-11-11 16:10:48 | INFO | CALIDAD [OK] Cali: fechas invalidas < 1% 0.068%
+2026-11-11 16:10:48 | INFO | CALIDAD [OK] Bogota: 20 localidades 20 localidades
+2026-11-11 16:10:48 | INFO | CALIDAD [OK] Bogota: sin nulos en atenciones 
+2026-11-11 16:10:48 | INFO | CALIDAD [OK] Bogota: especie suma atenciones 
+2026-11-11 16:10:48 | INFO | CALIDAD [OK] Bogota: sexo suma atenciones 
+2026-11-11 16:10:48 | WARNING | CALIDAD [ADVERTENCIA] Bogota: diagnosticos suman atenciones diferencias en Kennedy (-2), Fontibón (+2), Rafael Uribe Uribe (-1), Ciudad Bolívar (+1)
+2026-11-11 16:10:48 | WARNING | CALIDAD [ADVERTENCIA] Bogota: procedencia suman atenciones diferencias en Rafael Uribe Uribe (-1), Ciudad Bolívar (+1)
+2026-11-11 16:10:48 | INFO | Archivo guardado: evidencias/validaciones_calidad.csv (14 filas)
+2026-11-11 16:10:49 | INFO | DW: tabla silver_cali cargada (17642 filas)
+2026-11-11 16:10:49 | INFO | DW: tabla silver_bogota cargada (20 filas)
+2026-11-11 16:10:49 | INFO | DW: tabla gold_final cargada (404 filas)
+2026-11-11 16:10:49 | INFO | DW: tabla dim_categoria cargada (9 filas)
+2026-11-11 16:10:49 | INFO | DW: tabla validaciones_calidad cargada (14 filas)
+2026-11-11 16:10:49 | INFO | DW: tabla kpi_calidad_datos cargada (14 filas)
+2026-11-11 16:10:49 | INFO | DW: tabla kpi_casos_por_zona cargada (42 filas)
+2026-11-11 16:10:49 | INFO | DW: tabla kpi_evolucion_mensual cargada (24 filas)
+2026-11-11 16:10:49 | INFO | DW: tabla kpi_priorizacion_territorial cargada (37 filas)
+2026-11-11 16:10:49 | INFO | DW: tabla kpi_comparativo_ciudades cargada (8 filas)
+2026-11-11 16:10:49 | INFO | DW: tabla kpi_urgencias_por_zona cargada (56 filas)
+2026-11-11 16:10:49 | INFO | DW: tabla kpi_bogota_detalle cargada (28 filas)
+2026-11-11 16:10:49 | INFO | DW: tabla kpi_cambio_anual_servicios cargada (8 filas)
+2026-11-11 16:10:49 | INFO | DW: tabla kpi_brecha_prevencion_zona cargada (37 filas)
+2026-11-11 16:10:49 | INFO | DW: tabla kpi_top_barrios_cali cargada (25 filas)
+2026-11-11 16:10:49 | INFO | DW: tabla kpi_calidad_por_clase cargada (8 filas)
+2026-11-11 16:10:49 | INFO | DW: tabla kpi_patron_semanal_cali cargada (7 filas)
+2026-11-11 16:10:49 | INFO | DW: tabla kpi_bogota_engativa_vs_resto cargada (22 filas)
+2026-11-11 16:10:50 | INFO | Evidencia grafica: evidencias/01_casos_por_comuna.png
+2026-11-11 16:10:50 | INFO | Evidencia grafica: evidencias/02_evolucion_mensual.png
+2026-11-11 16:10:51 | INFO | Evidencia grafica: evidencias/03_urgencias_cali_vs_bogota.png
+2026-11-11 16:10:51 | INFO | Evidencia grafica: evidencias/04_calidad_antes_despues.png
+2026-11-11 16:10:51 | INFO | Evidencia grafica: evidencias/05_cambio_mix_2024_vs_2025.png
+2026-11-11 16:10:52 | INFO | Evidencia grafica: evidencias/06_brecha_prevencion_vs_criticos.png
+2026-11-11 16:10:52 | INFO | Evidencia grafica: evidencias/07_top_barrios_criticos_cali.png
+2026-11-11 16:10:52 | INFO | Evidencia grafica: evidencias/08_bogota_sesgo_uca_vs_resto.png
+2026-11-11 16:10:52 | INFO | validate_gold completado exitosamente: {'etapa': 'validate_gold', 'fecha_ejecucion': '2026-11-11 16:10:46', 'validaciones_path': 'evidencias/validaciones_calidad.csv', 'warehouse_path': 'data/gold/warehouse.db', 'filas_validadas_gold': 404, 'duplicados_llave': 0, 'controles_ok': 12, 'controles_advertencia': 2, 'controles_error': 0, 'tablas_cargadas_sqlite': 18, 'filas_insertadas_sqlite_gold': 404, 'graficas_generadas': 8}
+2026-11-11 16:12:28 | INFO | BRONZE Cali (Excel): 17642 filas x 5 columnas | sha256=b3dda41a1f7fc2ce
+2026-11-11 16:12:28 | INFO | SILVER Cali: duplicados por id eliminados = 0
+2026-11-11 16:12:29 | INFO | SILVER Cali: comunas recuperadas desde barrio = 18
+2026-11-11 16:12:29 | INFO | SILVER Cali: 17642 filas | zonas distintas 83 -> 42
+2026-11-11 16:12:29 | INFO | SILVER Bogota: 20 localidades | atenciones totales = 947
+2026-11-11 16:12:29 | INFO | GOLD final: 404 filas (Cali 17642 casos | Bogota 947 atenciones)
+2026-11-11 16:12:29 | INFO | API de población: 1 filas descartadas (no son comuna o corregimiento): ['Otros']
+2026-11-11 16:12:29 | INFO | API de población: 37 zonas con población (año 2020)
+2026-11-11 16:12:52 | INFO | BRONZE Cali (Excel): 17642 filas x 5 columnas | sha256=b3dda41a1f7fc2ce
+2026-11-11 16:12:52 | INFO | SILVER Cali: duplicados por id eliminados = 0
+2026-11-11 16:12:52 | INFO | SILVER Cali: comunas recuperadas desde barrio = 18
+2026-11-11 16:12:52 | INFO | SILVER Cali: 17642 filas | zonas distintas 83 -> 42
+2026-11-11 16:12:52 | INFO | SILVER Bogota: 20 localidades | atenciones totales = 947
+2026-11-11 16:12:52 | INFO | GOLD final: 404 filas (Cali 17642 casos | Bogota 947 atenciones)
+2026-11-11 16:12:52 | INFO | API de población: 1 filas descartadas (no son comuna o corregimiento): ['Otros']
+2026-11-11 16:12:52 | INFO | API de población: 37 zonas con población (año 2020)
+2026-11-11 16:12:53 | INFO | Iniciando tarea extract_api_bronze (corrida: 20261111_161253)...
+2026-11-11 16:12:53 | ERROR | Fallo simulado en extract_api_bronze: API de Datos Abiertos de Cali temporalmente inaccesible (FORZAR_FALLO_API.txt activo)
+2026-11-11 16:13:04 | INFO | Iniciando tarea extract_api_bronze (corrida: 20261111_161304)...
+2026-11-11 16:13:04 | WARNING | API de población sin conexión (HTTPSConnectionPool(host='datos.cali.gov.co', port=443): Max retries exceeded with url: /api/3/action/datastore_search?resource_id=63f3e50e-0452-49cf-993d-08dfc2842cb4&limit=500 (Caused by NameResolutionError("HTTPSConnection(host='datos.cali.gov.co', port=443): Failed to resolve 'datos.cali.gov.co' ([Errno 11001] getaddrinfo failed)"))). Se usa snapshot local de bronze: poblacion_comunas_api.json
+2026-11-11 16:13:04 | INFO | BRONZE Bogota: 20 features | sha256=1ced21585f46f559
+2026-11-11 16:13:04 | INFO | extract_api_bronze completado: API población=41 registros, Bogotá GeoJSON=20 localidades, copia en data/bronze/runs/20261111_161304
+2026-11-11 16:13:04 | INFO | Iniciando tarea extract_excel_bronze (corrida: 20261111_161304)...
+2026-11-11 16:13:05 | INFO | BRONZE Cali (Excel): 17642 filas x 5 columnas | sha256=b3dda41a1f7fc2ce
+2026-11-11 16:13:06 | INFO | extract_excel_bronze completado: 17642 filas x 5 columnas, sha256=b3dda41a1f7f, copia en data/bronze/runs/20261111_161304/Dataset_cali.xlsx
+2026-11-11 16:13:06 | INFO | Iniciando tarea transform_silver...
+2026-11-11 16:13:07 | INFO | BRONZE Cali (Excel): 17642 filas x 5 columnas | sha256=b3dda41a1f7fc2ce
+2026-11-11 16:13:07 | INFO | BRONZE Bogota: 20 features | sha256=1ced21585f46f559
+2026-11-11 16:13:07 | INFO | SILVER Cali: duplicados por id eliminados = 0
+2026-11-11 16:13:07 | INFO | SILVER Cali: comunas recuperadas desde barrio = 18
+2026-11-11 16:13:07 | INFO | SILVER Cali: 17642 filas | zonas distintas 83 -> 42
+2026-11-11 16:13:07 | INFO | SILVER Bogota: 20 localidades | atenciones totales = 947
+2026-11-11 16:13:07 | INFO | Archivo guardado: data/silver/silver_cali.csv (17642 filas)
+2026-11-11 16:13:07 | INFO | Archivo guardado: data/silver/silver_bogota.csv (20 filas)
+2026-11-11 16:13:07 | INFO | Archivo guardado: evidencias/trazabilidad_fuentes.csv (3 filas)
+2026-11-11 16:13:07 | INFO | Archivo guardado: data/gold/kpis/kpi_calidad_datos.csv (14 filas)
+2026-11-11 16:13:07 | INFO | transform_silver completado: Cali=17642 filas (data/silver/silver_cali.csv), Bogotá=20 localidades (data/silver/silver_bogota.csv)
+2026-11-11 16:13:07 | INFO | Iniciando tarea build_gold...
+2026-11-11 16:13:08 | INFO | BRONZE Cali (Excel): 17642 filas x 5 columnas | sha256=b3dda41a1f7fc2ce
+2026-11-11 16:13:09 | INFO | GOLD final: 404 filas (Cali 17642 casos | Bogota 947 atenciones)
+2026-11-11 16:13:09 | INFO | API de población: 1 filas descartadas (no son comuna o corregimiento): ['Otros']
+2026-11-11 16:13:09 | INFO | API de población: 37 zonas con población (año 2020)
+2026-11-11 16:13:09 | INFO | Archivo guardado: data/gold/gold_final.csv (404 filas)
+2026-11-11 16:13:09 | INFO | Archivo guardado: data/gold/kpis/kpi_calidad_datos.csv (14 filas)
+2026-11-11 16:13:09 | INFO | Archivo guardado: data/gold/kpis/kpi_casos_por_zona.csv (42 filas)
+2026-11-11 16:13:09 | INFO | Archivo guardado: data/gold/kpis/kpi_evolucion_mensual.csv (24 filas)
+2026-11-11 16:13:09 | INFO | Archivo guardado: data/gold/kpis/kpi_priorizacion_territorial.csv (37 filas)
+2026-11-11 16:13:09 | INFO | Archivo guardado: data/gold/kpis/kpi_comparativo_ciudades.csv (8 filas)
+2026-11-11 16:13:09 | INFO | Archivo guardado: data/gold/kpis/kpi_urgencias_por_zona.csv (56 filas)
+2026-11-11 16:13:09 | INFO | Archivo guardado: data/gold/kpis/kpi_bogota_detalle.csv (28 filas)
+2026-11-11 16:13:09 | INFO | Archivo guardado: data/gold/kpis/kpi_cambio_anual_servicios.csv (8 filas)
+2026-11-11 16:13:09 | INFO | Archivo guardado: data/gold/kpis/kpi_brecha_prevencion_zona.csv (37 filas)
+2026-11-11 16:13:09 | INFO | Archivo guardado: data/gold/kpis/kpi_top_barrios_cali.csv (25 filas)
+2026-11-11 16:13:09 | INFO | Archivo guardado: data/gold/kpis/kpi_calidad_por_clase.csv (8 filas)
+2026-11-11 16:13:09 | INFO | Archivo guardado: data/gold/kpis/kpi_patron_semanal_cali.csv (7 filas)
+2026-11-11 16:13:09 | INFO | Archivo guardado: data/gold/kpis/kpi_bogota_engativa_vs_resto.csv (22 filas)
+2026-11-11 16:13:09 | INFO | build_gold completado: gold_final=404 filas (data/gold/gold_final.csv), 13 tablas KPI generadas
+2026-11-11 16:13:10 | INFO | Iniciando tarea validate_gold...
+2026-11-11 16:13:11 | INFO | BRONZE Cali (Excel): 17642 filas x 5 columnas | sha256=b3dda41a1f7fc2ce
+2026-11-11 16:13:11 | INFO | CALIDAD [OK] Cali: no se pierden registros bronze->silver 17642 -> 17642
+2026-11-11 16:13:11 | INFO | CALIDAD [OK] Cali: id unico 
+2026-11-11 16:13:11 | INFO | CALIDAD [OK] Cali: clase sin valores fuera del catalogo 
+2026-11-11 16:13:11 | INFO | CALIDAD [OK] Cali: fechas validas dentro del rango 
+2026-11-11 16:13:11 | INFO | CALIDAD [OK] Cali: fechas invalidas < 1% 0.068%
+2026-11-11 16:13:11 | INFO | CALIDAD [OK] Bogota: 20 localidades 20 localidades
+2026-11-11 16:13:11 | INFO | CALIDAD [OK] Bogota: sin nulos en atenciones 
+2026-11-11 16:13:11 | INFO | CALIDAD [OK] Bogota: especie suma atenciones 
+2026-11-11 16:13:11 | INFO | CALIDAD [OK] Bogota: sexo suma atenciones 
+2026-11-11 16:13:11 | WARNING | CALIDAD [ADVERTENCIA] Bogota: diagnosticos suman atenciones diferencias en Kennedy (-2), Fontibón (+2), Rafael Uribe Uribe (-1), Ciudad Bolívar (+1)
+2026-11-11 16:13:11 | WARNING | CALIDAD [ADVERTENCIA] Bogota: procedencia suman atenciones diferencias en Rafael Uribe Uribe (-1), Ciudad Bolívar (+1)
+2026-11-11 16:13:11 | INFO | Archivo guardado: evidencias/validaciones_calidad.csv (14 filas)
+2026-11-11 16:13:11 | INFO | DW: tabla silver_cali cargada (17642 filas)
+2026-11-11 16:13:11 | INFO | DW: tabla silver_bogota cargada (20 filas)
+2026-11-11 16:13:11 | INFO | DW: tabla gold_final cargada (404 filas)
+2026-11-11 16:13:11 | INFO | DW: tabla dim_categoria cargada (9 filas)
+2026-11-11 16:13:11 | INFO | DW: tabla validaciones_calidad cargada (14 filas)
+2026-11-11 16:13:11 | INFO | DW: tabla kpi_calidad_datos cargada (14 filas)
+2026-11-11 16:13:11 | INFO | DW: tabla kpi_casos_por_zona cargada (42 filas)
+2026-11-11 16:13:11 | INFO | DW: tabla kpi_evolucion_mensual cargada (24 filas)
+2026-11-11 16:13:11 | INFO | DW: tabla kpi_priorizacion_territorial cargada (37 filas)
+2026-11-11 16:13:11 | INFO | DW: tabla kpi_comparativo_ciudades cargada (8 filas)
+2026-11-11 16:13:11 | INFO | DW: tabla kpi_urgencias_por_zona cargada (56 filas)
+2026-11-11 16:13:11 | INFO | DW: tabla kpi_bogota_detalle cargada (28 filas)
+2026-11-11 16:13:11 | INFO | DW: tabla kpi_cambio_anual_servicios cargada (8 filas)
+2026-11-11 16:13:11 | INFO | DW: tabla kpi_brecha_prevencion_zona cargada (37 filas)
+2026-11-11 16:13:11 | INFO | DW: tabla kpi_top_barrios_cali cargada (25 filas)
+2026-11-11 16:13:11 | INFO | DW: tabla kpi_calidad_por_clase cargada (8 filas)
+2026-11-11 16:13:11 | INFO | DW: tabla kpi_patron_semanal_cali cargada (7 filas)
+2026-11-11 16:13:11 | INFO | DW: tabla kpi_bogota_engativa_vs_resto cargada (22 filas)
+2026-11-11 16:13:11 | INFO | Evidencia grafica: evidencias/01_casos_por_comuna.png
+2026-11-11 16:13:11 | INFO | Evidencia grafica: evidencias/02_evolucion_mensual.png
+2026-11-11 16:13:12 | INFO | Evidencia grafica: evidencias/03_urgencias_cali_vs_bogota.png
+2026-11-11 16:13:12 | INFO | Evidencia grafica: evidencias/04_calidad_antes_despues.png
+2026-11-11 16:13:12 | INFO | Evidencia grafica: evidencias/05_cambio_mix_2024_vs_2025.png
+2026-11-11 16:13:12 | INFO | Evidencia grafica: evidencias/06_brecha_prevencion_vs_criticos.png
+2026-11-11 16:13:13 | INFO | Evidencia grafica: evidencias/07_top_barrios_criticos_cali.png
+2026-11-11 16:13:13 | INFO | Evidencia grafica: evidencias/08_bogota_sesgo_uca_vs_resto.png
+2026-11-11 16:13:13 | INFO | validate_gold completado exitosamente: {'etapa': 'validate_gold', 'fecha_ejecucion': '2026-11-11 16:13:10', 'validaciones_path': 'evidencias/validaciones_calidad.csv', 'warehouse_path': 'data/gold/warehouse.db', 'filas_validadas_gold': 404, 'duplicados_llave': 0, 'controles_ok': 12, 'controles_advertencia': 2, 'controles_error': 0, 'tablas_cargadas_sqlite': 18, 'filas_insertadas_sqlite_gold': 404, 'graficas_generadas': 8}
+2026-11-11 16:15:15 | INFO | === INICIO PIPELINE: ETL Bienestar Animal: Cali (CBA/Uaepa) vs Bogota (IDPYBA) v1.0 ===
+2026-11-11 16:15:17 | INFO | BRONZE Cali (Excel): 17642 filas x 5 columnas | sha256=b3dda41a1f7fc2ce
+2026-11-11 16:15:17 | INFO | BRONZE Bogota: 20 features | sha256=1ced21585f46f559
+2026-11-11 16:15:17 | INFO | SILVER Cali: duplicados por id eliminados = 0
+2026-11-11 16:15:18 | INFO | SILVER Cali: comunas recuperadas desde barrio = 18
+2026-11-11 16:15:18 | INFO | SILVER Cali: 17642 filas | zonas distintas 83 -> 42
+2026-11-11 16:15:18 | INFO | SILVER Bogota: 20 localidades | atenciones totales = 947
+2026-11-11 16:15:18 | INFO | Archivo guardado: data/silver/silver_cali.csv (17642 filas)
+2026-11-11 16:15:18 | INFO | Archivo guardado: data/silver/silver_bogota.csv (20 filas)
+2026-11-11 16:15:18 | INFO | CALIDAD [OK] Cali: no se pierden registros bronze->silver 17642 -> 17642
+2026-11-11 16:15:18 | INFO | CALIDAD [OK] Cali: id unico 
+2026-11-11 16:15:18 | INFO | CALIDAD [OK] Cali: clase sin valores fuera del catalogo 
+2026-11-11 16:15:18 | INFO | CALIDAD [OK] Cali: fechas validas dentro del rango 
+2026-11-11 16:15:18 | INFO | CALIDAD [OK] Cali: fechas invalidas < 1% 0.068%
+2026-11-11 16:15:18 | INFO | CALIDAD [OK] Bogota: 20 localidades 20 localidades
+2026-11-11 16:15:18 | INFO | CALIDAD [OK] Bogota: sin nulos en atenciones 
+2026-11-11 16:15:18 | INFO | CALIDAD [OK] Bogota: especie suma atenciones 
+2026-11-11 16:15:18 | INFO | CALIDAD [OK] Bogota: sexo suma atenciones 
+2026-11-11 16:15:18 | WARNING | CALIDAD [ADVERTENCIA] Bogota: diagnosticos suman atenciones diferencias en Kennedy (-2), Fontibón (+2), Rafael Uribe Uribe (-1), Ciudad Bolívar (+1)
+2026-11-11 16:15:18 | WARNING | CALIDAD [ADVERTENCIA] Bogota: procedencia suman atenciones diferencias en Rafael Uribe Uribe (-1), Ciudad Bolívar (+1)
+2026-11-11 16:15:18 | INFO | GOLD final: 404 filas (Cali 17642 casos | Bogota 947 atenciones)
+2026-11-11 16:15:19 | WARNING | API de población sin conexión (403 Client Error: Forbidden for url: https://datos.cali.gov.co/api/3/action/datastore_search?resource_id=63f3e50e-0452-49cf-993d-08dfc2842cb4&limit=500). Se usa snapshot local de bronze: poblacion_comunas_api.json
+2026-11-11 16:15:19 | INFO | API de población: 1 filas descartadas (no son comuna o corregimiento): ['Otros']
+2026-11-11 16:15:19 | INFO | API de población: 37 zonas con población (año 2020)
+2026-11-11 16:15:20 | INFO | Archivo guardado: data/gold/gold_final.csv (404 filas)
+2026-11-11 16:15:20 | INFO | Archivo guardado: data/gold/kpis/kpi_calidad_datos.csv (14 filas)
+2026-11-11 16:15:20 | INFO | Archivo guardado: data/gold/kpis/kpi_casos_por_zona.csv (42 filas)
+2026-11-11 16:15:20 | INFO | Archivo guardado: data/gold/kpis/kpi_evolucion_mensual.csv (24 filas)
+2026-11-11 16:15:20 | INFO | Archivo guardado: data/gold/kpis/kpi_priorizacion_territorial.csv (37 filas)
+2026-11-11 16:15:20 | INFO | Archivo guardado: data/gold/kpis/kpi_comparativo_ciudades.csv (8 filas)
+2026-11-11 16:15:20 | INFO | Archivo guardado: data/gold/kpis/kpi_urgencias_por_zona.csv (56 filas)
+2026-11-11 16:15:20 | INFO | Archivo guardado: data/gold/kpis/kpi_bogota_detalle.csv (28 filas)
+2026-11-11 16:15:20 | INFO | Archivo guardado: data/gold/kpis/kpi_cambio_anual_servicios.csv (8 filas)
+2026-11-11 16:15:20 | INFO | Archivo guardado: data/gold/kpis/kpi_brecha_prevencion_zona.csv (37 filas)
+2026-11-11 16:15:20 | INFO | Archivo guardado: data/gold/kpis/kpi_top_barrios_cali.csv (25 filas)
+2026-11-11 16:15:20 | INFO | Archivo guardado: data/gold/kpis/kpi_calidad_por_clase.csv (8 filas)
+2026-11-11 16:15:20 | INFO | Archivo guardado: data/gold/kpis/kpi_patron_semanal_cali.csv (7 filas)
+2026-11-11 16:15:20 | INFO | Archivo guardado: data/gold/kpis/kpi_bogota_engativa_vs_resto.csv (22 filas)
+2026-11-11 16:15:20 | INFO | Archivo guardado: evidencias/validaciones_calidad.csv (11 filas)
+2026-11-11 16:15:20 | INFO | DW: tabla silver_cali cargada (17642 filas)
+2026-11-11 16:15:20 | INFO | DW: tabla silver_bogota cargada (20 filas)
+2026-11-11 16:15:20 | INFO | DW: tabla gold_final cargada (404 filas)
+2026-11-11 16:15:20 | INFO | DW: tabla dim_categoria cargada (9 filas)
+2026-11-11 16:15:20 | INFO | DW: tabla validaciones_calidad cargada (11 filas)
+2026-11-11 16:15:20 | INFO | DW: tabla kpi_calidad_datos cargada (14 filas)
+2026-11-11 16:15:20 | INFO | DW: tabla kpi_casos_por_zona cargada (42 filas)
+2026-11-11 16:15:20 | INFO | DW: tabla kpi_evolucion_mensual cargada (24 filas)
+2026-11-11 16:15:20 | INFO | DW: tabla kpi_priorizacion_territorial cargada (37 filas)
+2026-11-11 16:15:20 | INFO | DW: tabla kpi_comparativo_ciudades cargada (8 filas)
+2026-11-11 16:15:20 | INFO | DW: tabla kpi_urgencias_por_zona cargada (56 filas)
+2026-11-11 16:15:20 | INFO | DW: tabla kpi_bogota_detalle cargada (28 filas)
+2026-11-11 16:15:20 | INFO | DW: tabla kpi_cambio_anual_servicios cargada (8 filas)
+2026-11-11 16:15:20 | INFO | DW: tabla kpi_brecha_prevencion_zona cargada (37 filas)
+2026-11-11 16:15:20 | INFO | DW: tabla kpi_top_barrios_cali cargada (25 filas)
+2026-11-11 16:15:20 | INFO | DW: tabla kpi_calidad_por_clase cargada (8 filas)
+2026-11-11 16:15:20 | INFO | DW: tabla kpi_patron_semanal_cali cargada (7 filas)
+2026-11-11 16:15:20 | INFO | DW: tabla kpi_bogota_engativa_vs_resto cargada (22 filas)
+2026-11-11 16:15:20 | INFO | Evidencia grafica: evidencias/01_casos_por_comuna.png
+2026-11-11 16:15:21 | INFO | Evidencia grafica: evidencias/02_evolucion_mensual.png
+2026-11-11 16:15:21 | INFO | Evidencia grafica: evidencias/03_urgencias_cali_vs_bogota.png
+2026-11-11 16:15:21 | INFO | Evidencia grafica: evidencias/04_calidad_antes_despues.png
+2026-11-11 16:15:21 | INFO | Evidencia grafica: evidencias/05_cambio_mix_2024_vs_2025.png
+2026-11-11 16:15:22 | INFO | Evidencia grafica: evidencias/06_brecha_prevencion_vs_criticos.png
+2026-11-11 16:15:22 | INFO | Evidencia grafica: evidencias/07_top_barrios_criticos_cali.png
+2026-11-11 16:15:22 | INFO | Evidencia grafica: evidencias/08_bogota_sesgo_uca_vs_resto.png
+2026-11-11 16:15:22 | INFO | === FIN PIPELINE: 9 reglas OK, 2 advertencias, 0 fallas ===
+2026-11-11 20:42:08 | INFO | Iniciando tarea extract_excel_bronze (corrida: 20261111_204208)...
+2026-11-11 20:42:08 | INFO | Iniciando tarea extract_api_bronze (corrida: 20261111_204208)...
+2026-11-11 20:42:09 | WARNING | API de población sin conexión (403 Client Error: Forbidden for url: https://datos.cali.gov.co/api/3/action/datastore_search?resource_id=63f3e50e-0452-49cf-993d-08dfc2842cb4&limit=500). Se usa snapshot local de bronze: poblacion_comunas_api.json
+2026-11-11 20:42:09 | INFO | BRONZE Bogota: 20 features | sha256=1ced21585f46f559
+2026-11-11 20:42:10 | INFO | extract_api_bronze completado: API población=41 registros, Bogotá GeoJSON=20 localidades, copia en data/bronze/runs/20261111_204208
+2026-11-11 20:42:10 | INFO | BRONZE Cali (Excel): 17642 filas x 5 columnas | sha256=b3dda41a1f7fc2ce
+2026-11-11 20:42:11 | INFO | extract_excel_bronze completado: 17642 filas x 5 columnas, sha256=b3dda41a1f7f, copia en data/bronze/runs/20261111_204208/Dataset_cali.xlsx
+2026-11-11 20:42:13 | INFO | Iniciando tarea transform_silver...
+2026-11-11 20:42:15 | INFO | BRONZE Cali (Excel): 17642 filas x 5 columnas | sha256=b3dda41a1f7fc2ce
+2026-11-11 20:42:15 | INFO | BRONZE Bogota: 20 features | sha256=1ced21585f46f559
+2026-11-11 20:42:15 | INFO | SILVER Cali: duplicados por id eliminados = 0
+2026-11-11 20:42:16 | INFO | SILVER Cali: comunas recuperadas desde barrio = 18
+2026-11-11 20:42:16 | INFO | SILVER Cali: 17642 filas | zonas distintas 83 -> 42
+2026-11-11 20:42:16 | INFO | SILVER Bogota: 20 localidades | atenciones totales = 947
+2026-11-11 20:42:16 | INFO | Archivo guardado: data/silver/silver_cali.csv (17642 filas)
+2026-11-11 20:42:17 | INFO | Archivo guardado: data/silver/silver_bogota.csv (20 filas)
+2026-11-11 20:42:17 | INFO | Archivo guardado: evidencias/trazabilidad_fuentes.csv (3 filas)
+2026-11-11 20:42:17 | INFO | Archivo guardado: data/gold/kpis/kpi_calidad_datos.csv (14 filas)
+2026-11-11 20:42:17 | INFO | transform_silver completado: Cali=17642 filas (data/silver/silver_cali.csv), Bogotá=20 localidades (data/silver/silver_bogota.csv)
+2026-11-11 20:42:19 | INFO | Iniciando tarea build_gold...
+2026-11-11 20:42:21 | INFO | BRONZE Cali (Excel): 17642 filas x 5 columnas | sha256=b3dda41a1f7fc2ce
+2026-11-11 20:42:21 | INFO | GOLD final: 404 filas (Cali 17642 casos | Bogota 947 atenciones)
+2026-11-11 20:42:21 | INFO | API de población: 1 filas descartadas (no son comuna o corregimiento): ['Otros']
+2026-11-11 20:42:21 | INFO | API de población: 37 zonas con población (año 2020)
+2026-11-11 20:42:22 | INFO | Archivo guardado: data/gold/gold_final.csv (404 filas)
+2026-11-11 20:42:22 | INFO | Archivo guardado: data/gold/kpis/kpi_calidad_datos.csv (14 filas)
+2026-11-11 20:42:22 | INFO | Archivo guardado: data/gold/kpis/kpi_casos_por_zona.csv (42 filas)
+2026-11-11 20:42:22 | INFO | Archivo guardado: data/gold/kpis/kpi_evolucion_mensual.csv (24 filas)
+2026-11-11 20:42:22 | INFO | Archivo guardado: data/gold/kpis/kpi_priorizacion_territorial.csv (37 filas)
+2026-11-11 20:42:22 | INFO | Archivo guardado: data/gold/kpis/kpi_comparativo_ciudades.csv (8 filas)
+2026-11-11 20:42:22 | INFO | Archivo guardado: data/gold/kpis/kpi_urgencias_por_zona.csv (56 filas)
+2026-11-11 20:42:22 | INFO | Archivo guardado: data/gold/kpis/kpi_bogota_detalle.csv (28 filas)
+2026-11-11 20:42:23 | INFO | Archivo guardado: data/gold/kpis/kpi_cambio_anual_servicios.csv (8 filas)
+2026-11-11 20:42:23 | INFO | Archivo guardado: data/gold/kpis/kpi_brecha_prevencion_zona.csv (37 filas)
+2026-11-11 20:42:23 | INFO | Archivo guardado: data/gold/kpis/kpi_top_barrios_cali.csv (25 filas)
+2026-11-11 20:42:23 | INFO | Archivo guardado: data/gold/kpis/kpi_calidad_por_clase.csv (8 filas)
+2026-11-11 20:42:23 | INFO | Archivo guardado: data/gold/kpis/kpi_patron_semanal_cali.csv (7 filas)
+2026-11-11 20:42:23 | INFO | Archivo guardado: data/gold/kpis/kpi_bogota_engativa_vs_resto.csv (22 filas)
+2026-11-11 20:42:23 | INFO | build_gold completado: gold_final=404 filas (data/gold/gold_final.csv), 13 tablas KPI generadas
+2026-11-11 20:42:25 | INFO | Iniciando tarea validate_gold...
+2026-11-11 20:42:27 | INFO | BRONZE Cali (Excel): 17642 filas x 5 columnas | sha256=b3dda41a1f7fc2ce
+2026-11-11 20:42:27 | INFO | CALIDAD [OK] Cali: no se pierden registros bronze->silver 17642 -> 17642
+2026-11-11 20:42:27 | INFO | CALIDAD [OK] Cali: id unico 
+2026-11-11 20:42:27 | INFO | CALIDAD [OK] Cali: clase sin valores fuera del catalogo 
+2026-11-11 20:42:27 | INFO | CALIDAD [OK] Cali: fechas validas dentro del rango 
+2026-11-11 20:42:27 | INFO | CALIDAD [OK] Cali: fechas invalidas < 1% 0.068%
+2026-11-11 20:42:27 | INFO | CALIDAD [OK] Bogota: 20 localidades 20 localidades
+2026-11-11 20:42:27 | INFO | CALIDAD [OK] Bogota: sin nulos en atenciones 
+2026-11-11 20:42:27 | INFO | CALIDAD [OK] Bogota: especie suma atenciones 
+2026-11-11 20:42:27 | INFO | CALIDAD [OK] Bogota: sexo suma atenciones 
+2026-11-11 20:42:27 | WARNING | CALIDAD [ADVERTENCIA] Bogota: diagnosticos suman atenciones diferencias en Kennedy (-2), Fontibón (+2), Rafael Uribe Uribe (-1), Ciudad Bolívar (+1)
+2026-11-11 20:42:27 | WARNING | CALIDAD [ADVERTENCIA] Bogota: procedencia suman atenciones diferencias en Rafael Uribe Uribe (-1), Ciudad Bolívar (+1)
+2026-11-11 20:42:27 | INFO | Archivo guardado: evidencias/validaciones_calidad.csv (14 filas)
+2026-11-11 20:42:31 | INFO | DW: tabla silver_cali cargada (17642 filas)
+2026-11-11 20:42:32 | INFO | DW: tabla silver_bogota cargada (20 filas)
+2026-11-11 20:42:32 | INFO | DW: tabla gold_final cargada (404 filas)
+2026-11-11 20:42:32 | INFO | DW: tabla dim_categoria cargada (9 filas)
+2026-11-11 20:42:32 | INFO | DW: tabla validaciones_calidad cargada (14 filas)
+2026-11-11 20:42:32 | INFO | DW: tabla kpi_calidad_datos cargada (14 filas)
+2026-11-11 20:42:33 | INFO | DW: tabla kpi_casos_por_zona cargada (42 filas)
+2026-11-11 20:42:33 | INFO | DW: tabla kpi_evolucion_mensual cargada (24 filas)
+2026-11-11 20:42:33 | INFO | DW: tabla kpi_priorizacion_territorial cargada (37 filas)
+2026-11-11 20:42:33 | INFO | DW: tabla kpi_comparativo_ciudades cargada (8 filas)
+2026-11-11 20:42:33 | INFO | DW: tabla kpi_urgencias_por_zona cargada (56 filas)
+2026-11-11 20:42:33 | INFO | DW: tabla kpi_bogota_detalle cargada (28 filas)
+2026-11-11 20:42:33 | INFO | DW: tabla kpi_cambio_anual_servicios cargada (8 filas)
+2026-11-11 20:42:33 | INFO | DW: tabla kpi_brecha_prevencion_zona cargada (37 filas)
+2026-11-11 20:42:34 | INFO | DW: tabla kpi_top_barrios_cali cargada (25 filas)
+2026-11-11 20:42:34 | INFO | DW: tabla kpi_calidad_por_clase cargada (8 filas)
+2026-11-11 20:42:34 | INFO | DW: tabla kpi_patron_semanal_cali cargada (7 filas)
+2026-11-11 20:42:34 | INFO | DW: tabla kpi_bogota_engativa_vs_resto cargada (22 filas)
+2026-11-11 20:42:34 | INFO | Evidencia grafica: evidencias/01_casos_por_comuna.png
+2026-11-11 20:42:35 | INFO | Evidencia grafica: evidencias/02_evolucion_mensual.png
+2026-11-11 20:42:35 | INFO | Evidencia grafica: evidencias/03_urgencias_cali_vs_bogota.png
+2026-11-11 20:42:35 | INFO | Evidencia grafica: evidencias/04_calidad_antes_despues.png
+2026-11-11 20:42:36 | INFO | Evidencia grafica: evidencias/05_cambio_mix_2024_vs_2025.png
+2026-11-11 20:42:36 | INFO | Evidencia grafica: evidencias/06_brecha_prevencion_vs_criticos.png
+2026-11-11 20:42:36 | INFO | Evidencia grafica: evidencias/07_top_barrios_criticos_cali.png
+2026-11-11 20:42:37 | INFO | Evidencia grafica: evidencias/08_bogota_sesgo_uca_vs_resto.png
+2026-11-11 20:42:37 | INFO | validate_gold completado exitosamente: {'etapa': 'validate_gold', 'fecha_ejecucion': '2026-11-11 20:42:25', 'validaciones_path': 'evidencias/validaciones_calidad.csv', 'warehouse_path': 'data/gold/warehouse.db', 'filas_validadas_gold': 404, 'duplicados_llave': 0, 'controles_ok': 12, 'controles_advertencia': 2, 'controles_error': 0, 'tablas_cargadas_sqlite': 18, 'filas_insertadas_sqlite_gold': 404, 'graficas_generadas': 8}
+2026-11-11 20:42:39 | INFO | Iniciando tarea extract_excel_bronze (corrida: 20261111_204239)...
+2026-11-11 20:42:39 | INFO | Iniciando tarea extract_api_bronze (corrida: 20261111_204239)...
+2026-11-11 20:42:39 | WARNING | API de población sin conexión (403 Client Error: Forbidden for url: https://datos.cali.gov.co/api/3/action/datastore_search?resource_id=63f3e50e-0452-49cf-993d-08dfc2842cb4&limit=500). Se usa snapshot local de bronze: poblacion_comunas_api.json
+2026-11-11 20:42:39 | INFO | BRONZE Bogota: 20 features | sha256=1ced21585f46f559
+2026-11-11 20:42:40 | INFO | extract_api_bronze completado: API población=41 registros, Bogotá GeoJSON=20 localidades, copia en data/bronze/runs/20261111_204239
+2026-11-11 20:42:41 | INFO | BRONZE Cali (Excel): 17642 filas x 5 columnas | sha256=b3dda41a1f7fc2ce
+2026-11-11 20:42:41 | INFO | extract_excel_bronze completado: 17642 filas x 5 columnas, sha256=b3dda41a1f7f, copia en data/bronze/runs/20261111_204239/Dataset_cali.xlsx
+2026-11-11 20:42:43 | INFO | Iniciando tarea transform_silver...
+2026-11-11 20:42:45 | INFO | BRONZE Cali (Excel): 17642 filas x 5 columnas | sha256=b3dda41a1f7fc2ce
+2026-11-11 20:42:45 | INFO | BRONZE Bogota: 20 features | sha256=1ced21585f46f559
+2026-11-11 20:42:45 | INFO | SILVER Cali: duplicados por id eliminados = 0
+2026-11-11 20:42:46 | INFO | SILVER Cali: comunas recuperadas desde barrio = 18
+2026-11-11 20:42:46 | INFO | SILVER Cali: 17642 filas | zonas distintas 83 -> 42
+2026-11-11 20:42:46 | INFO | SILVER Bogota: 20 localidades | atenciones totales = 947
+2026-11-11 20:42:46 | INFO | Archivo guardado: data/silver/silver_cali.csv (17642 filas)
+2026-11-11 20:42:46 | INFO | Archivo guardado: data/silver/silver_bogota.csv (20 filas)
+2026-11-11 20:42:47 | INFO | Archivo guardado: evidencias/trazabilidad_fuentes.csv (3 filas)
+2026-11-11 20:42:47 | INFO | Archivo guardado: data/gold/kpis/kpi_calidad_datos.csv (14 filas)
+2026-11-11 20:42:47 | INFO | transform_silver completado: Cali=17642 filas (data/silver/silver_cali.csv), Bogotá=20 localidades (data/silver/silver_bogota.csv)
+2026-11-11 20:42:49 | INFO | Iniciando tarea build_gold...
+2026-11-11 20:42:50 | INFO | BRONZE Cali (Excel): 17642 filas x 5 columnas | sha256=b3dda41a1f7fc2ce
+2026-11-11 20:42:51 | INFO | GOLD final: 404 filas (Cali 17642 casos | Bogota 947 atenciones)
+2026-11-11 20:42:51 | INFO | API de población: 1 filas descartadas (no son comuna o corregimiento): ['Otros']
+2026-11-11 20:42:51 | INFO | API de población: 37 zonas con población (año 2020)
+2026-11-11 20:42:52 | INFO | Archivo guardado: data/gold/gold_final.csv (404 filas)
+2026-11-11 20:42:52 | INFO | Archivo guardado: data/gold/kpis/kpi_calidad_datos.csv (14 filas)
+2026-11-11 20:42:52 | INFO | Archivo guardado: data/gold/kpis/kpi_casos_por_zona.csv (42 filas)
+2026-11-11 20:42:52 | INFO | Archivo guardado: data/gold/kpis/kpi_evolucion_mensual.csv (24 filas)
+2026-11-11 20:42:52 | INFO | Archivo guardado: data/gold/kpis/kpi_priorizacion_territorial.csv (37 filas)
+2026-11-11 20:42:52 | INFO | Archivo guardado: data/gold/kpis/kpi_comparativo_ciudades.csv (8 filas)
+2026-11-11 20:42:52 | INFO | Archivo guardado: data/gold/kpis/kpi_urgencias_por_zona.csv (56 filas)
+2026-11-11 20:42:52 | INFO | Archivo guardado: data/gold/kpis/kpi_bogota_detalle.csv (28 filas)
+2026-11-11 20:42:52 | INFO | Archivo guardado: data/gold/kpis/kpi_cambio_anual_servicios.csv (8 filas)
+2026-11-11 20:42:52 | INFO | Archivo guardado: data/gold/kpis/kpi_brecha_prevencion_zona.csv (37 filas)
+2026-11-11 20:42:52 | INFO | Archivo guardado: data/gold/kpis/kpi_top_barrios_cali.csv (25 filas)
+2026-11-11 20:42:52 | INFO | Archivo guardado: data/gold/kpis/kpi_calidad_por_clase.csv (8 filas)
+2026-11-11 20:42:52 | INFO | Archivo guardado: data/gold/kpis/kpi_patron_semanal_cali.csv (7 filas)
+2026-11-11 20:42:52 | INFO | Archivo guardado: data/gold/kpis/kpi_bogota_engativa_vs_resto.csv (22 filas)
+2026-11-11 20:42:52 | INFO | build_gold completado: gold_final=404 filas (data/gold/gold_final.csv), 13 tablas KPI generadas
+2026-11-11 20:42:54 | INFO | Iniciando tarea validate_gold...
+2026-11-11 20:42:56 | INFO | BRONZE Cali (Excel): 17642 filas x 5 columnas | sha256=b3dda41a1f7fc2ce
+2026-11-11 20:42:56 | INFO | CALIDAD [OK] Cali: no se pierden registros bronze->silver 17642 -> 17642
+2026-11-11 20:42:56 | INFO | CALIDAD [OK] Cali: id unico 
+2026-11-11 20:42:56 | INFO | CALIDAD [OK] Cali: clase sin valores fuera del catalogo 
+2026-11-11 20:42:56 | INFO | CALIDAD [OK] Cali: fechas validas dentro del rango 
+2026-11-11 20:42:56 | INFO | CALIDAD [OK] Cali: fechas invalidas < 1% 0.068%
+2026-11-11 20:42:56 | INFO | CALIDAD [OK] Bogota: 20 localidades 20 localidades
+2026-11-11 20:42:56 | INFO | CALIDAD [OK] Bogota: sin nulos en atenciones 
+2026-11-11 20:42:56 | INFO | CALIDAD [OK] Bogota: especie suma atenciones 
+2026-11-11 20:42:56 | INFO | CALIDAD [OK] Bogota: sexo suma atenciones 
+2026-11-11 20:42:56 | WARNING | CALIDAD [ADVERTENCIA] Bogota: diagnosticos suman atenciones diferencias en Kennedy (-2), Fontibón (+2), Rafael Uribe Uribe (-1), Ciudad Bolívar (+1)
+2026-11-11 20:42:56 | WARNING | CALIDAD [ADVERTENCIA] Bogota: procedencia suman atenciones diferencias en Rafael Uribe Uribe (-1), Ciudad Bolívar (+1)
+2026-11-11 20:42:56 | INFO | Archivo guardado: evidencias/validaciones_calidad.csv (14 filas)
+2026-11-11 20:42:59 | INFO | DW: tabla silver_cali cargada (17642 filas)
+2026-11-11 20:42:59 | INFO | DW: tabla silver_bogota cargada (20 filas)
+2026-11-11 20:42:59 | INFO | DW: tabla gold_final cargada (404 filas)
+2026-11-11 20:42:59 | INFO | DW: tabla dim_categoria cargada (9 filas)
+2026-11-11 20:42:59 | INFO | DW: tabla validaciones_calidad cargada (14 filas)
+2026-11-11 20:42:59 | INFO | DW: tabla kpi_calidad_datos cargada (14 filas)
+2026-11-11 20:42:59 | INFO | DW: tabla kpi_casos_por_zona cargada (42 filas)
+2026-11-11 20:42:59 | INFO | DW: tabla kpi_evolucion_mensual cargada (24 filas)
+2026-11-11 20:42:59 | INFO | DW: tabla kpi_priorizacion_territorial cargada (37 filas)
+2026-11-11 20:42:59 | INFO | DW: tabla kpi_comparativo_ciudades cargada (8 filas)
+2026-11-11 20:43:00 | INFO | DW: tabla kpi_urgencias_por_zona cargada (56 filas)
+2026-11-11 20:43:00 | INFO | DW: tabla kpi_bogota_detalle cargada (28 filas)
+2026-11-11 20:43:00 | INFO | DW: tabla kpi_cambio_anual_servicios cargada (8 filas)
+2026-11-11 20:43:00 | INFO | DW: tabla kpi_brecha_prevencion_zona cargada (37 filas)
+2026-11-11 20:43:00 | INFO | DW: tabla kpi_top_barrios_cali cargada (25 filas)
+2026-11-11 20:43:00 | INFO | DW: tabla kpi_calidad_por_clase cargada (8 filas)
+2026-11-11 20:43:00 | INFO | DW: tabla kpi_patron_semanal_cali cargada (7 filas)
+2026-11-11 20:43:01 | INFO | DW: tabla kpi_bogota_engativa_vs_resto cargada (22 filas)
+2026-11-11 20:43:01 | INFO | Evidencia grafica: evidencias/01_casos_por_comuna.png
+2026-11-11 20:43:01 | INFO | Evidencia grafica: evidencias/02_evolucion_mensual.png
+2026-11-11 20:43:02 | INFO | Evidencia grafica: evidencias/03_urgencias_cali_vs_bogota.png
+2026-11-11 20:43:02 | INFO | Evidencia grafica: evidencias/04_calidad_antes_despues.png
+2026-11-11 20:43:02 | INFO | Evidencia grafica: evidencias/05_cambio_mix_2024_vs_2025.png
+2026-11-11 20:43:02 | INFO | Evidencia grafica: evidencias/06_brecha_prevencion_vs_criticos.png
+2026-11-11 20:43:03 | INFO | Evidencia grafica: evidencias/07_top_barrios_criticos_cali.png
+2026-11-11 20:43:03 | INFO | Evidencia grafica: evidencias/08_bogota_sesgo_uca_vs_resto.png
+2026-11-11 20:43:03 | INFO | validate_gold completado exitosamente: {'etapa': 'validate_gold', 'fecha_ejecucion': '2026-11-11 20:42:54', 'validaciones_path': 'evidencias/validaciones_calidad.csv', 'warehouse_path': 'data/gold/warehouse.db', 'filas_validadas_gold': 404, 'duplicados_llave': 0, 'controles_ok': 12, 'controles_advertencia': 2, 'controles_error': 0, 'tablas_cargadas_sqlite': 18, 'filas_insertadas_sqlite_gold': 404, 'graficas_generadas': 8}
+2026-11-11 20:43:04 | INFO | Iniciando tarea extract_excel_bronze (corrida: 20261111_204304)...
+2026-11-11 20:43:05 | INFO | Iniciando tarea extract_api_bronze (corrida: 20261111_204305)...
+2026-11-11 20:43:05 | WARNING | API de población sin conexión (403 Client Error: Forbidden for url: https://datos.cali.gov.co/api/3/action/datastore_search?resource_id=63f3e50e-0452-49cf-993d-08dfc2842cb4&limit=500). Se usa snapshot local de bronze: poblacion_comunas_api.json
+2026-11-11 20:43:05 | INFO | BRONZE Bogota: 20 features | sha256=1ced21585f46f559
+2026-11-11 20:43:05 | INFO | extract_api_bronze completado: API población=41 registros, Bogotá GeoJSON=20 localidades, copia en data/bronze/runs/20261111_204305
+2026-11-11 20:43:06 | INFO | BRONZE Cali (Excel): 17642 filas x 5 columnas | sha256=b3dda41a1f7fc2ce
+2026-11-11 20:43:06 | INFO | extract_excel_bronze completado: 17642 filas x 5 columnas, sha256=b3dda41a1f7f, copia en data/bronze/runs/20261111_204304/Dataset_cali.xlsx
+2026-11-11 20:43:09 | INFO | Iniciando tarea transform_silver...
+2026-11-11 20:43:11 | INFO | BRONZE Cali (Excel): 17642 filas x 5 columnas | sha256=b3dda41a1f7fc2ce
+2026-11-11 20:43:11 | INFO | BRONZE Bogota: 20 features | sha256=1ced21585f46f559
+2026-11-11 20:43:11 | INFO | SILVER Cali: duplicados por id eliminados = 0
+2026-11-11 20:43:11 | INFO | SILVER Cali: comunas recuperadas desde barrio = 18
+2026-11-11 20:43:11 | INFO | SILVER Cali: 17642 filas | zonas distintas 83 -> 42
+2026-11-11 20:43:11 | INFO | SILVER Bogota: 20 localidades | atenciones totales = 947
+2026-11-11 20:43:12 | INFO | Archivo guardado: data/silver/silver_cali.csv (17642 filas)
+2026-11-11 20:43:12 | INFO | Archivo guardado: data/silver/silver_bogota.csv (20 filas)
+2026-11-11 20:43:12 | INFO | Archivo guardado: evidencias/trazabilidad_fuentes.csv (3 filas)
+2026-11-11 20:43:12 | INFO | Archivo guardado: data/gold/kpis/kpi_calidad_datos.csv (14 filas)
+2026-11-11 20:43:12 | INFO | transform_silver completado: Cali=17642 filas (data/silver/silver_cali.csv), Bogotá=20 localidades (data/silver/silver_bogota.csv)
+2026-11-11 20:43:14 | INFO | Iniciando tarea build_gold...
+2026-11-11 20:43:16 | INFO | BRONZE Cali (Excel): 17642 filas x 5 columnas | sha256=b3dda41a1f7fc2ce
+2026-11-11 20:43:16 | INFO | GOLD final: 404 filas (Cali 17642 casos | Bogota 947 atenciones)
+2026-11-11 20:43:16 | INFO | API de población: 1 filas descartadas (no son comuna o corregimiento): ['Otros']
+2026-11-11 20:43:16 | INFO | API de población: 37 zonas con población (año 2020)
+2026-11-11 20:43:17 | INFO | Archivo guardado: data/gold/gold_final.csv (404 filas)
+2026-11-11 20:43:17 | INFO | Archivo guardado: data/gold/kpis/kpi_calidad_datos.csv (14 filas)
+2026-11-11 20:43:17 | INFO | Archivo guardado: data/gold/kpis/kpi_casos_por_zona.csv (42 filas)
+2026-11-11 20:43:17 | INFO | Archivo guardado: data/gold/kpis/kpi_evolucion_mensual.csv (24 filas)
+2026-11-11 20:43:17 | INFO | Archivo guardado: data/gold/kpis/kpi_priorizacion_territorial.csv (37 filas)
+2026-11-11 20:43:17 | INFO | Archivo guardado: data/gold/kpis/kpi_comparativo_ciudades.csv (8 filas)
+2026-11-11 20:43:17 | INFO | Archivo guardado: data/gold/kpis/kpi_urgencias_por_zona.csv (56 filas)
+2026-11-11 20:43:17 | INFO | Archivo guardado: data/gold/kpis/kpi_bogota_detalle.csv (28 filas)
+2026-11-11 20:43:17 | INFO | Archivo guardado: data/gold/kpis/kpi_cambio_anual_servicios.csv (8 filas)
+2026-11-11 20:43:17 | INFO | Archivo guardado: data/gold/kpis/kpi_brecha_prevencion_zona.csv (37 filas)
+2026-11-11 20:43:17 | INFO | Archivo guardado: data/gold/kpis/kpi_top_barrios_cali.csv (25 filas)
+2026-11-11 20:43:18 | INFO | Archivo guardado: data/gold/kpis/kpi_calidad_por_clase.csv (8 filas)
+2026-11-11 20:43:18 | INFO | Archivo guardado: data/gold/kpis/kpi_patron_semanal_cali.csv (7 filas)
+2026-11-11 20:43:18 | INFO | Archivo guardado: data/gold/kpis/kpi_bogota_engativa_vs_resto.csv (22 filas)
+2026-11-11 20:43:18 | INFO | build_gold completado: gold_final=404 filas (data/gold/gold_final.csv), 13 tablas KPI generadas
+2026-11-11 20:43:20 | INFO | Iniciando tarea validate_gold...
+2026-11-11 20:43:21 | INFO | BRONZE Cali (Excel): 17642 filas x 5 columnas | sha256=b3dda41a1f7fc2ce
+2026-11-11 20:43:22 | INFO | CALIDAD [OK] Cali: no se pierden registros bronze->silver 17642 -> 17642
+2026-11-11 20:43:22 | INFO | CALIDAD [OK] Cali: id unico 
+2026-11-11 20:43:22 | INFO | CALIDAD [OK] Cali: clase sin valores fuera del catalogo 
+2026-11-11 20:43:22 | INFO | CALIDAD [OK] Cali: fechas validas dentro del rango 
+2026-11-11 20:43:22 | INFO | CALIDAD [OK] Cali: fechas invalidas < 1% 0.068%
+2026-11-11 20:43:22 | INFO | CALIDAD [OK] Bogota: 20 localidades 20 localidades
+2026-11-11 20:43:22 | INFO | CALIDAD [OK] Bogota: sin nulos en atenciones 
+2026-11-11 20:43:22 | INFO | CALIDAD [OK] Bogota: especie suma atenciones 
+2026-11-11 20:43:22 | INFO | CALIDAD [OK] Bogota: sexo suma atenciones 
+2026-11-11 20:43:22 | WARNING | CALIDAD [ADVERTENCIA] Bogota: diagnosticos suman atenciones diferencias en Kennedy (-2), Fontibón (+2), Rafael Uribe Uribe (-1), Ciudad Bolívar (+1)
+2026-11-11 20:43:22 | WARNING | CALIDAD [ADVERTENCIA] Bogota: procedencia suman atenciones diferencias en Rafael Uribe Uribe (-1), Ciudad Bolívar (+1)
+2026-11-11 20:43:22 | INFO | Archivo guardado: evidencias/validaciones_calidad.csv (14 filas)
+2026-11-11 20:43:24 | INFO | DW: tabla silver_cali cargada (17642 filas)
+2026-11-11 20:43:24 | INFO | DW: tabla silver_bogota cargada (20 filas)
+2026-11-11 20:43:24 | INFO | DW: tabla gold_final cargada (404 filas)
+2026-11-11 20:43:24 | INFO | DW: tabla dim_categoria cargada (9 filas)
+2026-11-11 20:43:25 | INFO | DW: tabla validaciones_calidad cargada (14 filas)
+2026-11-11 20:43:25 | INFO | DW: tabla kpi_calidad_datos cargada (14 filas)
+2026-11-11 20:43:25 | INFO | DW: tabla kpi_casos_por_zona cargada (42 filas)
+2026-11-11 20:43:25 | INFO | DW: tabla kpi_evolucion_mensual cargada (24 filas)
+2026-11-11 20:43:25 | INFO | DW: tabla kpi_priorizacion_territorial cargada (37 filas)
+2026-11-11 20:43:25 | INFO | DW: tabla kpi_comparativo_ciudades cargada (8 filas)
+2026-11-11 20:43:25 | INFO | DW: tabla kpi_urgencias_por_zona cargada (56 filas)
+2026-11-11 20:43:25 | INFO | DW: tabla kpi_bogota_detalle cargada (28 filas)
+2026-11-11 20:43:25 | INFO | DW: tabla kpi_cambio_anual_servicios cargada (8 filas)
+2026-11-11 20:43:26 | INFO | DW: tabla kpi_brecha_prevencion_zona cargada (37 filas)
+2026-11-11 20:43:26 | INFO | DW: tabla kpi_top_barrios_cali cargada (25 filas)
+2026-11-11 20:43:26 | INFO | DW: tabla kpi_calidad_por_clase cargada (8 filas)
+2026-11-11 20:43:26 | INFO | DW: tabla kpi_patron_semanal_cali cargada (7 filas)
+2026-11-11 20:43:26 | INFO | DW: tabla kpi_bogota_engativa_vs_resto cargada (22 filas)
+2026-11-11 20:43:26 | INFO | Evidencia grafica: evidencias/01_casos_por_comuna.png
+2026-11-11 20:43:26 | INFO | Evidencia grafica: evidencias/02_evolucion_mensual.png
+2026-11-11 20:43:27 | INFO | Evidencia grafica: evidencias/03_urgencias_cali_vs_bogota.png
+2026-11-11 20:43:27 | INFO | Evidencia grafica: evidencias/04_calidad_antes_despues.png
+2026-11-11 20:43:27 | INFO | Evidencia grafica: evidencias/05_cambio_mix_2024_vs_2025.png
+2026-11-11 20:43:28 | INFO | Evidencia grafica: evidencias/06_brecha_prevencion_vs_criticos.png
+2026-11-11 20:43:28 | INFO | Evidencia grafica: evidencias/07_top_barrios_criticos_cali.png
+2026-11-11 20:43:28 | INFO | Evidencia grafica: evidencias/08_bogota_sesgo_uca_vs_resto.png
+2026-11-11 20:43:28 | INFO | validate_gold completado exitosamente: {'etapa': 'validate_gold', 'fecha_ejecucion': '2026-11-11 20:43:20', 'validaciones_path': 'evidencias/validaciones_calidad.csv', 'warehouse_path': 'data/gold/warehouse.db', 'filas_validadas_gold': 404, 'duplicados_llave': 0, 'controles_ok': 12, 'controles_advertencia': 2, 'controles_error': 0, 'tablas_cargadas_sqlite': 18, 'filas_insertadas_sqlite_gold': 404, 'graficas_generadas': 8}
+2026-11-11 20:55:21 | INFO | BRONZE Cali (Excel): 17642 filas x 5 columnas | sha256=b3dda41a1f7fc2ce
+2026-11-11 20:55:21 | INFO | SILVER Cali: duplicados por id eliminados = 0
+2026-11-11 20:55:22 | INFO | SILVER Cali: comunas recuperadas desde barrio = 18
+2026-11-11 20:55:22 | INFO | SILVER Cali: 17642 filas | zonas distintas 83 -> 42
+2026-11-11 20:55:22 | INFO | SILVER Bogota: 20 localidades | atenciones totales = 947
+2026-11-11 20:55:22 | INFO | GOLD final: 404 filas (Cali 17642 casos | Bogota 947 atenciones)
+2026-11-11 20:55:22 | INFO | API de población: 1 filas descartadas (no son comuna o corregimiento): ['Otros']
+2026-11-11 20:55:22 | INFO | API de población: 37 zonas con población (año 2020)
+2026-11-11 20:55:24 | INFO | Iniciando tarea extract_api_bronze (corrida: 20261111_205524)...
+2026-11-11 20:55:24 | ERROR | Fallo simulado en extract_api_bronze: API de Datos Abiertos de Cali temporalmente inaccesible (FORZAR_FALLO_API.txt activo)
+2026-11-11 21:30:04 | INFO | === INICIO PIPELINE: ETL Bienestar Animal: Cali (CBA/Uaepa) vs Bogota (IDPYBA) v1.0 ===
+2026-11-11 21:30:07 | INFO | BRONZE Cali (Excel): 17642 filas x 5 columnas | sha256=b3dda41a1f7fc2ce
+2026-11-11 21:30:07 | INFO | BRONZE Bogota: 20 features | sha256=1ced21585f46f559
+2026-11-11 21:30:07 | INFO | SILVER Cali: duplicados por id eliminados = 0
+2026-11-11 21:30:07 | INFO | SILVER Cali: comunas recuperadas desde barrio = 18
+2026-11-11 21:30:07 | INFO | SILVER Cali: 17642 filas | zonas distintas 83 -> 42
+2026-11-11 21:30:07 | INFO | SILVER Bogota: 20 localidades | atenciones totales = 947
+2026-11-11 21:30:07 | INFO | Archivo guardado: data/silver/silver_cali.csv (17642 filas)
+2026-11-11 21:30:07 | INFO | Archivo guardado: data/silver/silver_bogota.csv (20 filas)
+2026-11-11 21:30:08 | INFO | CALIDAD [OK] Cali: no se pierden registros bronze->silver 17642 -> 17642
+2026-11-11 21:30:08 | INFO | CALIDAD [OK] Cali: id unico 
+2026-11-11 21:30:08 | INFO | CALIDAD [OK] Cali: clase sin valores fuera del catalogo 
+2026-11-11 21:30:08 | INFO | CALIDAD [OK] Cali: fechas validas dentro del rango 
+2026-11-11 21:30:08 | INFO | CALIDAD [OK] Cali: fechas invalidas < 1% 0.068%
+2026-11-11 21:30:08 | INFO | CALIDAD [OK] Bogota: 20 localidades 20 localidades
+2026-11-11 21:30:08 | INFO | CALIDAD [OK] Bogota: sin nulos en atenciones 
+2026-11-11 21:30:08 | INFO | CALIDAD [OK] Bogota: especie suma atenciones 
+2026-11-11 21:30:08 | INFO | CALIDAD [OK] Bogota: sexo suma atenciones 
+2026-11-11 21:30:08 | WARNING | CALIDAD [ADVERTENCIA] Bogota: diagnosticos suman atenciones diferencias en Kennedy (-2), Fontibón (+2), Rafael Uribe Uribe (-1), Ciudad Bolívar (+1)
+2026-11-11 21:30:08 | WARNING | CALIDAD [ADVERTENCIA] Bogota: procedencia suman atenciones diferencias en Rafael Uribe Uribe (-1), Ciudad Bolívar (+1)
+2026-11-11 21:30:08 | INFO | GOLD final: 404 filas (Cali 17642 casos | Bogota 947 atenciones)
+2026-11-11 21:30:11 | WARNING | API de población sin conexión (403 Client Error: Forbidden for url: https://datos.cali.gov.co/api/3/action/datastore_search?resource_id=63f3e50e-0452-49cf-993d-08dfc2842cb4&limit=500). Se usa snapshot local de bronze: poblacion_comunas_api.json
+2026-11-11 21:30:11 | INFO | API de población: 1 filas descartadas (no son comuna o corregimiento): ['Otros']
+2026-11-11 21:30:11 | INFO | API de población: 37 zonas con población (año 2020)
+2026-11-11 21:30:12 | INFO | Archivo guardado: data/gold/gold_final.csv (404 filas)
+2026-11-11 21:30:12 | INFO | Archivo guardado: data/gold/kpis/kpi_calidad_datos.csv (14 filas)
+2026-11-11 21:30:12 | INFO | Archivo guardado: data/gold/kpis/kpi_casos_por_zona.csv (42 filas)
+2026-11-11 21:30:12 | INFO | Archivo guardado: data/gold/kpis/kpi_evolucion_mensual.csv (24 filas)
+2026-11-11 21:30:12 | INFO | Archivo guardado: data/gold/kpis/kpi_priorizacion_territorial.csv (37 filas)
+2026-11-11 21:30:12 | INFO | Archivo guardado: data/gold/kpis/kpi_comparativo_ciudades.csv (8 filas)
+2026-11-11 21:30:12 | INFO | Archivo guardado: data/gold/kpis/kpi_urgencias_por_zona.csv (56 filas)
+2026-11-11 21:30:12 | INFO | Archivo guardado: data/gold/kpis/kpi_bogota_detalle.csv (28 filas)
+2026-11-11 21:30:12 | INFO | Archivo guardado: data/gold/kpis/kpi_cambio_anual_servicios.csv (8 filas)
+2026-11-11 21:30:12 | INFO | Archivo guardado: data/gold/kpis/kpi_brecha_prevencion_zona.csv (37 filas)
+2026-11-11 21:30:12 | INFO | Archivo guardado: data/gold/kpis/kpi_top_barrios_cali.csv (25 filas)
+2026-11-11 21:30:12 | INFO | Archivo guardado: data/gold/kpis/kpi_calidad_por_clase.csv (8 filas)
+2026-11-11 21:30:12 | INFO | Archivo guardado: data/gold/kpis/kpi_patron_semanal_cali.csv (7 filas)
+2026-11-11 21:30:12 | INFO | Archivo guardado: data/gold/kpis/kpi_bogota_engativa_vs_resto.csv (22 filas)
+2026-11-11 21:30:12 | INFO | Archivo guardado: evidencias/validaciones_calidad.csv (11 filas)
+2026-11-11 21:30:12 | INFO | DW: tabla silver_cali cargada (17642 filas)
+2026-11-11 21:30:12 | INFO | DW: tabla silver_bogota cargada (20 filas)
+2026-11-11 21:30:12 | INFO | DW: tabla gold_final cargada (404 filas)
+2026-11-11 21:30:12 | INFO | DW: tabla dim_categoria cargada (9 filas)
+2026-11-11 21:30:12 | INFO | DW: tabla validaciones_calidad cargada (11 filas)
+2026-11-11 21:30:12 | INFO | DW: tabla kpi_calidad_datos cargada (14 filas)
+2026-11-11 21:30:12 | INFO | DW: tabla kpi_casos_por_zona cargada (42 filas)
+2026-11-11 21:30:12 | INFO | DW: tabla kpi_evolucion_mensual cargada (24 filas)
+2026-11-11 21:30:12 | INFO | DW: tabla kpi_priorizacion_territorial cargada (37 filas)
+2026-11-11 21:30:12 | INFO | DW: tabla kpi_comparativo_ciudades cargada (8 filas)
+2026-11-11 21:30:12 | INFO | DW: tabla kpi_urgencias_por_zona cargada (56 filas)
+2026-11-11 21:30:12 | INFO | DW: tabla kpi_bogota_detalle cargada (28 filas)
+2026-11-11 21:30:12 | INFO | DW: tabla kpi_cambio_anual_servicios cargada (8 filas)
+2026-11-11 21:30:12 | INFO | DW: tabla kpi_brecha_prevencion_zona cargada (37 filas)
+2026-11-11 21:30:12 | INFO | DW: tabla kpi_top_barrios_cali cargada (25 filas)
+2026-11-11 21:30:12 | INFO | DW: tabla kpi_calidad_por_clase cargada (8 filas)
+2026-11-11 21:30:12 | INFO | DW: tabla kpi_patron_semanal_cali cargada (7 filas)
+2026-11-11 21:30:12 | INFO | DW: tabla kpi_bogota_engativa_vs_resto cargada (22 filas)
+2026-11-11 21:30:13 | INFO | Evidencia grafica: evidencias/01_casos_por_comuna.png
+2026-11-11 21:30:13 | INFO | Evidencia grafica: evidencias/02_evolucion_mensual.png
+2026-11-11 21:30:13 | INFO | Evidencia grafica: evidencias/03_urgencias_cali_vs_bogota.png
+2026-11-11 21:30:13 | INFO | Evidencia grafica: evidencias/04_calidad_antes_despues.png
+2026-11-11 21:30:14 | INFO | Evidencia grafica: evidencias/05_cambio_mix_2024_vs_2025.png
+2026-11-11 21:30:14 | INFO | Evidencia grafica: evidencias/06_brecha_prevencion_vs_criticos.png
+2026-11-11 21:30:14 | INFO | Evidencia grafica: evidencias/07_top_barrios_criticos_cali.png
+2026-11-11 21:30:14 | INFO | Evidencia grafica: evidencias/08_bogota_sesgo_uca_vs_resto.png
+2026-11-11 21:30:14 | INFO | === FIN PIPELINE: 9 reglas OK, 2 advertencias, 0 fallas ===
+2026-11-11 21:31:54 | INFO | === INICIO PIPELINE: ETL Bienestar Animal: Cali (CBA/Uaepa) vs Bogota (IDPYBA) v1.0 ===
+2026-11-11 21:31:56 | INFO | BRONZE Cali (Excel): 17642 filas x 5 columnas | sha256=b3dda41a1f7fc2ce
+2026-11-11 21:31:56 | INFO | BRONZE Bogota: 20 features | sha256=1ced21585f46f559
+2026-11-11 21:31:56 | INFO | SILVER Cali: duplicados por id eliminados = 0
+2026-11-11 21:31:57 | INFO | SILVER Cali: comunas recuperadas desde barrio = 18
+2026-11-11 21:31:57 | INFO | SILVER Cali: 17642 filas | zonas distintas 83 -> 42
+2026-11-11 21:31:57 | INFO | SILVER Bogota: 20 localidades | atenciones totales = 947
+2026-11-11 21:31:57 | INFO | Archivo guardado: data/silver/silver_cali.csv (17642 filas)
+2026-11-11 21:31:57 | INFO | Archivo guardado: data/silver/silver_bogota.csv (20 filas)
+2026-11-11 21:31:57 | INFO | CALIDAD [OK] Cali: no se pierden registros bronze->silver 17642 -> 17642
+2026-11-11 21:31:57 | INFO | CALIDAD [OK] Cali: id unico 
+2026-11-11 21:31:57 | INFO | CALIDAD [OK] Cali: clase sin valores fuera del catalogo 
+2026-11-11 21:31:57 | INFO | CALIDAD [OK] Cali: fechas validas dentro del rango 
+2026-11-11 21:31:57 | INFO | CALIDAD [OK] Cali: fechas invalidas < 1% 0.068%
+2026-11-11 21:31:57 | INFO | CALIDAD [OK] Bogota: 20 localidades 20 localidades
+2026-11-11 21:31:57 | INFO | CALIDAD [OK] Bogota: sin nulos en atenciones 
+2026-11-11 21:31:57 | INFO | CALIDAD [OK] Bogota: especie suma atenciones 
+2026-11-11 21:31:57 | INFO | CALIDAD [OK] Bogota: sexo suma atenciones 
+2026-11-11 21:31:57 | WARNING | CALIDAD [ADVERTENCIA] Bogota: diagnosticos suman atenciones diferencias en Kennedy (-2), Fontibón (+2), Rafael Uribe Uribe (-1), Ciudad Bolívar (+1)
+2026-11-11 21:31:57 | WARNING | CALIDAD [ADVERTENCIA] Bogota: procedencia suman atenciones diferencias en Rafael Uribe Uribe (-1), Ciudad Bolívar (+1)
+2026-11-11 21:31:57 | INFO | GOLD final: 404 filas (Cali 17642 casos | Bogota 947 atenciones)
+2026-11-11 21:31:59 | WARNING | API de población sin conexión (403 Client Error: Forbidden for url: https://datos.cali.gov.co/api/3/action/datastore_search?resource_id=63f3e50e-0452-49cf-993d-08dfc2842cb4&limit=500). Se usa snapshot local de bronze: poblacion_comunas_api.json
+2026-11-11 21:31:59 | INFO | API de población: 1 filas descartadas (no son comuna o corregimiento): ['Otros']
+2026-11-11 21:31:59 | INFO | API de población: 37 zonas con población (año 2020)
+2026-11-11 21:31:59 | INFO | Archivo guardado: data/gold/gold_final.csv (404 filas)
+2026-11-11 21:31:59 | INFO | Archivo guardado: data/gold/kpis/kpi_calidad_datos.csv (14 filas)
+2026-11-11 21:31:59 | INFO | Archivo guardado: data/gold/kpis/kpi_casos_por_zona.csv (42 filas)
+2026-11-11 21:31:59 | INFO | Archivo guardado: data/gold/kpis/kpi_evolucion_mensual.csv (24 filas)
+2026-11-11 21:31:59 | INFO | Archivo guardado: data/gold/kpis/kpi_priorizacion_territorial.csv (37 filas)
+2026-11-11 21:31:59 | INFO | Archivo guardado: data/gold/kpis/kpi_comparativo_ciudades.csv (8 filas)
+2026-11-11 21:31:59 | INFO | Archivo guardado: data/gold/kpis/kpi_urgencias_por_zona.csv (56 filas)
+2026-11-11 21:31:59 | INFO | Archivo guardado: data/gold/kpis/kpi_bogota_detalle.csv (28 filas)
+2026-11-11 21:31:59 | INFO | Archivo guardado: data/gold/kpis/kpi_cambio_anual_servicios.csv (8 filas)
+2026-11-11 21:31:59 | INFO | Archivo guardado: data/gold/kpis/kpi_brecha_prevencion_zona.csv (37 filas)
+2026-11-11 21:31:59 | INFO | Archivo guardado: data/gold/kpis/kpi_top_barrios_cali.csv (25 filas)
+2026-11-11 21:31:59 | INFO | Archivo guardado: data/gold/kpis/kpi_calidad_por_clase.csv (8 filas)
+2026-11-11 21:31:59 | INFO | Archivo guardado: data/gold/kpis/kpi_patron_semanal_cali.csv (7 filas)
+2026-11-11 21:31:59 | INFO | Archivo guardado: data/gold/kpis/kpi_bogota_engativa_vs_resto.csv (22 filas)
+2026-11-11 21:31:59 | INFO | Archivo guardado: evidencias/validaciones_calidad.csv (11 filas)
+2026-11-11 21:32:00 | INFO | DW: tabla silver_cali cargada (17642 filas)
+2026-11-11 21:32:00 | INFO | DW: tabla silver_bogota cargada (20 filas)
+2026-11-11 21:32:00 | INFO | DW: tabla gold_final cargada (404 filas)
+2026-11-11 21:32:00 | INFO | DW: tabla dim_categoria cargada (9 filas)
+2026-11-11 21:32:00 | INFO | DW: tabla validaciones_calidad cargada (11 filas)
+2026-11-11 21:32:00 | INFO | DW: tabla kpi_calidad_datos cargada (14 filas)
+2026-11-11 21:32:00 | INFO | DW: tabla kpi_casos_por_zona cargada (42 filas)
+2026-11-11 21:32:00 | INFO | DW: tabla kpi_evolucion_mensual cargada (24 filas)
+2026-11-11 21:32:00 | INFO | DW: tabla kpi_priorizacion_territorial cargada (37 filas)
+2026-11-11 21:32:00 | INFO | DW: tabla kpi_comparativo_ciudades cargada (8 filas)
+2026-11-11 21:32:00 | INFO | DW: tabla kpi_urgencias_por_zona cargada (56 filas)
+2026-11-11 21:32:00 | INFO | DW: tabla kpi_bogota_detalle cargada (28 filas)
+2026-11-11 21:32:00 | INFO | DW: tabla kpi_cambio_anual_servicios cargada (8 filas)
+2026-11-11 21:32:00 | INFO | DW: tabla kpi_brecha_prevencion_zona cargada (37 filas)
+2026-11-11 21:32:00 | INFO | DW: tabla kpi_top_barrios_cali cargada (25 filas)
+2026-11-11 21:32:00 | INFO | DW: tabla kpi_calidad_por_clase cargada (8 filas)
+2026-11-11 21:32:00 | INFO | DW: tabla kpi_patron_semanal_cali cargada (7 filas)
+2026-11-11 21:32:00 | INFO | DW: tabla kpi_bogota_engativa_vs_resto cargada (22 filas)
+2026-11-11 21:32:00 | INFO | Evidencia grafica: evidencias/01_casos_por_comuna.png
+2026-11-11 21:32:00 | INFO | Evidencia grafica: evidencias/02_evolucion_mensual.png
+2026-11-11 21:32:01 | INFO | Evidencia grafica: evidencias/03_urgencias_cali_vs_bogota.png
+2026-11-11 21:32:01 | INFO | Evidencia grafica: evidencias/04_calidad_antes_despues.png
+2026-11-11 21:32:01 | INFO | Evidencia grafica: evidencias/05_cambio_mix_2024_vs_2025.png
+2026-11-11 21:32:01 | INFO | Evidencia grafica: evidencias/06_brecha_prevencion_vs_criticos.png
+2026-11-11 21:32:02 | INFO | Evidencia grafica: evidencias/07_top_barrios_criticos_cali.png
+2026-11-11 21:32:02 | INFO | Evidencia grafica: evidencias/08_bogota_sesgo_uca_vs_resto.png
+2026-11-11 21:32:02 | INFO | === FIN PIPELINE: 9 reglas OK, 2 advertencias, 0 fallas ===
+2026-11-11 21:35:54 | INFO | BRONZE Cali (Excel): 17642 filas x 5 columnas | sha256=b3dda41a1f7fc2ce
+2026-11-11 21:35:54 | INFO | BRONZE Bogota: 20 features | sha256=1ced21585f46f559
+2026-11-11 21:35:54 | WARNING | API de población sin conexión (403 Client Error: Forbidden for url: https://datos.cali.gov.co/api/3/action/datastore_search?resource_id=63f3e50e-0452-49cf-993d-08dfc2842cb4&limit=500). Se usa snapshot local de bronze: poblacion_comunas_api.json
+2026-11-11 21:35:55 | INFO | SILVER Cali: duplicados por id eliminados = 0
+2026-11-11 21:35:55 | INFO | SILVER Cali: comunas recuperadas desde barrio = 18
+2026-11-11 21:35:55 | INFO | SILVER Cali: 17642 filas | zonas distintas 83 -> 42
+2026-11-11 21:35:55 | INFO | SILVER Bogota: 20 localidades | atenciones totales = 947
+2026-11-11 21:35:55 | INFO | CALIDAD [OK] Cali: no se pierden registros bronze->silver 17642 -> 17642
+2026-11-11 21:35:55 | INFO | CALIDAD [OK] Cali: id unico 
+2026-11-11 21:35:55 | INFO | CALIDAD [OK] Cali: clase sin valores fuera del catalogo 
+2026-11-11 21:35:55 | INFO | CALIDAD [OK] Cali: fechas validas dentro del rango 
+2026-11-11 21:35:55 | INFO | CALIDAD [OK] Cali: fechas invalidas < 1% 0.068%
+2026-11-11 21:35:55 | INFO | CALIDAD [OK] Bogota: 20 localidades 20 localidades
+2026-11-11 21:35:55 | INFO | CALIDAD [OK] Bogota: sin nulos en atenciones 
+2026-11-11 21:35:55 | INFO | CALIDAD [OK] Bogota: especie suma atenciones 
+2026-11-11 21:35:55 | INFO | CALIDAD [OK] Bogota: sexo suma atenciones 
+2026-11-11 21:35:55 | WARNING | CALIDAD [ADVERTENCIA] Bogota: diagnosticos suman atenciones diferencias en Kennedy (-2), Fontibón (+2), Rafael Uribe Uribe (-1), Ciudad Bolívar (+1)
+2026-11-11 21:35:55 | WARNING | CALIDAD [ADVERTENCIA] Bogota: procedencia suman atenciones diferencias en Rafael Uribe Uribe (-1), Ciudad Bolívar (+1)
+2026-11-11 21:35:55 | INFO | GOLD final: 404 filas (Cali 17642 casos | Bogota 947 atenciones)
+2026-11-11 21:35:56 | WARNING | API de población sin conexión (403 Client Error: Forbidden for url: https://datos.cali.gov.co/api/3/action/datastore_search?resource_id=63f3e50e-0452-49cf-993d-08dfc2842cb4&limit=500). Se usa snapshot local de bronze: poblacion_comunas_api.json
+2026-11-11 21:35:56 | INFO | API de población: 1 filas descartadas (no son comuna o corregimiento): ['Otros']
+2026-11-11 21:35:56 | INFO | API de población: 37 zonas con población (año 2020)
+2026-11-11 21:35:57 | INFO | Evidencia grafica: evidencias/01_casos_por_comuna.png
+2026-11-11 21:35:57 | INFO | Evidencia grafica: evidencias/02_evolucion_mensual.png
+2026-11-11 21:35:58 | INFO | Evidencia grafica: evidencias/03_urgencias_cali_vs_bogota.png
+2026-11-11 21:35:58 | INFO | Evidencia grafica: evidencias/04_calidad_antes_despues.png
+2026-11-11 21:35:58 | INFO | Evidencia grafica: evidencias/05_cambio_mix_2024_vs_2025.png
+2026-11-11 21:35:58 | INFO | Evidencia grafica: evidencias/06_brecha_prevencion_vs_criticos.png
+2026-11-11 21:35:59 | INFO | Evidencia grafica: evidencias/07_top_barrios_criticos_cali.png
+2026-11-11 21:35:59 | INFO | Evidencia grafica: evidencias/08_bogota_sesgo_uca_vs_resto.png
+2026-11-11 22:39:10 | INFO | === INICIO PIPELINE: ETL Bienestar Animal: Cali (CBA/Uaepa) vs Bogota (IDPYBA) v1.0 ===
+2026-11-11 22:39:11 | INFO | BRONZE Cali (Excel): 17642 filas x 5 columnas | sha256=b3dda41a1f7fc2ce
+2026-11-11 22:39:11 | INFO | BRONZE Bogota: 20 features | sha256=1ced21585f46f559
+2026-11-11 22:39:11 | INFO | SILVER Cali: duplicados por id eliminados = 0
+2026-11-11 22:39:11 | INFO | SILVER Cali: comunas recuperadas desde barrio = 18
+2026-11-11 22:39:11 | INFO | SILVER Cali: 17642 filas | zonas distintas 83 -> 42
+2026-11-11 22:39:11 | INFO | SILVER Bogota: 20 localidades | atenciones totales = 947
+2026-11-11 22:39:11 | INFO | Archivo guardado: data/silver/silver_cali.csv (17642 filas)
+2026-11-11 22:39:11 | INFO | Archivo guardado: data/silver/silver_bogota.csv (20 filas)
+2026-11-11 22:39:11 | INFO | GOLD final: 404 filas (Cali 17642 casos | Bogota 947 atenciones)
+2026-11-11 22:39:11 | INFO | CALIDAD [OK] Cali: no se pierden registros bronze->silver 17642 -> 17642
+2026-11-11 22:39:11 | INFO | CALIDAD [OK] Cali: id unico 
+2026-11-11 22:39:11 | INFO | CALIDAD [OK] Cali: clase sin valores fuera del catalogo 
+2026-11-11 22:39:11 | INFO | CALIDAD [OK] Cali: fechas validas dentro del rango 
+2026-11-11 22:39:11 | INFO | CALIDAD [OK] Cali: fechas invalidas < 1% 0.068%
+2026-11-11 22:39:11 | INFO | CALIDAD [OK] Bogota: 20 localidades 20 localidades
+2026-11-11 22:39:11 | INFO | CALIDAD [OK] Bogota: sin nulos en atenciones 
+2026-11-11 22:39:11 | INFO | CALIDAD [OK] Bogota: especie suma atenciones 
+2026-11-11 22:39:11 | INFO | CALIDAD [OK] Bogota: sexo suma atenciones 
+2026-11-11 22:39:11 | WARNING | CALIDAD [ADVERTENCIA] Bogota: diagnosticos suman atenciones diferencias en Kennedy (-2), Fontibón (+2), Rafael Uribe Uribe (-1), Ciudad Bolívar (+1)
+2026-11-11 22:39:11 | WARNING | CALIDAD [ADVERTENCIA] Bogota: procedencia suman atenciones diferencias en Rafael Uribe Uribe (-1), Ciudad Bolívar (+1)
+2026-11-11 22:39:11 | INFO | CALIDAD [OK] Gold: sin duplicados en llave (ciudad, zona, categoria, periodo) duplicados=0
+2026-11-11 22:39:11 | INFO | CALIDAD [OK] Gold: casos Cali cuadran con Silver 17642 == 17642
+2026-11-11 22:39:11 | INFO | CALIDAD [OK] Gold: atenciones Bogotá cuadran con Silver 947 == 947
+2026-11-11 22:39:11 | WARNING | API de población sin conexión (HTTPSConnectionPool(host='datos.cali.gov.co', port=443): Max retries exceeded with url: /api/3/action/datastore_search?resource_id=63f3e50e-0452-49cf-993d-08dfc2842cb4&limit=500 (Caused by NameResolutionError("HTTPSConnection(host='datos.cali.gov.co', port=443): Failed to resolve 'datos.cali.gov.co' ([Errno 11001] getaddrinfo failed)"))). Se usa snapshot local de bronze: poblacion_comunas_api.json
+2026-11-11 22:39:11 | INFO | API de población: 1 filas descartadas (no son comuna o corregimiento): ['Otros']
+2026-11-11 22:39:11 | INFO | API de población: 37 zonas con población (año 2020)
+2026-11-11 22:39:12 | INFO | Archivo guardado: data/gold/gold_final.csv (404 filas)
+2026-11-11 22:39:12 | INFO | Archivo guardado: data/gold/kpis/kpi_calidad_datos.csv (14 filas)
+2026-11-11 22:39:12 | INFO | Archivo guardado: data/gold/kpis/kpi_casos_por_zona.csv (42 filas)
+2026-11-11 22:39:12 | INFO | Archivo guardado: data/gold/kpis/kpi_evolucion_mensual.csv (24 filas)
+2026-11-11 22:39:12 | INFO | Archivo guardado: data/gold/kpis/kpi_priorizacion_territorial.csv (37 filas)
+2026-11-11 22:39:12 | INFO | Archivo guardado: data/gold/kpis/kpi_comparativo_ciudades.csv (8 filas)
+2026-11-11 22:39:12 | INFO | Archivo guardado: data/gold/kpis/kpi_urgencias_por_zona.csv (56 filas)
+2026-11-11 22:39:12 | INFO | Archivo guardado: data/gold/kpis/kpi_bogota_detalle.csv (28 filas)
+2026-11-11 22:39:12 | INFO | Archivo guardado: data/gold/kpis/kpi_cambio_anual_servicios.csv (8 filas)
+2026-11-11 22:39:12 | INFO | Archivo guardado: data/gold/kpis/kpi_brecha_prevencion_zona.csv (37 filas)
+2026-11-11 22:39:12 | INFO | Archivo guardado: data/gold/kpis/kpi_top_barrios_cali.csv (25 filas)
+2026-11-11 22:39:12 | INFO | Archivo guardado: data/gold/kpis/kpi_calidad_por_clase.csv (8 filas)
+2026-11-11 22:39:12 | INFO | Archivo guardado: data/gold/kpis/kpi_patron_semanal_cali.csv (7 filas)
+2026-11-11 22:39:12 | INFO | Archivo guardado: data/gold/kpis/kpi_bogota_engativa_vs_resto.csv (22 filas)
+2026-11-11 22:39:12 | INFO | Archivo guardado: evidencias/validaciones_calidad.csv (14 filas)
+2026-11-11 22:39:12 | INFO | DW: tabla silver_cali cargada (17642 filas)
+2026-11-11 22:39:12 | INFO | DW: tabla silver_bogota cargada (20 filas)
+2026-11-11 22:39:12 | INFO | DW: tabla gold_final cargada (404 filas)
+2026-11-11 22:39:12 | INFO | DW: tabla dim_categoria cargada (9 filas)
+2026-11-11 22:39:12 | INFO | DW: tabla validaciones_calidad cargada (14 filas)
+2026-11-11 22:39:12 | INFO | DW: tabla kpi_calidad_datos cargada (14 filas)
+2026-11-11 22:39:12 | INFO | DW: tabla kpi_casos_por_zona cargada (42 filas)
+2026-11-11 22:39:12 | INFO | DW: tabla kpi_evolucion_mensual cargada (24 filas)
+2026-11-11 22:39:12 | INFO | DW: tabla kpi_priorizacion_territorial cargada (37 filas)
+2026-11-11 22:39:12 | INFO | DW: tabla kpi_comparativo_ciudades cargada (8 filas)
+2026-11-11 22:39:12 | INFO | DW: tabla kpi_urgencias_por_zona cargada (56 filas)
+2026-11-11 22:39:12 | INFO | DW: tabla kpi_bogota_detalle cargada (28 filas)
+2026-11-11 22:39:12 | INFO | DW: tabla kpi_cambio_anual_servicios cargada (8 filas)
+2026-11-11 22:39:12 | INFO | DW: tabla kpi_brecha_prevencion_zona cargada (37 filas)
+2026-11-11 22:39:12 | INFO | DW: tabla kpi_top_barrios_cali cargada (25 filas)
+2026-11-11 22:39:12 | INFO | DW: tabla kpi_calidad_por_clase cargada (8 filas)
+2026-11-11 22:39:12 | INFO | DW: tabla kpi_patron_semanal_cali cargada (7 filas)
+2026-11-11 22:39:12 | INFO | DW: tabla kpi_bogota_engativa_vs_resto cargada (22 filas)
+2026-11-11 22:39:12 | INFO | Evidencia grafica: evidencias/01_casos_por_comuna.png
+2026-11-11 22:39:12 | INFO | Evidencia grafica: evidencias/02_evolucion_mensual.png
+2026-11-11 22:39:13 | INFO | Evidencia grafica: evidencias/03_urgencias_cali_vs_bogota.png
+2026-11-11 22:39:13 | INFO | Evidencia grafica: evidencias/04_calidad_antes_despues.png
+2026-11-11 22:39:13 | INFO | Evidencia grafica: evidencias/05_cambio_mix_2024_vs_2025.png
+2026-11-11 22:39:13 | INFO | Evidencia grafica: evidencias/06_brecha_prevencion_vs_criticos.png
+2026-11-11 22:39:13 | INFO | Evidencia grafica: evidencias/07_top_barrios_criticos_cali.png
+2026-11-11 22:39:13 | INFO | Evidencia grafica: evidencias/08_bogota_sesgo_uca_vs_resto.png
+2026-11-11 22:39:13 | INFO | === FIN PIPELINE: 12 reglas OK, 2 advertencias, 0 fallas ===
+2026-11-11 22:39:15 | INFO | BRONZE Cali (Excel): 17642 filas x 5 columnas | sha256=b3dda41a1f7fc2ce
+2026-11-11 22:39:15 | INFO | SILVER Cali: duplicados por id eliminados = 0
+2026-11-11 22:39:16 | INFO | SILVER Cali: comunas recuperadas desde barrio = 18
+2026-11-11 22:39:16 | INFO | SILVER Cali: 17642 filas | zonas distintas 83 -> 42
+2026-11-11 22:39:16 | INFO | SILVER Bogota: 20 localidades | atenciones totales = 947
+2026-11-11 22:39:16 | INFO | GOLD final: 404 filas (Cali 17642 casos | Bogota 947 atenciones)
+2026-11-11 22:39:16 | INFO | API de población: 1 filas descartadas (no son comuna o corregimiento): ['Otros']
+2026-11-11 22:39:16 | INFO | API de población: 37 zonas con población (año 2020)
+2026-11-11 22:39:16 | INFO | Iniciando tarea extract_api_bronze (corrida: 20261111_223916)...
+2026-11-11 22:39:16 | ERROR | Fallo simulado en extract_api_bronze: API de Datos Abiertos de Cali temporalmente inaccesible (FORZAR_FALLO_API.txt activo)
+2026-11-11 22:47:15 | INFO | === INICIO PIPELINE: ETL Bienestar Animal: Cali (CBA/Uaepa) vs Bogota (IDPYBA) v1.0 ===
+2026-11-11 22:47:16 | INFO | BRONZE Cali (Excel): 17642 filas x 5 columnas | sha256=b3dda41a1f7fc2ce
+2026-11-11 22:47:17 | INFO | BRONZE Bogota: 20 features | sha256=1ced21585f46f559
+2026-11-11 22:47:17 | INFO | SILVER Cali: duplicados por id eliminados = 0
+2026-11-11 22:47:17 | INFO | SILVER Cali: comunas recuperadas desde barrio = 18
+2026-11-11 22:47:17 | INFO | SILVER Cali: 17642 filas | zonas distintas 83 -> 42
+2026-11-11 22:47:17 | INFO | SILVER Bogota: 20 localidades | atenciones totales = 947
+2026-11-11 22:47:17 | INFO | Archivo guardado: data/silver/silver_cali.csv (17642 filas)
+2026-11-11 22:47:17 | INFO | Archivo guardado: data/silver/silver_bogota.csv (20 filas)
+2026-11-11 22:47:17 | INFO | GOLD final: 404 filas (Cali 17642 casos | Bogota 947 atenciones)
+2026-11-11 22:47:17 | INFO | CALIDAD [OK] Cali: no se pierden registros bronze->silver 17642 -> 17642
+2026-11-11 22:47:17 | INFO | CALIDAD [OK] Cali: id unico 
+2026-11-11 22:47:17 | INFO | CALIDAD [OK] Cali: clase sin valores fuera del catalogo 
+2026-11-11 22:47:17 | INFO | CALIDAD [OK] Cali: fechas validas dentro del rango 
+2026-11-11 22:47:17 | INFO | CALIDAD [OK] Cali: fechas invalidas < 1% 0.068%
+2026-11-11 22:47:17 | INFO | CALIDAD [OK] Bogota: 20 localidades 20 localidades
+2026-11-11 22:47:17 | INFO | CALIDAD [OK] Bogota: sin nulos en atenciones 
+2026-11-11 22:47:17 | INFO | CALIDAD [OK] Bogota: especie suma atenciones 
+2026-11-11 22:47:17 | INFO | CALIDAD [OK] Bogota: sexo suma atenciones 
+2026-11-11 22:47:17 | WARNING | CALIDAD [ADVERTENCIA] Bogota: diagnosticos suman atenciones diferencias en Kennedy (-2), Fontibón (+2), Rafael Uribe Uribe (-1), Ciudad Bolívar (+1)
+2026-11-11 22:47:17 | WARNING | CALIDAD [ADVERTENCIA] Bogota: procedencia suman atenciones diferencias en Rafael Uribe Uribe (-1), Ciudad Bolívar (+1)
+2026-11-11 22:47:17 | INFO | CALIDAD [OK] Gold: sin duplicados en llave (ciudad, zona, categoria, periodo) duplicados=0
+2026-11-11 22:47:17 | INFO | CALIDAD [OK] Gold: casos Cali cuadran con Silver 17642 == 17642
+2026-11-11 22:47:17 | INFO | CALIDAD [OK] Gold: atenciones Bogotá cuadran con Silver 947 == 947
+2026-11-11 22:47:18 | WARNING | API de población sin conexión (403 Client Error: Forbidden for url: https://datos.cali.gov.co/api/3/action/datastore_search?resource_id=63f3e50e-0452-49cf-993d-08dfc2842cb4&limit=500). Se usa snapshot local de bronze: poblacion_comunas_api.json
+2026-11-11 22:47:18 | INFO | API de población: 1 filas descartadas (no son comuna o corregimiento): ['Otros']
+2026-11-11 22:47:18 | INFO | API de población: 37 zonas con población (año 2020)
+2026-11-11 22:47:18 | INFO | Archivo guardado: data/gold/gold_final.csv (404 filas)
+2026-11-11 22:47:18 | INFO | Archivo guardado: data/gold/kpis/kpi_calidad_datos.csv (14 filas)
+2026-11-11 22:47:18 | INFO | Archivo guardado: data/gold/kpis/kpi_casos_por_zona.csv (42 filas)
+2026-11-11 22:47:18 | INFO | Archivo guardado: data/gold/kpis/kpi_evolucion_mensual.csv (24 filas)
+2026-11-11 22:47:18 | INFO | Archivo guardado: data/gold/kpis/kpi_priorizacion_territorial.csv (37 filas)
+2026-11-11 22:47:18 | INFO | Archivo guardado: data/gold/kpis/kpi_comparativo_ciudades.csv (8 filas)
+2026-11-11 22:47:18 | INFO | Archivo guardado: data/gold/kpis/kpi_urgencias_por_zona.csv (56 filas)
+2026-11-11 22:47:18 | INFO | Archivo guardado: data/gold/kpis/kpi_bogota_detalle.csv (28 filas)
+2026-11-11 22:47:18 | INFO | Archivo guardado: data/gold/kpis/kpi_cambio_anual_servicios.csv (8 filas)
+2026-11-11 22:47:18 | INFO | Archivo guardado: data/gold/kpis/kpi_brecha_prevencion_zona.csv (37 filas)
+2026-11-11 22:47:18 | INFO | Archivo guardado: data/gold/kpis/kpi_top_barrios_cali.csv (25 filas)
+2026-11-11 22:47:18 | INFO | Archivo guardado: data/gold/kpis/kpi_calidad_por_clase.csv (8 filas)
+2026-11-11 22:47:18 | INFO | Archivo guardado: data/gold/kpis/kpi_patron_semanal_cali.csv (7 filas)
+2026-11-11 22:47:18 | INFO | Archivo guardado: data/gold/kpis/kpi_bogota_engativa_vs_resto.csv (22 filas)
+2026-11-11 22:47:18 | INFO | Archivo guardado: evidencias/validaciones_calidad.csv (14 filas)
+2026-11-11 22:47:18 | INFO | DW: tabla silver_cali cargada (17642 filas)
+2026-11-11 22:47:18 | INFO | DW: tabla silver_bogota cargada (20 filas)
+2026-11-11 22:47:18 | INFO | DW: tabla gold_final cargada (404 filas)
+2026-11-11 22:47:18 | INFO | DW: tabla dim_categoria cargada (9 filas)
+2026-11-11 22:47:18 | INFO | DW: tabla validaciones_calidad cargada (14 filas)
+2026-11-11 22:47:18 | INFO | DW: tabla kpi_calidad_datos cargada (14 filas)
+2026-11-11 22:47:18 | INFO | DW: tabla kpi_casos_por_zona cargada (42 filas)
+2026-11-11 22:47:18 | INFO | DW: tabla kpi_evolucion_mensual cargada (24 filas)
+2026-11-11 22:47:18 | INFO | DW: tabla kpi_priorizacion_territorial cargada (37 filas)
+2026-11-11 22:47:18 | INFO | DW: tabla kpi_comparativo_ciudades cargada (8 filas)
+2026-11-11 22:47:18 | INFO | DW: tabla kpi_urgencias_por_zona cargada (56 filas)
+2026-11-11 22:47:18 | INFO | DW: tabla kpi_bogota_detalle cargada (28 filas)
+2026-11-11 22:47:18 | INFO | DW: tabla kpi_cambio_anual_servicios cargada (8 filas)
+2026-11-11 22:47:18 | INFO | DW: tabla kpi_brecha_prevencion_zona cargada (37 filas)
+2026-11-11 22:47:18 | INFO | DW: tabla kpi_top_barrios_cali cargada (25 filas)
+2026-11-11 22:47:18 | INFO | DW: tabla kpi_calidad_por_clase cargada (8 filas)
+2026-11-11 22:47:18 | INFO | DW: tabla kpi_patron_semanal_cali cargada (7 filas)
+2026-11-11 22:47:18 | INFO | DW: tabla kpi_bogota_engativa_vs_resto cargada (22 filas)
+2026-11-11 22:47:19 | INFO | Evidencia grafica: evidencias/01_casos_por_comuna.png
+2026-11-11 22:47:19 | INFO | Evidencia grafica: evidencias/02_evolucion_mensual.png
+2026-11-11 22:47:19 | INFO | Evidencia grafica: evidencias/03_urgencias_cali_vs_bogota.png
+2026-11-11 22:47:19 | INFO | Evidencia grafica: evidencias/04_calidad_antes_despues.png
+2026-11-11 22:47:19 | INFO | Evidencia grafica: evidencias/05_cambio_mix_2024_vs_2025.png
+2026-11-11 22:47:19 | INFO | Evidencia grafica: evidencias/06_brecha_prevencion_vs_criticos.png
+2026-11-11 22:47:20 | INFO | Evidencia grafica: evidencias/07_top_barrios_criticos_cali.png
+2026-11-11 22:47:20 | INFO | Evidencia grafica: evidencias/08_bogota_sesgo_uca_vs_resto.png
+2026-11-11 22:47:20 | INFO | === FIN PIPELINE: 12 reglas OK, 2 advertencias, 0 fallas ===
+2026-11-12 20:38:58 | INFO | === INICIO PIPELINE: ETL Bienestar Animal: Cali (CBA/Uaepa) vs Bogota (IDPYBA) v1.0 ===
+2026-11-12 20:39:01 | INFO | BRONZE Cali (Excel): 17642 filas x 5 columnas | sha256=b3dda41a1f7fc2ce
+2026-11-12 20:39:01 | INFO | BRONZE Bogota: 20 features | sha256=1ced21585f46f559
+2026-11-12 20:39:01 | INFO | SILVER Cali: duplicados por id eliminados = 0
+2026-11-12 20:39:01 | INFO | SILVER Cali: comunas recuperadas desde barrio = 18
+2026-11-12 20:39:01 | INFO | SILVER Cali: 17642 filas | zonas distintas 83 -> 42
+2026-11-12 20:39:01 | INFO | SILVER Bogota: 20 localidades | atenciones totales = 947
+2026-11-12 20:39:01 | INFO | Archivo guardado: data/silver/silver_cali.csv (17642 filas)
+2026-11-12 20:39:01 | INFO | Archivo guardado: data/silver/silver_bogota.csv (20 filas)
+2026-11-12 20:39:01 | INFO | GOLD final: 404 filas (Cali 17642 casos | Bogota 947 atenciones)
+2026-11-12 20:39:01 | INFO | CALIDAD [OK] Cali: no se pierden registros bronze->silver 17642 -> 17642
+2026-11-12 20:39:01 | INFO | CALIDAD [OK] Cali: id unico 
+2026-11-12 20:39:01 | INFO | CALIDAD [OK] Cali: clase sin valores fuera del catalogo 
+2026-11-12 20:39:01 | INFO | CALIDAD [OK] Cali: fechas validas dentro del rango 
+2026-11-12 20:39:01 | INFO | CALIDAD [OK] Cali: fechas invalidas < 1% 0.068%
+2026-11-12 20:39:01 | INFO | CALIDAD [OK] Bogota: 20 localidades 20 localidades
+2026-11-12 20:39:01 | INFO | CALIDAD [OK] Bogota: sin nulos en atenciones 
+2026-11-12 20:39:01 | INFO | CALIDAD [OK] Bogota: especie suma atenciones 
+2026-11-12 20:39:01 | INFO | CALIDAD [OK] Bogota: sexo suma atenciones 
+2026-11-12 20:39:01 | WARNING | CALIDAD [ADVERTENCIA] Bogota: diagnosticos suman atenciones diferencias en Kennedy (-2), Fontibón (+2), Rafael Uribe Uribe (-1), Ciudad Bolívar (+1)
+2026-11-12 20:39:01 | WARNING | CALIDAD [ADVERTENCIA] Bogota: procedencia suman atenciones diferencias en Rafael Uribe Uribe (-1), Ciudad Bolívar (+1)
+2026-11-12 20:39:01 | INFO | CALIDAD [OK] Gold: sin duplicados en llave (ciudad, zona, categoria, periodo) duplicados=0
+2026-11-12 20:39:01 | INFO | CALIDAD [OK] Gold: casos Cali cuadran con Silver 17642 == 17642
+2026-11-12 20:39:01 | INFO | CALIDAD [OK] Gold: atenciones Bogotá cuadran con Silver 947 == 947
+2026-11-12 20:39:03 | WARNING | API de población sin conexión (403 Client Error: Forbidden for url: https://datos.cali.gov.co/api/3/action/datastore_search?resource_id=63f3e50e-0452-49cf-993d-08dfc2842cb4&limit=500). Se usa snapshot local de bronze: poblacion_comunas_api.json
+2026-11-12 20:39:03 | INFO | API de población: 1 filas descartadas (no son comuna o corregimiento): ['Otros']
+2026-11-12 20:39:03 | INFO | API de población: 37 zonas con población (año 2020)
+2026-11-12 20:39:03 | INFO | Archivo guardado: data/gold/gold_final.csv (404 filas)
+2026-11-12 20:39:03 | INFO | Archivo guardado: data/gold/kpis/kpi_calidad_datos.csv (14 filas)
+2026-11-12 20:39:03 | INFO | Archivo guardado: data/gold/kpis/kpi_casos_por_zona.csv (42 filas)
+2026-11-12 20:39:03 | INFO | Archivo guardado: data/gold/kpis/kpi_evolucion_mensual.csv (24 filas)
+2026-11-12 20:39:03 | INFO | Archivo guardado: data/gold/kpis/kpi_priorizacion_territorial.csv (37 filas)
+2026-11-12 20:39:03 | INFO | Archivo guardado: data/gold/kpis/kpi_comparativo_ciudades.csv (8 filas)
+2026-11-12 20:39:03 | INFO | Archivo guardado: data/gold/kpis/kpi_urgencias_por_zona.csv (56 filas)
+2026-11-12 20:39:03 | INFO | Archivo guardado: data/gold/kpis/kpi_bogota_detalle.csv (28 filas)
+2026-11-12 20:39:03 | INFO | Archivo guardado: data/gold/kpis/kpi_cambio_anual_servicios.csv (8 filas)
+2026-11-12 20:39:03 | INFO | Archivo guardado: data/gold/kpis/kpi_brecha_prevencion_zona.csv (37 filas)
+2026-11-12 20:39:03 | INFO | Archivo guardado: data/gold/kpis/kpi_top_barrios_cali.csv (25 filas)
+2026-11-12 20:39:03 | INFO | Archivo guardado: data/gold/kpis/kpi_calidad_por_clase.csv (8 filas)
+2026-11-12 20:39:03 | INFO | Archivo guardado: data/gold/kpis/kpi_patron_semanal_cali.csv (7 filas)
+2026-11-12 20:39:03 | INFO | Archivo guardado: data/gold/kpis/kpi_bogota_engativa_vs_resto.csv (22 filas)
+2026-11-12 20:39:03 | INFO | Archivo guardado: evidencias/validaciones_calidad.csv (14 filas)
+2026-11-12 20:39:03 | INFO | DW: tabla silver_cali cargada (17642 filas)
+2026-11-12 20:39:03 | INFO | DW: tabla silver_bogota cargada (20 filas)
+2026-11-12 20:39:03 | INFO | DW: tabla gold_final cargada (404 filas)
+2026-11-12 20:39:03 | INFO | DW: tabla dim_categoria cargada (9 filas)
+2026-11-12 20:39:03 | INFO | DW: tabla validaciones_calidad cargada (14 filas)
+2026-11-12 20:39:04 | INFO | DW: tabla kpi_calidad_datos cargada (14 filas)
+2026-11-12 20:39:04 | INFO | DW: tabla kpi_casos_por_zona cargada (42 filas)
+2026-11-12 20:39:04 | INFO | DW: tabla kpi_evolucion_mensual cargada (24 filas)
+2026-11-12 20:39:04 | INFO | DW: tabla kpi_priorizacion_territorial cargada (37 filas)
+2026-11-12 20:39:04 | INFO | DW: tabla kpi_comparativo_ciudades cargada (8 filas)
+2026-11-12 20:39:04 | INFO | DW: tabla kpi_urgencias_por_zona cargada (56 filas)
+2026-11-12 20:39:04 | INFO | DW: tabla kpi_bogota_detalle cargada (28 filas)
+2026-11-12 20:39:04 | INFO | DW: tabla kpi_cambio_anual_servicios cargada (8 filas)
+2026-11-12 20:39:04 | INFO | DW: tabla kpi_brecha_prevencion_zona cargada (37 filas)
+2026-11-12 20:39:04 | INFO | DW: tabla kpi_top_barrios_cali cargada (25 filas)
+2026-11-12 20:39:04 | INFO | DW: tabla kpi_calidad_por_clase cargada (8 filas)
+2026-11-12 20:39:04 | INFO | DW: tabla kpi_patron_semanal_cali cargada (7 filas)
+2026-11-12 20:39:04 | INFO | DW: tabla kpi_bogota_engativa_vs_resto cargada (22 filas)
+2026-11-12 20:39:05 | INFO | Evidencia grafica: evidencias/01_casos_por_comuna.png
+2026-11-12 20:39:06 | INFO | Evidencia grafica: evidencias/02_evolucion_mensual.png
+2026-11-12 20:39:07 | INFO | Evidencia grafica: evidencias/03_urgencias_cali_vs_bogota.png
+2026-11-12 20:39:07 | INFO | Evidencia grafica: evidencias/04_calidad_antes_despues.png
+2026-11-12 20:39:08 | INFO | Evidencia grafica: evidencias/05_cambio_mix_2024_vs_2025.png
+2026-11-12 20:39:09 | INFO | Evidencia grafica: evidencias/06_brecha_prevencion_vs_criticos.png
+2026-11-12 20:39:09 | INFO | Evidencia grafica: evidencias/07_top_barrios_criticos_cali.png
+2026-11-12 20:39:10 | INFO | Evidencia grafica: evidencias/08_bogota_sesgo_uca_vs_resto.png
+2026-11-12 20:39:10 | INFO | === FIN PIPELINE: 12 reglas OK, 2 advertencias, 0 fallas ===
+2026-11-13 13:41:03 | INFO | BRONZE Cali (Excel): 17642 filas x 5 columnas | sha256=b3dda41a1f7fc2ce
+2026-11-13 13:41:03 | INFO | SILVER Cali: duplicados por id eliminados = 0
+2026-11-13 13:41:03 | INFO | SILVER Cali: comunas recuperadas desde barrio = 18
+2026-11-13 13:41:03 | INFO | SILVER Cali: 17642 filas | zonas distintas 83 -> 42
+2026-11-13 13:41:03 | INFO | SILVER Bogota: 20 localidades | atenciones totales = 947
+2026-11-13 13:41:03 | INFO | GOLD final: 404 filas (Cali 17642 casos | Bogota 947 atenciones)
+2026-11-13 13:41:03 | INFO | API de población: 1 filas descartadas (no son comuna o corregimiento): ['Otros']
+2026-11-13 13:41:03 | INFO | API de población: 37 zonas con población (año 2020)
+2026-11-13 13:41:04 | INFO | Iniciando tarea extract_api_bronze (corrida: 20261113_134104)...
+2026-11-13 13:41:04 | ERROR | Fallo simulado en extract_api_bronze: API de Datos Abiertos de Cali temporalmente inaccesible (FORZAR_FALLO_API.txt activo)
+2026-11-13 14:33:58 | INFO | BRONZE Cali (Excel): 17642 filas x 5 columnas | sha256=b3dda41a1f7fc2ce
+2026-11-13 14:33:59 | INFO | SILVER Cali: duplicados por id eliminados = 0
+2026-11-13 14:33:59 | INFO | SILVER Cali: comunas recuperadas desde barrio = 18
+2026-11-13 14:33:59 | INFO | SILVER Cali: 17642 filas | zonas distintas 83 -> 42
+2026-11-13 14:33:59 | INFO | SILVER Bogota: 20 localidades | atenciones totales = 947
+2026-11-13 14:33:59 | INFO | GOLD final: 404 filas (Cali 17642 casos | Bogota 947 atenciones)
+2026-11-13 14:33:59 | INFO | API de población: 1 filas descartadas (no son comuna o corregimiento): ['Otros']
+2026-11-13 14:33:59 | INFO | API de población: 37 zonas con población (año 2020)
+2026-11-13 14:34:00 | INFO | Iniciando tarea extract_api_bronze (corrida: 20261113_143400)...
+2026-11-13 14:34:00 | ERROR | Fallo simulado en extract_api_bronze: API de Datos Abiertos de Cali temporalmente inaccesible (FORZAR_FALLO_API.txt activo)
+2026-11-13 14:38:16 | INFO | === INICIO PIPELINE: ETL Bienestar Animal: Cali (CBA/Uaepa) vs Bogota (IDPYBA) v1.0 ===
+2026-11-13 14:38:18 | INFO | BRONZE Cali (Excel): 17642 filas x 5 columnas | sha256=b3dda41a1f7fc2ce
+2026-11-13 14:38:18 | INFO | BRONZE Bogota: 20 features | sha256=1ced21585f46f559
+2026-11-13 14:38:18 | INFO | SILVER Cali: duplicados por id eliminados = 0
+2026-11-13 14:38:18 | INFO | SILVER Cali: comunas recuperadas desde barrio = 18
+2026-11-13 14:38:18 | INFO | SILVER Cali: 17642 filas | zonas distintas 83 -> 42
+2026-11-13 14:38:18 | INFO | SILVER Bogota: 20 localidades | atenciones totales = 947
+2026-11-13 14:38:18 | INFO | Archivo guardado: data/silver/silver_cali.csv (17642 filas)
+2026-11-13 14:38:18 | INFO | Archivo guardado: data/silver/silver_bogota.csv (20 filas)
+2026-11-13 14:38:19 | INFO | GOLD final: 404 filas (Cali 17642 casos | Bogota 947 atenciones)
+2026-11-13 14:38:19 | INFO | CALIDAD [OK] Cali: no se pierden registros bronze->silver 17642 -> 17642
+2026-11-13 14:38:19 | INFO | CALIDAD [OK] Cali: id unico 
+2026-11-13 14:38:19 | INFO | CALIDAD [OK] Cali: clase sin valores fuera del catalogo 
+2026-11-13 14:38:19 | INFO | CALIDAD [OK] Cali: fechas validas dentro del rango 
+2026-11-13 14:38:19 | INFO | CALIDAD [OK] Cali: fechas invalidas < 1% 0.068%
+2026-11-13 14:38:19 | INFO | CALIDAD [OK] Bogota: 20 localidades 20 localidades
+2026-11-13 14:38:19 | INFO | CALIDAD [OK] Bogota: sin nulos en atenciones 
+2026-11-13 14:38:19 | INFO | CALIDAD [OK] Bogota: especie suma atenciones 
+2026-11-13 14:38:19 | INFO | CALIDAD [OK] Bogota: sexo suma atenciones 
+2026-11-13 14:38:19 | WARNING | CALIDAD [ADVERTENCIA] Bogota: diagnosticos suman atenciones diferencias en Kennedy (-2), Fontibón (+2), Rafael Uribe Uribe (-1), Ciudad Bolívar (+1)
+2026-11-13 14:38:19 | WARNING | CALIDAD [ADVERTENCIA] Bogota: procedencia suman atenciones diferencias en Rafael Uribe Uribe (-1), Ciudad Bolívar (+1)
+2026-11-13 14:38:19 | INFO | CALIDAD [OK] Gold: sin duplicados en llave (ciudad, zona, categoria, periodo) duplicados=0
+2026-11-13 14:38:19 | INFO | CALIDAD [OK] Gold: casos Cali cuadran con Silver 17642 == 17642
+2026-11-13 14:38:19 | INFO | CALIDAD [OK] Gold: atenciones Bogotá cuadran con Silver 947 == 947
+2026-11-13 14:38:21 | WARNING | API de población sin conexión (403 Client Error: Forbidden for url: https://datos.cali.gov.co/api/3/action/datastore_search?resource_id=63f3e50e-0452-49cf-993d-08dfc2842cb4&limit=500). Se usa snapshot local de bronze: poblacion_comunas_api.json
+2026-11-13 14:38:21 | INFO | API de población: 1 filas descartadas (no son comuna o corregimiento): ['Otros']
+2026-11-13 14:38:21 | INFO | API de población: 37 zonas con población (año 2020)
+2026-11-13 14:38:22 | INFO | Archivo guardado: data/gold/gold_final.csv (404 filas)
+2026-11-13 14:38:22 | INFO | Archivo guardado: data/gold/kpis/kpi_calidad_datos.csv (14 filas)
+2026-11-13 14:38:22 | INFO | Archivo guardado: data/gold/kpis/kpi_casos_por_zona.csv (42 filas)
+2026-11-13 14:38:22 | INFO | Archivo guardado: data/gold/kpis/kpi_evolucion_mensual.csv (24 filas)
+2026-11-13 14:38:22 | INFO | Archivo guardado: data/gold/kpis/kpi_priorizacion_territorial.csv (37 filas)
+2026-11-13 14:38:22 | INFO | Archivo guardado: data/gold/kpis/kpi_comparativo_ciudades.csv (8 filas)
+2026-11-13 14:38:22 | INFO | Archivo guardado: data/gold/kpis/kpi_urgencias_por_zona.csv (56 filas)
+2026-11-13 14:38:22 | INFO | Archivo guardado: data/gold/kpis/kpi_bogota_detalle.csv (28 filas)
+2026-11-13 14:38:22 | INFO | Archivo guardado: data/gold/kpis/kpi_cambio_anual_servicios.csv (8 filas)
+2026-11-13 14:38:22 | INFO | Archivo guardado: data/gold/kpis/kpi_brecha_prevencion_zona.csv (37 filas)
+2026-11-13 14:38:22 | INFO | Archivo guardado: data/gold/kpis/kpi_top_barrios_cali.csv (25 filas)
+2026-11-13 14:38:22 | INFO | Archivo guardado: data/gold/kpis/kpi_calidad_por_clase.csv (8 filas)
+2026-11-13 14:38:22 | INFO | Archivo guardado: data/gold/kpis/kpi_patron_semanal_cali.csv (7 filas)
+2026-11-13 14:38:22 | INFO | Archivo guardado: data/gold/kpis/kpi_bogota_engativa_vs_resto.csv (22 filas)
+2026-11-13 14:38:22 | INFO | Archivo guardado: evidencias/validaciones_calidad.csv (14 filas)
+2026-11-13 14:38:22 | INFO | DW: tabla silver_cali cargada (17642 filas)
+2026-11-13 14:38:22 | INFO | DW: tabla silver_bogota cargada (20 filas)
+2026-11-13 14:38:22 | INFO | DW: tabla gold_final cargada (404 filas)
+2026-11-13 14:38:22 | INFO | DW: tabla dim_categoria cargada (9 filas)
+2026-11-13 14:38:22 | INFO | DW: tabla validaciones_calidad cargada (14 filas)
+2026-11-13 14:38:22 | INFO | DW: tabla kpi_calidad_datos cargada (14 filas)
+2026-11-13 14:38:22 | INFO | DW: tabla kpi_casos_por_zona cargada (42 filas)
+2026-11-13 14:38:22 | INFO | DW: tabla kpi_evolucion_mensual cargada (24 filas)
+2026-11-13 14:38:22 | INFO | DW: tabla kpi_priorizacion_territorial cargada (37 filas)
+2026-11-13 14:38:22 | INFO | DW: tabla kpi_comparativo_ciudades cargada (8 filas)
+2026-11-13 14:38:22 | INFO | DW: tabla kpi_urgencias_por_zona cargada (56 filas)
+2026-11-13 14:38:22 | INFO | DW: tabla kpi_bogota_detalle cargada (28 filas)
+2026-11-13 14:38:22 | INFO | DW: tabla kpi_cambio_anual_servicios cargada (8 filas)
+2026-11-13 14:38:22 | INFO | DW: tabla kpi_brecha_prevencion_zona cargada (37 filas)
+2026-11-13 14:38:22 | INFO | DW: tabla kpi_top_barrios_cali cargada (25 filas)
+2026-11-13 14:38:22 | INFO | DW: tabla kpi_calidad_por_clase cargada (8 filas)
+2026-11-13 14:38:22 | INFO | DW: tabla kpi_patron_semanal_cali cargada (7 filas)
+2026-11-13 14:38:22 | INFO | DW: tabla kpi_bogota_engativa_vs_resto cargada (22 filas)
+2026-11-13 14:38:22 | INFO | Evidencia grafica: evidencias/01_casos_por_comuna.png
+2026-11-13 14:38:22 | INFO | Evidencia grafica: evidencias/02_evolucion_mensual.png
+2026-11-13 14:38:23 | INFO | Evidencia grafica: evidencias/03_urgencias_cali_vs_bogota.png
+2026-11-13 14:38:23 | INFO | Evidencia grafica: evidencias/04_calidad_antes_despues.png
+2026-11-13 14:38:23 | INFO | Evidencia grafica: evidencias/05_cambio_mix_2024_vs_2025.png
+2026-11-13 14:38:23 | INFO | Evidencia grafica: evidencias/06_brecha_prevencion_vs_criticos.png
+2026-11-13 14:38:24 | INFO | Evidencia grafica: evidencias/07_top_barrios_criticos_cali.png
+2026-11-13 14:38:24 | INFO | Evidencia grafica: evidencias/08_bogota_sesgo_uca_vs_resto.png
+2026-11-13 14:38:24 | INFO | === FIN PIPELINE: 12 reglas OK, 2 advertencias, 0 fallas ===
+2026-11-13 14:39:06 | INFO | BRONZE Cali (Excel): 17642 filas x 5 columnas | sha256=b3dda41a1f7fc2ce
+2026-11-13 14:39:06 | INFO | SILVER Cali: duplicados por id eliminados = 0
+2026-11-13 14:39:06 | INFO | SILVER Cali: comunas recuperadas desde barrio = 18
+2026-11-13 14:39:07 | INFO | SILVER Cali: 17642 filas | zonas distintas 83 -> 42
+2026-11-13 14:39:07 | INFO | SILVER Bogota: 20 localidades | atenciones totales = 947
+2026-11-13 14:39:07 | INFO | GOLD final: 404 filas (Cali 17642 casos | Bogota 947 atenciones)
+2026-11-13 14:39:07 | INFO | API de población: 1 filas descartadas (no son comuna o corregimiento): ['Otros']
+2026-11-13 14:39:07 | INFO | API de población: 37 zonas con población (año 2020)
+2026-11-13 14:39:07 | INFO | Iniciando tarea extract_api_bronze (corrida: 20261113_143907)...
+2026-11-13 14:39:07 | ERROR | Fallo simulado en extract_api_bronze: API de Datos Abiertos de Cali temporalmente inaccesible (FORZAR_FALLO_API.txt activo)
+2026-11-13 14:53:33 | INFO | Iniciando tarea extract_excel_bronze (corrida: 20261113_145333)...
+2026-11-13 14:53:33 | INFO | Iniciando tarea extract_api_bronze (corrida: 20261113_145333)...
+2026-11-13 14:53:35 | WARNING | API de población sin conexión (403 Client Error: Forbidden for url: https://datos.cali.gov.co/api/3/action/datastore_search?resource_id=63f3e50e-0452-49cf-993d-08dfc2842cb4&limit=500). Se usa snapshot local de bronze: poblacion_comunas_api.json
+2026-11-13 14:53:35 | INFO | BRONZE Bogota: 20 features | sha256=1ced21585f46f559
+2026-11-13 14:53:35 | INFO | extract_api_bronze completado: API población=41 registros, Bogotá GeoJSON=20 localidades, copia en data/bronze/runs/20261113_145333
+2026-11-13 14:53:35 | INFO | BRONZE Cali (Excel): 17642 filas x 5 columnas | sha256=b3dda41a1f7fc2ce
+2026-11-13 14:53:36 | INFO | extract_excel_bronze completado: 17642 filas x 5 columnas, sha256=b3dda41a1f7f, copia en data/bronze/runs/20261113_145333/Dataset_cali.xlsx
+2026-11-13 14:53:37 | INFO | Iniciando tarea transform_silver...
+2026-11-13 14:53:40 | INFO | BRONZE Cali (Excel): 17642 filas x 5 columnas | sha256=b3dda41a1f7fc2ce
+2026-11-13 14:53:40 | INFO | BRONZE Bogota: 20 features | sha256=1ced21585f46f559
+2026-11-13 14:53:40 | INFO | SILVER Cali: duplicados por id eliminados = 0
+2026-11-13 14:53:42 | INFO | SILVER Cali: comunas recuperadas desde barrio = 18
+2026-11-13 14:53:42 | INFO | SILVER Cali: 17642 filas | zonas distintas 83 -> 42
+2026-11-13 14:53:42 | INFO | SILVER Bogota: 20 localidades | atenciones totales = 947
+2026-11-13 14:53:42 | INFO | Archivo guardado: data/silver/silver_cali.csv (17642 filas)
+2026-11-13 14:53:42 | INFO | Archivo guardado: data/silver/silver_bogota.csv (20 filas)
+2026-11-13 14:53:42 | INFO | Archivo guardado: evidencias/trazabilidad_fuentes.csv (3 filas)
+2026-11-13 14:53:43 | INFO | Archivo guardado: data/gold/kpis/kpi_calidad_datos.csv (14 filas)
+2026-11-13 14:53:43 | INFO | transform_silver completado: Cali=17642 filas (data/silver/silver_cali.csv), Bogotá=20 localidades (data/silver/silver_bogota.csv)
+2026-11-13 14:53:44 | INFO | Iniciando tarea build_gold...
+2026-11-13 14:53:46 | INFO | BRONZE Cali (Excel): 17642 filas x 5 columnas | sha256=b3dda41a1f7fc2ce
+2026-11-13 14:53:46 | INFO | GOLD final: 404 filas (Cali 17642 casos | Bogota 947 atenciones)
+2026-11-13 14:53:46 | INFO | API de población: 1 filas descartadas (no son comuna o corregimiento): ['Otros']
+2026-11-13 14:53:46 | INFO | API de población: 37 zonas con población (año 2020)
+2026-11-13 14:53:48 | INFO | Archivo guardado: data/gold/gold_final.csv (404 filas)
+2026-11-13 14:53:48 | INFO | Archivo guardado: data/gold/kpis/kpi_calidad_datos.csv (14 filas)
+2026-11-13 14:53:48 | INFO | Archivo guardado: data/gold/kpis/kpi_casos_por_zona.csv (42 filas)
+2026-11-13 14:53:48 | INFO | Archivo guardado: data/gold/kpis/kpi_evolucion_mensual.csv (24 filas)
+2026-11-13 14:53:48 | INFO | Archivo guardado: data/gold/kpis/kpi_priorizacion_territorial.csv (37 filas)
+2026-11-13 14:53:48 | INFO | Archivo guardado: data/gold/kpis/kpi_comparativo_ciudades.csv (8 filas)
+2026-11-13 14:53:48 | INFO | Archivo guardado: data/gold/kpis/kpi_urgencias_por_zona.csv (56 filas)
+2026-11-13 14:53:48 | INFO | Archivo guardado: data/gold/kpis/kpi_bogota_detalle.csv (28 filas)
+2026-11-13 14:53:48 | INFO | Archivo guardado: data/gold/kpis/kpi_cambio_anual_servicios.csv (8 filas)
+2026-11-13 14:53:48 | INFO | Archivo guardado: data/gold/kpis/kpi_brecha_prevencion_zona.csv (37 filas)
+2026-11-13 14:53:48 | INFO | Archivo guardado: data/gold/kpis/kpi_top_barrios_cali.csv (25 filas)
+2026-11-13 14:53:48 | INFO | Archivo guardado: data/gold/kpis/kpi_calidad_por_clase.csv (8 filas)
+2026-11-13 14:53:48 | INFO | Archivo guardado: data/gold/kpis/kpi_patron_semanal_cali.csv (7 filas)
+2026-11-13 14:53:49 | INFO | Archivo guardado: data/gold/kpis/kpi_bogota_engativa_vs_resto.csv (22 filas)
+2026-11-13 14:53:49 | INFO | build_gold completado: gold_final=404 filas (data/gold/gold_final.csv), 13 tablas KPI generadas
+2026-11-13 14:53:51 | INFO | Iniciando tarea validate_gold...
+2026-11-13 14:53:53 | INFO | BRONZE Cali (Excel): 17642 filas x 5 columnas | sha256=b3dda41a1f7fc2ce
+2026-11-13 14:53:53 | INFO | CALIDAD [OK] Cali: no se pierden registros bronze->silver 17642 -> 17642
+2026-11-13 14:53:53 | INFO | CALIDAD [OK] Cali: id unico 
+2026-11-13 14:53:53 | INFO | CALIDAD [OK] Cali: clase sin valores fuera del catalogo 
+2026-11-13 14:53:53 | INFO | CALIDAD [OK] Cali: fechas validas dentro del rango 
+2026-11-13 14:53:53 | INFO | CALIDAD [OK] Cali: fechas invalidas < 1% 0.068%
+2026-11-13 14:53:53 | INFO | CALIDAD [OK] Bogota: 20 localidades 20 localidades
+2026-11-13 14:53:53 | INFO | CALIDAD [OK] Bogota: sin nulos en atenciones 
+2026-11-13 14:53:53 | INFO | CALIDAD [OK] Bogota: especie suma atenciones 
+2026-11-13 14:53:53 | INFO | CALIDAD [OK] Bogota: sexo suma atenciones 
+2026-11-13 14:53:53 | WARNING | CALIDAD [ADVERTENCIA] Bogota: diagnosticos suman atenciones diferencias en Kennedy (-2), Fontibón (+2), Rafael Uribe Uribe (-1), Ciudad Bolívar (+1)
+2026-11-13 14:53:53 | WARNING | CALIDAD [ADVERTENCIA] Bogota: procedencia suman atenciones diferencias en Rafael Uribe Uribe (-1), Ciudad Bolívar (+1)
+2026-11-13 14:53:53 | INFO | CALIDAD [OK] Gold: sin duplicados en llave (ciudad, zona, categoria, periodo) duplicados=0
+2026-11-13 14:53:53 | INFO | CALIDAD [OK] Gold: casos Cali cuadran con Silver 17642 == 17642
+2026-11-13 14:53:53 | INFO | CALIDAD [OK] Gold: atenciones Bogotá cuadran con Silver 947 == 947
+2026-11-13 14:53:53 | INFO | Archivo guardado: evidencias/validaciones_calidad.csv (14 filas)
+2026-11-13 14:53:56 | INFO | DW: tabla silver_cali cargada (17642 filas)
+2026-11-13 14:53:56 | INFO | DW: tabla silver_bogota cargada (20 filas)
+2026-11-13 14:53:57 | INFO | DW: tabla gold_final cargada (404 filas)
+2026-11-13 14:53:57 | INFO | DW: tabla dim_categoria cargada (9 filas)
+2026-11-13 14:53:57 | INFO | DW: tabla validaciones_calidad cargada (14 filas)
+2026-11-13 14:53:57 | INFO | DW: tabla kpi_calidad_datos cargada (14 filas)
+2026-11-13 14:53:57 | INFO | DW: tabla kpi_casos_por_zona cargada (42 filas)
+2026-11-13 14:53:57 | INFO | DW: tabla kpi_evolucion_mensual cargada (24 filas)
+2026-11-13 14:53:57 | INFO | DW: tabla kpi_priorizacion_territorial cargada (37 filas)
+2026-11-13 14:53:58 | INFO | DW: tabla kpi_comparativo_ciudades cargada (8 filas)
+2026-11-13 14:53:58 | INFO | DW: tabla kpi_urgencias_por_zona cargada (56 filas)
+2026-11-13 14:53:58 | INFO | DW: tabla kpi_bogota_detalle cargada (28 filas)
+2026-11-13 14:53:58 | INFO | DW: tabla kpi_cambio_anual_servicios cargada (8 filas)
+2026-11-13 14:53:58 | INFO | DW: tabla kpi_brecha_prevencion_zona cargada (37 filas)
+2026-11-13 14:53:58 | INFO | DW: tabla kpi_top_barrios_cali cargada (25 filas)
+2026-11-13 14:53:58 | INFO | DW: tabla kpi_calidad_por_clase cargada (8 filas)
+2026-11-13 14:53:58 | INFO | DW: tabla kpi_patron_semanal_cali cargada (7 filas)
+2026-11-13 14:53:58 | INFO | DW: tabla kpi_bogota_engativa_vs_resto cargada (22 filas)
+2026-11-13 14:53:59 | INFO | Evidencia grafica: evidencias/01_casos_por_comuna.png
+2026-11-13 14:53:59 | INFO | Evidencia grafica: evidencias/02_evolucion_mensual.png
+2026-11-13 14:53:59 | INFO | Evidencia grafica: evidencias/03_urgencias_cali_vs_bogota.png
+2026-11-13 14:54:00 | INFO | Evidencia grafica: evidencias/04_calidad_antes_despues.png
+2026-11-13 14:54:00 | INFO | Evidencia grafica: evidencias/05_cambio_mix_2024_vs_2025.png
+2026-11-13 14:54:00 | INFO | Evidencia grafica: evidencias/06_brecha_prevencion_vs_criticos.png
+2026-11-13 14:54:00 | INFO | Evidencia grafica: evidencias/07_top_barrios_criticos_cali.png
+2026-11-13 14:54:01 | INFO | Evidencia grafica: evidencias/08_bogota_sesgo_uca_vs_resto.png
+2026-11-13 14:54:01 | INFO | validate_gold completado exitosamente: {'etapa': 'validate_gold', 'fecha_ejecucion': '2026-11-13 14:53:51', 'validaciones_path': 'evidencias/validaciones_calidad.csv', 'warehouse_path': 'data/gold/warehouse.db', 'filas_validadas_gold': 404, 'duplicados_llave': 0, 'controles_ok': 12, 'controles_advertencia': 2, 'controles_error': 0, 'tablas_cargadas_sqlite': 18, 'filas_insertadas_sqlite_gold': 404, 'graficas_generadas': 8}
+2026-11-13 14:55:21 | INFO | Iniciando tarea extract_excel_bronze (corrida: 20261113_145521)...
+2026-11-13 14:55:21 | INFO | Iniciando tarea extract_api_bronze (corrida: 20261113_145521)...
+2026-11-13 14:55:22 | WARNING | API de población sin conexión (403 Client Error: Forbidden for url: https://datos.cali.gov.co/api/3/action/datastore_search?resource_id=63f3e50e-0452-49cf-993d-08dfc2842cb4&limit=500). Se usa snapshot local de bronze: poblacion_comunas_api.json
+2026-11-13 14:55:22 | INFO | BRONZE Bogota: 20 features | sha256=1ced21585f46f559
+2026-11-13 14:55:22 | INFO | extract_api_bronze completado: API población=41 registros, Bogotá GeoJSON=20 localidades, copia en data/bronze/runs/20261113_145521
+2026-11-13 14:55:23 | INFO | BRONZE Cali (Excel): 17642 filas x 5 columnas | sha256=b3dda41a1f7fc2ce
+2026-11-13 14:55:23 | INFO | extract_excel_bronze completado: 17642 filas x 5 columnas, sha256=b3dda41a1f7f, copia en data/bronze/runs/20261113_145521/Dataset_cali.xlsx
+2026-11-13 14:55:25 | INFO | Iniciando tarea transform_silver...
+2026-11-13 14:55:27 | INFO | BRONZE Cali (Excel): 17642 filas x 5 columnas | sha256=b3dda41a1f7fc2ce
+2026-11-13 14:55:28 | INFO | BRONZE Bogota: 20 features | sha256=1ced21585f46f559
+2026-11-13 14:55:28 | INFO | SILVER Cali: duplicados por id eliminados = 0
+2026-11-13 14:55:28 | INFO | SILVER Cali: comunas recuperadas desde barrio = 18
+2026-11-13 14:55:28 | INFO | SILVER Cali: 17642 filas | zonas distintas 83 -> 42
+2026-11-13 14:55:28 | INFO | SILVER Bogota: 20 localidades | atenciones totales = 947
+2026-11-13 14:55:29 | INFO | Archivo guardado: data/silver/silver_cali.csv (17642 filas)
+2026-11-13 14:55:29 | INFO | Archivo guardado: data/silver/silver_bogota.csv (20 filas)
+2026-11-13 14:55:29 | INFO | Archivo guardado: evidencias/trazabilidad_fuentes.csv (3 filas)
+2026-11-13 14:55:29 | INFO | Archivo guardado: data/gold/kpis/kpi_calidad_datos.csv (14 filas)
+2026-11-13 14:55:29 | INFO | transform_silver completado: Cali=17642 filas (data/silver/silver_cali.csv), Bogotá=20 localidades (data/silver/silver_bogota.csv)
+2026-11-13 14:55:31 | INFO | Iniciando tarea build_gold...
+2026-11-13 14:55:33 | INFO | BRONZE Cali (Excel): 17642 filas x 5 columnas | sha256=b3dda41a1f7fc2ce
+2026-11-13 14:55:33 | INFO | GOLD final: 404 filas (Cali 17642 casos | Bogota 947 atenciones)
+2026-11-13 14:55:33 | INFO | API de población: 1 filas descartadas (no son comuna o corregimiento): ['Otros']
+2026-11-13 14:55:33 | INFO | API de población: 37 zonas con población (año 2020)
+2026-11-13 14:55:35 | INFO | Archivo guardado: data/gold/gold_final.csv (404 filas)
+2026-11-13 14:55:35 | INFO | Archivo guardado: data/gold/kpis/kpi_calidad_datos.csv (14 filas)
+2026-11-13 14:55:35 | INFO | Archivo guardado: data/gold/kpis/kpi_casos_por_zona.csv (42 filas)
+2026-11-13 14:55:35 | INFO | Archivo guardado: data/gold/kpis/kpi_evolucion_mensual.csv (24 filas)
+2026-11-13 14:55:35 | INFO | Archivo guardado: data/gold/kpis/kpi_priorizacion_territorial.csv (37 filas)
+2026-11-13 14:55:35 | INFO | Archivo guardado: data/gold/kpis/kpi_comparativo_ciudades.csv (8 filas)
+2026-11-13 14:55:35 | INFO | Archivo guardado: data/gold/kpis/kpi_urgencias_por_zona.csv (56 filas)
+2026-11-13 14:55:35 | INFO | Archivo guardado: data/gold/kpis/kpi_bogota_detalle.csv (28 filas)
+2026-11-13 14:55:35 | INFO | Archivo guardado: data/gold/kpis/kpi_cambio_anual_servicios.csv (8 filas)
+2026-11-13 14:55:35 | INFO | Archivo guardado: data/gold/kpis/kpi_brecha_prevencion_zona.csv (37 filas)
+2026-11-13 14:55:35 | INFO | Archivo guardado: data/gold/kpis/kpi_top_barrios_cali.csv (25 filas)
+2026-11-13 14:55:35 | INFO | Archivo guardado: data/gold/kpis/kpi_calidad_por_clase.csv (8 filas)
+2026-11-13 14:55:35 | INFO | Archivo guardado: data/gold/kpis/kpi_patron_semanal_cali.csv (7 filas)
+2026-11-13 14:55:35 | INFO | Archivo guardado: data/gold/kpis/kpi_bogota_engativa_vs_resto.csv (22 filas)
+2026-11-13 14:55:35 | INFO | build_gold completado: gold_final=404 filas (data/gold/gold_final.csv), 13 tablas KPI generadas
+2026-11-13 14:55:37 | INFO | Iniciando tarea validate_gold...
+2026-11-13 14:55:39 | INFO | BRONZE Cali (Excel): 17642 filas x 5 columnas | sha256=b3dda41a1f7fc2ce
+2026-11-13 14:55:39 | INFO | CALIDAD [OK] Cali: no se pierden registros bronze->silver 17642 -> 17642
+2026-11-13 14:55:39 | INFO | CALIDAD [OK] Cali: id unico 
+2026-11-13 14:55:39 | INFO | CALIDAD [OK] Cali: clase sin valores fuera del catalogo 
+2026-11-13 14:55:39 | INFO | CALIDAD [OK] Cali: fechas validas dentro del rango 
+2026-11-13 14:55:39 | INFO | CALIDAD [OK] Cali: fechas invalidas < 1% 0.068%
+2026-11-13 14:55:39 | INFO | CALIDAD [OK] Bogota: 20 localidades 20 localidades
+2026-11-13 14:55:39 | INFO | CALIDAD [OK] Bogota: sin nulos en atenciones 
+2026-11-13 14:55:39 | INFO | CALIDAD [OK] Bogota: especie suma atenciones 
+2026-11-13 14:55:39 | INFO | CALIDAD [OK] Bogota: sexo suma atenciones 
+2026-11-13 14:55:39 | WARNING | CALIDAD [ADVERTENCIA] Bogota: diagnosticos suman atenciones diferencias en Kennedy (-2), Fontibón (+2), Rafael Uribe Uribe (-1), Ciudad Bolívar (+1)
+2026-11-13 14:55:39 | WARNING | CALIDAD [ADVERTENCIA] Bogota: procedencia suman atenciones diferencias en Rafael Uribe Uribe (-1), Ciudad Bolívar (+1)
+2026-11-13 14:55:39 | INFO | CALIDAD [OK] Gold: sin duplicados en llave (ciudad, zona, categoria, periodo) duplicados=0
+2026-11-13 14:55:39 | INFO | CALIDAD [OK] Gold: casos Cali cuadran con Silver 17642 == 17642
+2026-11-13 14:55:39 | INFO | CALIDAD [OK] Gold: atenciones Bogotá cuadran con Silver 947 == 947
+2026-11-13 14:55:39 | INFO | Archivo guardado: evidencias/validaciones_calidad.csv (14 filas)
+2026-11-13 14:55:42 | INFO | DW: tabla silver_cali cargada (17642 filas)
+2026-11-13 14:55:42 | INFO | DW: tabla silver_bogota cargada (20 filas)
+2026-11-13 14:55:42 | INFO | DW: tabla gold_final cargada (404 filas)
+2026-11-13 14:55:42 | INFO | DW: tabla dim_categoria cargada (9 filas)
+2026-11-13 14:55:42 | INFO | DW: tabla validaciones_calidad cargada (14 filas)
+2026-11-13 14:55:42 | INFO | DW: tabla kpi_calidad_datos cargada (14 filas)
+2026-11-13 14:55:42 | INFO | DW: tabla kpi_casos_por_zona cargada (42 filas)
+2026-11-13 14:55:43 | INFO | DW: tabla kpi_evolucion_mensual cargada (24 filas)
+2026-11-13 14:55:43 | INFO | DW: tabla kpi_priorizacion_territorial cargada (37 filas)
+2026-11-13 14:55:43 | INFO | DW: tabla kpi_comparativo_ciudades cargada (8 filas)
+2026-11-13 14:55:43 | INFO | DW: tabla kpi_urgencias_por_zona cargada (56 filas)
+2026-11-13 14:55:43 | INFO | DW: tabla kpi_bogota_detalle cargada (28 filas)
+2026-11-13 14:55:43 | INFO | DW: tabla kpi_cambio_anual_servicios cargada (8 filas)
+2026-11-13 14:55:43 | INFO | DW: tabla kpi_brecha_prevencion_zona cargada (37 filas)
+2026-11-13 14:55:43 | INFO | DW: tabla kpi_top_barrios_cali cargada (25 filas)
+2026-11-13 14:55:44 | INFO | DW: tabla kpi_calidad_por_clase cargada (8 filas)
+2026-11-13 14:55:44 | INFO | DW: tabla kpi_patron_semanal_cali cargada (7 filas)
+2026-11-13 14:55:44 | INFO | DW: tabla kpi_bogota_engativa_vs_resto cargada (22 filas)
+2026-11-13 14:55:44 | INFO | Evidencia grafica: evidencias/01_casos_por_comuna.png
+2026-11-13 14:55:44 | INFO | Evidencia grafica: evidencias/02_evolucion_mensual.png
+2026-11-13 14:55:45 | INFO | Evidencia grafica: evidencias/03_urgencias_cali_vs_bogota.png
+2026-11-13 14:55:45 | INFO | Evidencia grafica: evidencias/04_calidad_antes_despues.png
+2026-11-13 14:55:45 | INFO | Evidencia grafica: evidencias/05_cambio_mix_2024_vs_2025.png
+2026-11-13 14:55:46 | INFO | Evidencia grafica: evidencias/06_brecha_prevencion_vs_criticos.png
+2026-11-13 14:55:46 | INFO | Evidencia grafica: evidencias/07_top_barrios_criticos_cali.png
+2026-11-13 14:55:46 | INFO | Evidencia grafica: evidencias/08_bogota_sesgo_uca_vs_resto.png
+2026-11-13 14:55:46 | INFO | validate_gold completado exitosamente: {'etapa': 'validate_gold', 'fecha_ejecucion': '2026-11-13 14:55:37', 'validaciones_path': 'evidencias/validaciones_calidad.csv', 'warehouse_path': 'data/gold/warehouse.db', 'filas_validadas_gold': 404, 'duplicados_llave': 0, 'controles_ok': 12, 'controles_advertencia': 2, 'controles_error': 0, 'tablas_cargadas_sqlite': 18, 'filas_insertadas_sqlite_gold': 404, 'graficas_generadas': 8}
+2026-11-13 15:00:04 | INFO | Iniciando tarea extract_excel_bronze (corrida: 20261113_150004)...
+2026-11-13 15:00:04 | INFO | Iniciando tarea extract_api_bronze (corrida: 20261113_150004)...
+2026-11-13 15:00:05 | WARNING | API de población sin conexión (403 Client Error: Forbidden for url: https://datos.cali.gov.co/api/3/action/datastore_search?resource_id=63f3e50e-0452-49cf-993d-08dfc2842cb4&limit=500). Se usa snapshot local de bronze: poblacion_comunas_api.json
+2026-11-13 15:00:07 | INFO | BRONZE Bogota: 20 features | sha256=1ced21585f46f559
+2026-11-13 15:00:08 | INFO | extract_api_bronze completado: API población=41 registros, Bogotá GeoJSON=20 localidades, copia en data/bronze/runs/20261113_150004
+2026-11-13 15:00:14 | INFO | BRONZE Cali (Excel): 17642 filas x 5 columnas | sha256=b3dda41a1f7fc2ce
+2026-11-13 15:00:14 | INFO | extract_excel_bronze completado: 17642 filas x 5 columnas, sha256=b3dda41a1f7f, copia en data/bronze/runs/20261113_150004/Dataset_cali.xlsx
+2026-11-13 15:00:19 | INFO | Iniciando tarea transform_silver...
+2026-11-13 15:00:27 | INFO | BRONZE Cali (Excel): 17642 filas x 5 columnas | sha256=b3dda41a1f7fc2ce
+2026-11-13 15:00:27 | INFO | BRONZE Bogota: 20 features | sha256=1ced21585f46f559
+2026-11-13 15:00:27 | INFO | SILVER Cali: duplicados por id eliminados = 0
+2026-11-13 15:00:29 | INFO | SILVER Cali: comunas recuperadas desde barrio = 18
+2026-11-13 15:00:29 | INFO | SILVER Cali: 17642 filas | zonas distintas 83 -> 42
+2026-11-13 15:00:29 | INFO | SILVER Bogota: 20 localidades | atenciones totales = 947
+2026-11-13 15:00:30 | INFO | Archivo guardado: data/silver/silver_cali.csv (17642 filas)
+2026-11-13 15:00:30 | INFO | Archivo guardado: data/silver/silver_bogota.csv (20 filas)
+2026-11-13 15:00:30 | INFO | Archivo guardado: evidencias/trazabilidad_fuentes.csv (3 filas)
+2026-11-13 15:00:30 | INFO | Archivo guardado: data/gold/kpis/kpi_calidad_datos.csv (14 filas)
+2026-11-13 15:00:30 | INFO | transform_silver completado: Cali=17642 filas (data/silver/silver_cali.csv), Bogotá=20 localidades (data/silver/silver_bogota.csv)
+2026-11-13 15:00:33 | INFO | Iniciando tarea build_gold...
+2026-11-13 15:00:42 | INFO | BRONZE Cali (Excel): 17642 filas x 5 columnas | sha256=b3dda41a1f7fc2ce
+2026-11-13 15:00:42 | INFO | GOLD final: 404 filas (Cali 17642 casos | Bogota 947 atenciones)
+2026-11-13 15:00:42 | INFO | API de población: 1 filas descartadas (no son comuna o corregimiento): ['Otros']
+2026-11-13 15:00:42 | INFO | API de población: 37 zonas con población (año 2020)
+2026-11-13 15:00:49 | INFO | Archivo guardado: data/gold/gold_final.csv (404 filas)
+2026-11-13 15:00:49 | INFO | Archivo guardado: data/gold/kpis/kpi_calidad_datos.csv (14 filas)
+2026-11-13 15:00:49 | INFO | Archivo guardado: data/gold/kpis/kpi_casos_por_zona.csv (42 filas)
+2026-11-13 15:00:49 | INFO | Archivo guardado: data/gold/kpis/kpi_evolucion_mensual.csv (24 filas)
+2026-11-13 15:00:50 | INFO | Archivo guardado: data/gold/kpis/kpi_priorizacion_territorial.csv (37 filas)
+2026-11-13 15:00:50 | INFO | Archivo guardado: data/gold/kpis/kpi_comparativo_ciudades.csv (8 filas)
+2026-11-13 15:00:50 | INFO | Archivo guardado: data/gold/kpis/kpi_urgencias_por_zona.csv (56 filas)
+2026-11-13 15:00:50 | INFO | Archivo guardado: data/gold/kpis/kpi_bogota_detalle.csv (28 filas)
+2026-11-13 15:00:50 | INFO | Archivo guardado: data/gold/kpis/kpi_cambio_anual_servicios.csv (8 filas)
+2026-11-13 15:00:50 | INFO | Archivo guardado: data/gold/kpis/kpi_brecha_prevencion_zona.csv (37 filas)
+2026-11-13 15:00:50 | INFO | Archivo guardado: data/gold/kpis/kpi_top_barrios_cali.csv (25 filas)
+2026-11-13 15:00:50 | INFO | Archivo guardado: data/gold/kpis/kpi_calidad_por_clase.csv (8 filas)
+2026-11-13 15:00:50 | INFO | Archivo guardado: data/gold/kpis/kpi_patron_semanal_cali.csv (7 filas)
+2026-11-13 15:00:50 | INFO | Archivo guardado: data/gold/kpis/kpi_bogota_engativa_vs_resto.csv (22 filas)
+2026-11-13 15:00:50 | INFO | build_gold completado: gold_final=404 filas (data/gold/gold_final.csv), 13 tablas KPI generadas
+2026-11-13 15:00:54 | INFO | Iniciando tarea validate_gold...
+2026-11-13 15:00:57 | INFO | BRONZE Cali (Excel): 17642 filas x 5 columnas | sha256=b3dda41a1f7fc2ce
+2026-11-13 15:00:57 | INFO | CALIDAD [OK] Cali: no se pierden registros bronze->silver 17642 -> 17642
+2026-11-13 15:00:57 | INFO | CALIDAD [OK] Cali: id unico 
+2026-11-13 15:00:57 | INFO | CALIDAD [OK] Cali: clase sin valores fuera del catalogo 
+2026-11-13 15:00:57 | INFO | CALIDAD [OK] Cali: fechas validas dentro del rango 
+2026-11-13 15:00:57 | INFO | CALIDAD [OK] Cali: fechas invalidas < 1% 0.068%
+2026-11-13 15:00:57 | INFO | CALIDAD [OK] Bogota: 20 localidades 20 localidades
+2026-11-13 15:00:57 | INFO | CALIDAD [OK] Bogota: sin nulos en atenciones 
+2026-11-13 15:00:57 | INFO | CALIDAD [OK] Bogota: especie suma atenciones 
+2026-11-13 15:00:57 | INFO | CALIDAD [OK] Bogota: sexo suma atenciones 
+2026-11-13 15:00:57 | WARNING | CALIDAD [ADVERTENCIA] Bogota: diagnosticos suman atenciones diferencias en Kennedy (-2), Fontibón (+2), Rafael Uribe Uribe (-1), Ciudad Bolívar (+1)
+2026-11-13 15:00:57 | WARNING | CALIDAD [ADVERTENCIA] Bogota: procedencia suman atenciones diferencias en Rafael Uribe Uribe (-1), Ciudad Bolívar (+1)
+2026-11-13 15:00:57 | INFO | CALIDAD [OK] Gold: sin duplicados en llave (ciudad, zona, categoria, periodo) duplicados=0
+2026-11-13 15:00:57 | INFO | CALIDAD [OK] Gold: casos Cali cuadran con Silver 17642 == 17642
+2026-11-13 15:00:57 | INFO | CALIDAD [OK] Gold: atenciones Bogotá cuadran con Silver 947 == 947
+2026-11-13 15:00:57 | INFO | Archivo guardado: evidencias/validaciones_calidad.csv (14 filas)
+2026-11-13 15:01:04 | INFO | DW: tabla silver_cali cargada (17642 filas)
+2026-11-13 15:01:04 | INFO | DW: tabla silver_bogota cargada (20 filas)
+2026-11-13 15:01:04 | INFO | DW: tabla gold_final cargada (404 filas)
+2026-11-13 15:01:04 | INFO | DW: tabla dim_categoria cargada (9 filas)
+2026-11-13 15:01:05 | INFO | DW: tabla validaciones_calidad cargada (14 filas)
+2026-11-13 15:01:05 | INFO | DW: tabla kpi_calidad_datos cargada (14 filas)
+2026-11-13 15:01:05 | INFO | DW: tabla kpi_casos_por_zona cargada (42 filas)
+2026-11-13 15:01:05 | INFO | DW: tabla kpi_evolucion_mensual cargada (24 filas)
+2026-11-13 15:01:06 | INFO | DW: tabla kpi_priorizacion_territorial cargada (37 filas)
+2026-11-13 15:01:06 | INFO | DW: tabla kpi_comparativo_ciudades cargada (8 filas)
+2026-11-13 15:01:07 | INFO | DW: tabla kpi_urgencias_por_zona cargada (56 filas)
+2026-11-13 15:01:07 | INFO | DW: tabla kpi_bogota_detalle cargada (28 filas)
+2026-11-13 15:01:07 | INFO | DW: tabla kpi_cambio_anual_servicios cargada (8 filas)
+2026-11-13 15:01:08 | INFO | DW: tabla kpi_brecha_prevencion_zona cargada (37 filas)
+2026-11-13 15:01:09 | INFO | DW: tabla kpi_top_barrios_cali cargada (25 filas)
+2026-11-13 15:01:09 | INFO | DW: tabla kpi_calidad_por_clase cargada (8 filas)
+2026-11-13 15:01:09 | INFO | DW: tabla kpi_patron_semanal_cali cargada (7 filas)
+2026-11-13 15:01:09 | INFO | DW: tabla kpi_bogota_engativa_vs_resto cargada (22 filas)
+2026-11-13 15:01:10 | INFO | Evidencia grafica: evidencias/01_casos_por_comuna.png
+2026-11-13 15:01:11 | INFO | Evidencia grafica: evidencias/02_evolucion_mensual.png
+2026-11-13 15:01:13 | INFO | Evidencia grafica: evidencias/03_urgencias_cali_vs_bogota.png
+2026-11-13 15:01:13 | INFO | Evidencia grafica: evidencias/04_calidad_antes_despues.png
+2026-11-13 15:01:15 | INFO | Evidencia grafica: evidencias/05_cambio_mix_2024_vs_2025.png
+2026-11-13 15:01:16 | INFO | Evidencia grafica: evidencias/06_brecha_prevencion_vs_criticos.png
+2026-11-13 15:01:18 | INFO | Evidencia grafica: evidencias/07_top_barrios_criticos_cali.png
+2026-11-13 15:01:21 | INFO | Evidencia grafica: evidencias/08_bogota_sesgo_uca_vs_resto.png
+2026-11-13 15:01:21 | INFO | validate_gold completado exitosamente: {'etapa': 'validate_gold', 'fecha_ejecucion': '2026-11-13 15:00:54', 'validaciones_path': 'evidencias/validaciones_calidad.csv', 'warehouse_path': 'data/gold/warehouse.db', 'filas_validadas_gold': 404, 'duplicados_llave': 0, 'controles_ok': 12, 'controles_advertencia': 2, 'controles_error': 0, 'tablas_cargadas_sqlite': 18, 'filas_insertadas_sqlite_gold': 404, 'graficas_generadas': 8}
+2026-11-13 16:00:04 | INFO | Iniciando tarea extract_excel_bronze (corrida: 20261113_160004)...
+2026-11-13 16:00:04 | INFO | Iniciando tarea extract_api_bronze (corrida: 20261113_160004)...
+2026-11-13 16:00:07 | WARNING | API de población sin conexión (403 Client Error: Forbidden for url: https://datos.cali.gov.co/api/3/action/datastore_search?resource_id=63f3e50e-0452-49cf-993d-08dfc2842cb4&limit=500). Se usa snapshot local de bronze: poblacion_comunas_api.json
+2026-11-13 16:00:07 | INFO | BRONZE Bogota: 20 features | sha256=1ced21585f46f559
+2026-11-13 16:00:08 | INFO | extract_api_bronze completado: API población=41 registros, Bogotá GeoJSON=20 localidades, copia en data/bronze/runs/20261113_160004
+2026-11-13 16:00:08 | INFO | BRONZE Cali (Excel): 17642 filas x 5 columnas | sha256=b3dda41a1f7fc2ce
+2026-11-13 16:00:09 | INFO | extract_excel_bronze completado: 17642 filas x 5 columnas, sha256=b3dda41a1f7f, copia en data/bronze/runs/20261113_160004/Dataset_cali.xlsx
+2026-11-13 16:00:13 | INFO | Iniciando tarea transform_silver...
+2026-11-13 16:00:17 | INFO | BRONZE Cali (Excel): 17642 filas x 5 columnas | sha256=b3dda41a1f7fc2ce
+2026-11-13 16:00:17 | INFO | BRONZE Bogota: 20 features | sha256=1ced21585f46f559
+2026-11-13 16:00:17 | INFO | SILVER Cali: duplicados por id eliminados = 0
+2026-11-13 16:00:20 | INFO | SILVER Cali: comunas recuperadas desde barrio = 18
+2026-11-13 16:00:20 | INFO | SILVER Cali: 17642 filas | zonas distintas 83 -> 42
+2026-11-13 16:00:20 | INFO | SILVER Bogota: 20 localidades | atenciones totales = 947
+2026-11-13 16:00:22 | INFO | Archivo guardado: data/silver/silver_cali.csv (17642 filas)
+2026-11-13 16:00:22 | INFO | Archivo guardado: data/silver/silver_bogota.csv (20 filas)
+2026-11-13 16:00:22 | INFO | Archivo guardado: evidencias/trazabilidad_fuentes.csv (3 filas)
+2026-11-13 16:00:23 | INFO | Archivo guardado: data/gold/kpis/kpi_calidad_datos.csv (14 filas)
+2026-11-13 16:00:23 | INFO | transform_silver completado: Cali=17642 filas (data/silver/silver_cali.csv), Bogotá=20 localidades (data/silver/silver_bogota.csv)
+2026-11-13 16:00:27 | INFO | Iniciando tarea build_gold...
+2026-11-13 16:00:35 | INFO | BRONZE Cali (Excel): 17642 filas x 5 columnas | sha256=b3dda41a1f7fc2ce
+2026-11-13 16:00:35 | INFO | GOLD final: 404 filas (Cali 17642 casos | Bogota 947 atenciones)
+2026-11-13 16:00:35 | INFO | API de población: 1 filas descartadas (no son comuna o corregimiento): ['Otros']
+2026-11-13 16:00:35 | INFO | API de población: 37 zonas con población (año 2020)
+2026-11-13 16:00:39 | INFO | Archivo guardado: data/gold/gold_final.csv (404 filas)
+2026-11-13 16:00:39 | INFO | Archivo guardado: data/gold/kpis/kpi_calidad_datos.csv (14 filas)
+2026-11-13 16:00:39 | INFO | Archivo guardado: data/gold/kpis/kpi_casos_por_zona.csv (42 filas)
+2026-11-13 16:00:39 | INFO | Archivo guardado: data/gold/kpis/kpi_evolucion_mensual.csv (24 filas)
+2026-11-13 16:00:39 | INFO | Archivo guardado: data/gold/kpis/kpi_priorizacion_territorial.csv (37 filas)
+2026-11-13 16:00:39 | INFO | Archivo guardado: data/gold/kpis/kpi_comparativo_ciudades.csv (8 filas)
+2026-11-13 16:00:40 | INFO | Archivo guardado: data/gold/kpis/kpi_urgencias_por_zona.csv (56 filas)
+2026-11-13 16:00:40 | INFO | Archivo guardado: data/gold/kpis/kpi_bogota_detalle.csv (28 filas)
+2026-11-13 16:00:40 | INFO | Archivo guardado: data/gold/kpis/kpi_cambio_anual_servicios.csv (8 filas)
+2026-11-13 16:00:40 | INFO | Archivo guardado: data/gold/kpis/kpi_brecha_prevencion_zona.csv (37 filas)
+2026-11-13 16:00:40 | INFO | Archivo guardado: data/gold/kpis/kpi_top_barrios_cali.csv (25 filas)
+2026-11-13 16:00:40 | INFO | Archivo guardado: data/gold/kpis/kpi_calidad_por_clase.csv (8 filas)
+2026-11-13 16:00:40 | INFO | Archivo guardado: data/gold/kpis/kpi_patron_semanal_cali.csv (7 filas)
+2026-11-13 16:00:40 | INFO | Archivo guardado: data/gold/kpis/kpi_bogota_engativa_vs_resto.csv (22 filas)
+2026-11-13 16:00:40 | INFO | build_gold completado: gold_final=404 filas (data/gold/gold_final.csv), 13 tablas KPI generadas
+2026-11-13 16:00:44 | INFO | Iniciando tarea validate_gold...
+2026-11-13 16:00:49 | INFO | BRONZE Cali (Excel): 17642 filas x 5 columnas | sha256=b3dda41a1f7fc2ce
+2026-11-13 16:00:49 | INFO | CALIDAD [OK] Cali: no se pierden registros bronze->silver 17642 -> 17642
+2026-11-13 16:00:49 | INFO | CALIDAD [OK] Cali: id unico 
+2026-11-13 16:00:49 | INFO | CALIDAD [OK] Cali: clase sin valores fuera del catalogo 
+2026-11-13 16:00:49 | INFO | CALIDAD [OK] Cali: fechas validas dentro del rango 
+2026-11-13 16:00:49 | INFO | CALIDAD [OK] Cali: fechas invalidas < 1% 0.068%
+2026-11-13 16:00:49 | INFO | CALIDAD [OK] Bogota: 20 localidades 20 localidades
+2026-11-13 16:00:49 | INFO | CALIDAD [OK] Bogota: sin nulos en atenciones 
+2026-11-13 16:00:49 | INFO | CALIDAD [OK] Bogota: especie suma atenciones 
+2026-11-13 16:00:49 | INFO | CALIDAD [OK] Bogota: sexo suma atenciones 
+2026-11-13 16:00:49 | WARNING | CALIDAD [ADVERTENCIA] Bogota: diagnosticos suman atenciones diferencias en Kennedy (-2), Fontibón (+2), Rafael Uribe Uribe (-1), Ciudad Bolívar (+1)
+2026-11-13 16:00:49 | WARNING | CALIDAD [ADVERTENCIA] Bogota: procedencia suman atenciones diferencias en Rafael Uribe Uribe (-1), Ciudad Bolívar (+1)
+2026-11-13 16:00:49 | INFO | CALIDAD [OK] Gold: sin duplicados en llave (ciudad, zona, categoria, periodo) duplicados=0
+2026-11-13 16:00:49 | INFO | CALIDAD [OK] Gold: casos Cali cuadran con Silver 17642 == 17642
+2026-11-13 16:00:49 | INFO | CALIDAD [OK] Gold: atenciones Bogotá cuadran con Silver 947 == 947
+2026-11-13 16:00:49 | INFO | Archivo guardado: evidencias/validaciones_calidad.csv (14 filas)
+2026-11-13 16:00:56 | INFO | DW: tabla silver_cali cargada (17642 filas)
+2026-11-13 16:00:57 | INFO | DW: tabla silver_bogota cargada (20 filas)
+2026-11-13 16:00:57 | INFO | DW: tabla gold_final cargada (404 filas)
+2026-11-13 16:00:57 | INFO | DW: tabla dim_categoria cargada (9 filas)
+2026-11-13 16:00:58 | INFO | DW: tabla validaciones_calidad cargada (14 filas)
+2026-11-13 16:00:58 | INFO | DW: tabla kpi_calidad_datos cargada (14 filas)
+2026-11-13 16:00:58 | INFO | DW: tabla kpi_casos_por_zona cargada (42 filas)
+2026-11-13 16:00:58 | INFO | DW: tabla kpi_evolucion_mensual cargada (24 filas)
+2026-11-13 16:00:59 | INFO | DW: tabla kpi_priorizacion_territorial cargada (37 filas)
+2026-11-13 16:00:59 | INFO | DW: tabla kpi_comparativo_ciudades cargada (8 filas)
+2026-11-13 16:00:59 | INFO | DW: tabla kpi_urgencias_por_zona cargada (56 filas)
+2026-11-13 16:01:00 | INFO | DW: tabla kpi_bogota_detalle cargada (28 filas)
+2026-11-13 16:01:00 | INFO | DW: tabla kpi_cambio_anual_servicios cargada (8 filas)
+2026-11-13 16:01:01 | INFO | DW: tabla kpi_brecha_prevencion_zona cargada (37 filas)
+2026-11-13 16:01:01 | INFO | DW: tabla kpi_top_barrios_cali cargada (25 filas)
+2026-11-13 16:01:01 | INFO | DW: tabla kpi_calidad_por_clase cargada (8 filas)
+2026-11-13 16:01:02 | INFO | DW: tabla kpi_patron_semanal_cali cargada (7 filas)
+2026-11-13 16:01:02 | INFO | DW: tabla kpi_bogota_engativa_vs_resto cargada (22 filas)
+2026-11-13 16:01:03 | INFO | Evidencia grafica: evidencias/01_casos_por_comuna.png
+2026-11-13 16:01:05 | INFO | Evidencia grafica: evidencias/02_evolucion_mensual.png
+2026-11-13 16:01:06 | INFO | Evidencia grafica: evidencias/03_urgencias_cali_vs_bogota.png
+2026-11-13 16:01:07 | INFO | Evidencia grafica: evidencias/04_calidad_antes_despues.png
+2026-11-13 16:01:09 | INFO | Evidencia grafica: evidencias/05_cambio_mix_2024_vs_2025.png
+2026-11-13 16:01:10 | INFO | Evidencia grafica: evidencias/06_brecha_prevencion_vs_criticos.png
+2026-11-13 16:01:11 | INFO | Evidencia grafica: evidencias/07_top_barrios_criticos_cali.png
+2026-11-13 16:01:12 | INFO | Evidencia grafica: evidencias/08_bogota_sesgo_uca_vs_resto.png
+2026-11-13 16:01:12 | INFO | validate_gold completado exitosamente: {'etapa': 'validate_gold', 'fecha_ejecucion': '2026-11-13 16:00:44', 'validaciones_path': 'evidencias/validaciones_calidad.csv', 'warehouse_path': 'data/gold/warehouse.db', 'filas_validadas_gold': 404, 'duplicados_llave': 0, 'controles_ok': 12, 'controles_advertencia': 2, 'controles_error': 0, 'tablas_cargadas_sqlite': 18, 'filas_insertadas_sqlite_gold': 404, 'graficas_generadas': 8}
+2026-11-13 19:23:48 | INFO | Iniciando tarea extract_excel_bronze (corrida: 20261113_192348)...
+2026-11-13 19:23:48 | INFO | Iniciando tarea extract_api_bronze (corrida: 20261113_192348)...
+2026-11-13 19:23:48 | WARNING | API de población sin conexión (403 Client Error: Forbidden for url: https://datos.cali.gov.co/api/3/action/datastore_search?resource_id=63f3e50e-0452-49cf-993d-08dfc2842cb4&limit=500). Se usa snapshot local de bronze: poblacion_comunas_api.json
+2026-11-13 19:23:48 | INFO | BRONZE Bogota: 20 features | sha256=1ced21585f46f559
+2026-11-13 19:23:49 | INFO | extract_api_bronze completado: API población=41 registros, Bogotá GeoJSON=20 localidades, copia en data/bronze/runs/20261113_192348
+2026-11-13 19:23:50 | INFO | BRONZE Cali (Excel): 17642 filas x 5 columnas | sha256=b3dda41a1f7fc2ce
+2026-11-13 19:23:50 | INFO | extract_excel_bronze completado: 17642 filas x 5 columnas, sha256=b3dda41a1f7f, copia en data/bronze/runs/20261113_192348/Dataset_cali.xlsx
+2026-11-13 19:23:52 | INFO | Iniciando tarea transform_silver...
+2026-11-13 22:32:52 | INFO | BRONZE Cali (Excel): 17642 filas x 5 columnas | sha256=b3dda41a1f7fc2ce
+2026-11-13 22:32:52 | INFO | BRONZE Bogota: 20 features | sha256=1ced21585f46f559
+2026-11-13 22:32:52 | INFO | SILVER Cali: duplicados por id eliminados = 0
+2026-11-13 22:32:53 | INFO | SILVER Cali: comunas recuperadas desde barrio = 18
+2026-11-13 22:32:53 | INFO | SILVER Cali: 17642 filas | zonas distintas 83 -> 42
+2026-11-13 22:32:53 | INFO | SILVER Bogota: 20 localidades | atenciones totales = 947
+2026-11-13 22:32:53 | INFO | Archivo guardado: data/silver/silver_cali.csv (17642 filas)
+2026-11-13 22:32:53 | INFO | Archivo guardado: data/silver/silver_bogota.csv (20 filas)
+2026-11-13 22:32:53 | INFO | Archivo guardado: evidencias/trazabilidad_fuentes.csv (3 filas)
+2026-11-13 22:32:53 | INFO | Archivo guardado: data/gold/kpis/kpi_calidad_datos.csv (14 filas)
+2026-11-13 22:32:53 | INFO | transform_silver completado: Cali=17642 filas (data/silver/silver_cali.csv), Bogotá=20 localidades (data/silver/silver_bogota.csv)

@@ -1,0 +1,16 @@
+pandas
+pyyaml
+matplotlib
+numpy
+pyYAML
+python-dotenv
+mysql-connector
+pytest
+requests
+openpyxl
+fastapi
+uvicorn
+streamlit
+
+
+

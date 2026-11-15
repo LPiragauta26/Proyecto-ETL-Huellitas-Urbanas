@@ -1,0 +1,38 @@
+﻿zona,tipo_zona,casos_total,casos_criticos,denuncias,urgencias,esterilizaciones,citas_medicas,pct_denuncias,pct_urgencias,pct_esterilizaciones,denuncias_por_10k_hab,urgencias_por_10k_hab,ratio_prevencion_criticos,perfil_demanda
+Comuna 18,urbana,1441,161,68,93,193,381,4.7,6.5,13.4,4.51,6.17,1.2,Balance intermedio prevención/criticidad
+Comuna 20,urbana,2310,156,50,106,321,824,2.2,4.6,13.9,7.04,14.92,2.06,Alta cobertura relativa de esterilización
+Comuna 21,urbana,961,139,73,66,122,228,7.6,6.9,12.7,6.01,5.43,0.88,Balance intermedio prevención/criticidad
+Comuna 14,urbana,1084,131,68,63,137,325,6.3,5.8,12.6,3.75,3.48,1.05,Balance intermedio prevención/criticidad
+Comuna 13,urbana,1146,129,60,69,143,326,5.2,6.0,12.5,3.31,3.81,1.11,Balance intermedio prevención/criticidad
+Comuna 6,urbana,936,127,70,57,113,241,7.5,6.1,12.1,3.53,2.88,0.89,Balance intermedio prevención/criticidad
+Comuna 17,urbana,415,119,112,7,37,64,27.0,1.7,8.9,7.18,0.45,0.31,Foco en denuncias de maltrato/tenencia (baja esterilización)
+Comuna 15,urbana,846,104,58,46,114,192,6.9,5.4,13.5,3.32,2.64,1.1,Balance intermedio prevención/criticidad
+Comuna 1,urbana,717,104,55,49,72,211,7.7,6.8,10.0,5.31,4.73,0.69,Déficit preventivo frente a casos críticos
+Comuna 2,urbana,364,89,73,16,33,65,20.1,4.4,9.1,5.86,1.28,0.37,Foco en denuncias de maltrato/tenencia (baja esterilización)
+Comuna 8,urbana,533,81,46,35,81,113,8.6,6.6,15.2,4.45,3.38,1.0,Balance intermedio prevención/criticidad
+Comuna 16,urbana,608,81,45,36,61,148,7.4,5.9,10.0,4.01,3.21,0.75,Balance intermedio prevención/criticidad
+Comuna 19,urbana,502,77,63,14,66,150,12.5,2.8,13.1,5.35,1.19,0.86,Balance intermedio prevención/criticidad
+Comuna 10,urbana,530,60,40,20,62,131,7.5,3.8,11.7,3.54,1.77,1.03,Balance intermedio prevención/criticidad
+Comuna 11,urbana,441,59,38,21,59,102,8.6,4.8,13.4,3.45,1.9,1.0,Balance intermedio prevención/criticidad
+Comuna 22,urbana,122,54,51,3,9,11,41.8,2.5,7.4,40.36,2.37,0.17,Foco en denuncias de maltrato/tenencia (baja esterilización)
+Comuna 5,urbana,338,54,37,17,49,63,10.9,5.0,14.5,3.17,1.46,0.91,Balance intermedio prevención/criticidad
+Comuna 9,urbana,328,49,30,19,28,105,9.1,5.8,8.5,6.92,4.38,0.57,Déficit preventivo frente a casos críticos
+Comuna 12,urbana,371,48,24,24,35,83,6.5,6.5,9.4,3.63,3.63,0.73,Déficit preventivo frente a casos críticos
+Comuna 4,urbana,322,44,24,20,51,76,7.5,6.2,15.8,4.63,3.86,1.16,Balance intermedio prevención/criticidad
+Comuna 7,urbana,392,43,30,13,52,96,7.7,3.3,13.3,4.36,1.89,1.21,Balance intermedio prevención/criticidad
+Comuna 3,urbana,278,34,22,12,28,58,7.9,4.3,10.1,4.68,2.55,0.82,Balance intermedio prevención/criticidad
+Montebello,rural,144,21,7,14,19,55,4.9,9.7,13.2,7.83,15.67,0.9,Balance intermedio prevención/criticidad
+Villacarmelo,rural,118,20,9,11,10,52,7.6,9.3,8.5,110.02,134.47,0.5,Déficit preventivo frente a casos críticos
+La Buitrera,rural,213,19,7,12,16,121,3.3,5.6,7.5,8.87,15.2,0.84,Balance intermedio prevención/criticidad
+Pance,rural,41,12,11,1,4,5,26.8,2.4,9.8,85.47,7.77,0.33,Foco en denuncias de maltrato/tenencia (baja esterilización)
+Las Golondrinas,rural,16,6,3,3,2,1,18.8,18.8,12.5,9.52,9.52,0.33,Foco en denuncias de maltrato/tenencia (baja esterilización)
+Los Andes,rural,19,5,2,3,1,10,10.5,15.8,5.3,4.14,6.21,0.2,Déficit preventivo frente a casos críticos
+Navarro,rural,16,3,2,1,1,6,12.5,6.2,6.2,25.71,12.85,0.33,Déficit preventivo frente a casos críticos
+Felidia,rural,31,3,0,3,1,24,0.0,9.7,3.2,0.0,25.53,0.33,Déficit preventivo frente a casos críticos
+El Hormiguero,rural,17,2,1,1,0,7,5.9,5.9,0.0,2.7,2.7,0.0,Déficit preventivo frente a casos críticos
+La Leonera,rural,7,1,1,0,1,3,14.3,0.0,14.3,23.92,0.0,1.0,Balance intermedio prevención/criticidad
+La Paz,rural,10,1,0,1,1,6,0.0,10.0,10.0,0.0,19.38,1.0,Balance intermedio prevención/criticidad
+La Castilla,rural,6,1,0,1,0,0,0.0,16.7,0.0,0.0,11.51,0.0,Déficit preventivo frente a casos críticos
+La Elvira,rural,5,1,0,1,0,2,0.0,20.0,0.0,0.0,10.58,0.0,Déficit preventivo frente a casos críticos
+Pichinde,rural,5,1,0,1,1,1,0.0,20.0,20.0,0.0,17.21,1.0,Balance intermedio prevención/criticidad
+El Saladito,rural,4,0,0,0,0,2,0.0,0.0,0.0,0.0,0.0,,Balance intermedio prevención/criticidad

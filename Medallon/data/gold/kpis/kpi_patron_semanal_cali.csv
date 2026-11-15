@@ -1,0 +1,8 @@
+﻿orden_dia,dia_semana,tipo_dia,casos_total,pct_total_semanal,citas_medicas,pqr,esterilizaciones,denuncias,urgencias,pct_esterilizaciones_en_dia
+1,Lunes,Hábil,2764,15.68,693,1440,279,212,130,10.09
+2,Martes,Hábil,3052,17.31,762,1566,337,210,152,11.04
+3,Miércoles,Hábil,2886,16.37,710,1481,338,202,139,11.71
+4,Jueves,Hábil,2803,15.9,778,1334,330,227,116,11.77
+5,Viernes,Hábil,2699,15.31,723,1337,277,187,165,10.26
+6,Sábado,Fin de semana,1856,10.53,406,943,269,136,94,14.49
+7,Domingo,Fin de semana,1570,8.91,375,830,141,137,82,8.98

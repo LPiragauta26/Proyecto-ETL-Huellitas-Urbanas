@@ -1,0 +1,9 @@
+﻿categoria_comparable,casos_cali_total,casos_cali_hasta_corte_bogota,casos_bogota_corte_2025_06_30,comparable,nota
+Urgencias,879,643,947.0,True,Unica categoria comparable. Periodos distintos: Cali 2024-2025 (registro individual) vs Bogota acumulado a 30/06/2025 (agregado por localidad)
+Adopciones,61,59,,False,Solo Cali
+Cita médica,4453,2942,,False,Solo Cali
+Denuncia,1312,1025,,False,Solo Cali
+Esterilizaciones,1971,1920,,False,Solo Cali
+PQR,8935,8239,,False,Solo Cali
+Sin clasificar,24,23,,False,Solo Cali
+Solicitud de información general,7,7,,False,Solo Cali

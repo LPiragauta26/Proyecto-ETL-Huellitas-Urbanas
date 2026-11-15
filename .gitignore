@@ -1,0 +1,25 @@
+# Entornos virtuales
+venv/
+.venv/
+Medallon/venv/
+Medallon/.venv/
+
+# Cachés de Python y pruebas
+__pycache__/
+*.py[cod]
+.pytest_cache/
+.ipynb_checkpoints/
+.agents/
+Medallon/.agents/
+
+# Variables de entorno locales y base SQLite regenerable
+Medallon/.env
+Medallon/data/gold/warehouse.db
+
+# Logs pesados de contenedores Airflow (conservar .gitkeep)
+airflow-medallon/logs/*
+!airflow-medallon/logs/.gitkeep
+
+# Copias temporales de corridas en Bronze
+Medallon/data/bronze/runs/
+Medallon/data/bronze/FORZAR_FALLO_API.txt

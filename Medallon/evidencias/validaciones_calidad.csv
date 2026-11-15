@@ -1,0 +1,15 @@
+﻿regla,estado,detalle
+Cali: no se pierden registros bronze->silver,OK,17642 -> 17642
+Cali: id unico,OK,
+Cali: clase sin valores fuera del catalogo,OK,
+Cali: fechas validas dentro del rango,OK,
+Cali: fechas invalidas < 1%,OK,0.068%
+Bogota: 20 localidades,OK,20 localidades
+Bogota: sin nulos en atenciones,OK,
+Bogota: especie suma atenciones,OK,
+Bogota: sexo suma atenciones,OK,
+Bogota: diagnosticos suman atenciones,ADVERTENCIA,"diferencias en Kennedy (-2), Fontibón (+2), Rafael Uribe Uribe (-1), Ciudad Bolívar (+1)"
+Bogota: procedencia suman atenciones,ADVERTENCIA,"diferencias en Rafael Uribe Uribe (-1), Ciudad Bolívar (+1)"
+"Gold: sin duplicados en llave (ciudad, zona, categoria, periodo)",OK,duplicados=0
+Gold: casos Cali cuadran con Silver,OK,17642 == 17642
+Gold: atenciones Bogotá cuadran con Silver,OK,947 == 947
