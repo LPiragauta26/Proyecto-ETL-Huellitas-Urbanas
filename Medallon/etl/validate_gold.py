@@ -89,6 +89,11 @@ def run(gold_info: dict | None = None) -> dict:
     if n_err > 0:
         raise ValueError(f"validate_gold falló con {n_err} reglas en estado FALLA")
 
+    # 5) Evaluación automática de solicitudes de adopción (Aceptada / En espera / Negada)
+    from api.main import evaluar_solicitudes_automatico_airflow
+
+    resumen_adopciones = evaluar_solicitudes_automatico_airflow()
+
     resumen = {
         "etapa": "validate_gold",
         "fecha_ejecucion": fecha_ejec,
@@ -102,11 +107,13 @@ def run(gold_info: dict | None = None) -> dict:
         "tablas_cargadas_sqlite": len(tablas_dw),
         "filas_insertadas_sqlite_gold": int(len(gold_final)),
         "graficas_generadas": 8,
+        "adopciones_evaluadas": resumen_adopciones,
     }
     print(
         f"[validate_gold] Validaciones OK={n_ok} | ADVERTENCIAS={n_adv} | ERRORES={n_err} | "
         f"Duplicados llave={duplicados_gold} | SQLite ({len(tablas_dw)} tablas, gold_final={len(gold_final)} filas) | "
-        f"Gráficas PNG=8"
+        f"Gráficas PNG=8 | Adopciones (Aceptadas={resumen_adopciones['aceptadas']}, "
+        f"En espera={resumen_adopciones['en_espera']}, Negadas={resumen_adopciones['negadas']})"
     )
     log.info("validate_gold completado exitosamente: %s", resumen)
     return resumen

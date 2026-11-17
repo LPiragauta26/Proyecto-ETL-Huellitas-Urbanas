@@ -9,7 +9,7 @@ Pipeline de ingeniería de datos con **arquitectura Medallion** (**Bronze → Si
 ## 1. Estructura Completa del Proyecto
 
 ```text
-ETL_Avance_2/
+ETL_Bienestar_animal/
 ├── airflow-medallon/                        # Orquestación con Docker Compose + Apache Airflow 3.3.2
 │   ├── config/airflow.cfg                   # Configuración de Apache Airflow
 │   ├── dags/etl_bienestar_animal_hourly.py  # DAG horario (@hourly / 0 * * * *) con las 5 tareas Medallion
@@ -76,7 +76,7 @@ ETL_Avance_2/
 Abre la **Terminal**, entra a la carpeta `Medallon` y activa el entorno virtual:
 
 ```Terminal
-cd c:\Users\Laura\Downloads\ETL_Avance_2\Medallon
+cd c:\Users\Laura\Downloads\ETL_Bienestar_animal\Medallon
 python -m venv venv
 .\venv\Scripts\activate
 pip install -r requirements.txt
@@ -127,7 +127,7 @@ Rutas disponibles en el navegador una vez iniciado el servidor en `http://127.0.
 ### 2.5 Levantar la Orquestación con Apache Airflow 3.3.2 y Docker Compose
 Desde la carpeta `airflow-medallon`:
 ```Terminal
-cd c:\Users\Laura\Downloads\ETL_Avance_2\airflow-medallon
+cd c:\Users\Laura\Downloads\ETL_Bienestar_animal\airflow-medallon
 docker compose build
 docker compose up airflow-init
 docker compose up -d

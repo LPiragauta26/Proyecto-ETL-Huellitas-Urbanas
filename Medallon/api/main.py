@@ -221,6 +221,72 @@ class SolicitudAdopcionInput(BaseModel):
     motivacion: str = Field(..., min_length=5, description="Por qué desea adoptar y compromiso de tenencia responsable")
 
 
+class CambioEstadoSolicitudInput(BaseModel):
+    nuevo_estado: str = Field(..., description="Nuevo estado: 'Aceptada', 'En espera' o 'Negada'")
+    observacion: Optional[str] = Field(None, description="Motivo o comentario del comité de bienestar animal")
+
+
+SOLICITUDES_SEMILLA = [
+    {
+        "radicado": "ADOP-2026-0001",
+        "fecha_solicitud": "2026-11-15 10:15:00",
+        "id_animal": "CBA-CALI-005",
+        "nombre_animal": "Milo",
+        "especie": "Felino",
+        "ciudad_animal": "Cali",
+        "entidad": "Centro de Bienestar Animal (CBA - UAEPA)",
+        "nombre_solicitante": "Camila Andrea Gómez",
+        "documento": "1144098231",
+        "telefono": "3157894512",
+        "correo": "camila.gomez@correo.co",
+        "ciudad_residencia": "Cali",
+        "direccion_barrio": "Comuna 6 - Ciudadela Floralia",
+        "tipo_vivienda": "Apartamento con mallas de protección y espacio seguro",
+        "motivacion": "Contamos con mallas de seguridad en balcones, presupuesto veterinario y experiencia cuidando gatos rescatados.",
+        "estado_solicitud": "Aceptada",
+        "observacion_comite": "Evaluación Airflow/Comité: Cumple criterios de tenencia responsable, misma ciudad y vivienda segura con mallas.",
+    },
+    {
+        "radicado": "ADOP-2026-0002",
+        "fecha_solicitud": "2026-11-16 14:30:00",
+        "id_animal": "UCA-BOG-004",
+        "nombre_animal": "Toby",
+        "especie": "Canino",
+        "ciudad_animal": "Bogotá",
+        "entidad": "IDPYBA - Unidad de Cuidado Animal (UCA)",
+        "nombre_solicitante": "Carlos Eduardo Ramírez",
+        "documento": "80123987",
+        "telefono": "3104567890",
+        "correo": "carlos.ramirez@correo.co",
+        "ciudad_residencia": "Cali",
+        "direccion_barrio": "Barrio El Ingenio",
+        "tipo_vivienda": "Casa amplia con patio interno",
+        "motivacion": "Deseo adoptarlo y asumir traslado, tengo patio seguro.",
+        "estado_solicitud": "En espera",
+        "observacion_comite": "Evaluación Airflow/Comité: En espera de entrevista virtual y verificación de traslado interurbano (Bogotá -> Cali).",
+    },
+    {
+        "radicado": "ADOP-2026-0003",
+        "fecha_solicitud": "2026-11-16 16:45:00",
+        "id_animal": "CBA-CALI-001",
+        "nombre_animal": "Bruno",
+        "especie": "Canino",
+        "ciudad_animal": "Cali",
+        "entidad": "Centro de Bienestar Animal (CBA - UAEPA)",
+        "nombre_solicitante": "Jorge Luis Pérez",
+        "documento": "94512300",
+        "telefono": "3001112233",
+        "correo": "jorge.perez@correo.co",
+        "ciudad_residencia": "Cali",
+        "direccion_barrio": "Comuna 13",
+        "tipo_vivienda": "Lote sin cerramiento en terraza abierta",
+        "motivacion": "Para cuidar un lote abierto en las noches.",
+        "estado_solicitud": "Negada",
+        "observacion_comite": "Evaluación Airflow/Comité: Negada por condiciones sin cerramiento seguro; el animal Bruno regresa a estado Disponible.",
+    },
+]
+
+
 ######################################################
 # Funciones
 ######################################################
@@ -284,27 +350,15 @@ def asegurar_catalogo_adopciones() -> pd.DataFrame:
 
 def cargar_solicitudes_adopcion() -> pd.DataFrame:
     ruta_sol = obtener_ruta_solicitudes_adopcion()
+    ruta_sol.parent.mkdir(parents=True, exist_ok=True)
     if not ruta_sol.exists():
-        cols = [
-            "radicado",
-            "fecha_solicitud",
-            "id_animal",
-            "nombre_animal",
-            "especie",
-            "ciudad_animal",
-            "entidad",
-            "nombre_solicitante",
-            "documento",
-            "telefono",
-            "correo",
-            "ciudad_residencia",
-            "direccion_barrio",
-            "tipo_vivienda",
-            "motivacion",
-            "estado_solicitud",
-        ]
-        return pd.DataFrame(columns=cols)
-    return pd.read_csv(ruta_sol)
+        df_init = pd.DataFrame(SOLICITUDES_SEMILLA)
+        df_init.to_csv(ruta_sol, index=False, encoding="utf-8-sig")
+        return df_init
+    df = pd.read_csv(ruta_sol)
+    if "observacion_comite" not in df.columns:
+        df["observacion_comite"] = "En evaluación por Comité de Bienestar Animal / Airflow"
+    return df
 
 
 def registrar_solicitud_adopcion(datos: SolicitudAdopcionInput) -> dict:
@@ -349,6 +403,7 @@ def registrar_solicitud_adopcion(datos: SolicitudAdopcionInput) -> dict:
         "tipo_vivienda": datos.tipo_vivienda.strip(),
         "motivacion": datos.motivacion.strip(),
         "estado_solicitud": "En revisión por bienestar animal",
+        "observacion_comite": "Pendiente de evaluación (puedes usar los botones manuales o correr el DAG en Airflow)",
     }
 
     df_sol = pd.concat([df_sol, pd.DataFrame([nueva_fila])], ignore_index=True)
@@ -359,6 +414,146 @@ def registrar_solicitud_adopcion(datos: SolicitudAdopcionInput) -> dict:
     df_cat.to_csv(obtener_ruta_catalogo_adopciones(), index=False, encoding="utf-8-sig")
 
     return nueva_fila
+
+
+def actualizar_estado_solicitud_adopcion(
+    radicado: str,
+    nuevo_estado: str,
+    observacion: Optional[str] = None,
+) -> dict:
+    """Actualiza el estado de una solicitud ('Aceptada', 'En espera' o 'Negada') y sincroniza el animal."""
+    estados_validos = {
+        "aceptada": "Aceptada",
+        "aprobada": "Aceptada",
+        "en espera": "En espera",
+        "espera": "En espera",
+        "negada": "Negada",
+        "rechazada": "Negada",
+    }
+    clave = nuevo_estado.strip().lower()
+    if clave not in estados_validos:
+        raise HTTPException(
+            status_code=400,
+            detail="Estado inválido. Usa 'Aceptada', 'En espera' o 'Negada'.",
+        )
+    estado_canonico = estados_validos[clave]
+
+    df_sol = cargar_solicitudes_adopcion()
+    mask_sol = df_sol["radicado"].astype(str).str.upper() == radicado.strip().upper()
+    if not mask_sol.any():
+        raise HTTPException(
+            status_code=404,
+            detail=f"No se encontró la solicitud con radicado '{radicado}'.",
+        )
+
+    idx = df_sol.index[mask_sol][0]
+    id_animal = str(df_sol.loc[idx, "id_animal"])
+    df_sol.loc[idx, "estado_solicitud"] = estado_canonico
+
+    if observacion and observacion.strip():
+        obs_texto = observacion.strip()
+    else:
+        mensajes_defecto = {
+            "Aceptada": "Aprobada: cumple condiciones de tenencia responsable y espacio seguro.",
+            "En espera": "En espera: pendiente de entrevista o visita domiciliaria de verificación.",
+            "Negada": "Negada: no cumple requisitos de bienestar animal; el animal vuelve a estar Disponible.",
+        }
+        obs_texto = mensajes_defecto[estado_canonico]
+
+    df_sol.loc[idx, "observacion_comite"] = obs_texto
+    df_sol.to_csv(obtener_ruta_solicitudes_adopcion(), index=False, encoding="utf-8-sig")
+
+    # Sincronizar el estado del animal en catalogo_adopciones.csv
+    df_cat = asegurar_catalogo_adopciones()
+    mask_cat = df_cat["id_animal"].astype(str).str.upper() == id_animal.upper()
+    if mask_cat.any():
+        if estado_canonico == "Aceptada":
+            df_cat.loc[mask_cat, "estado"] = "Adoptado"
+        elif estado_canonico == "En espera":
+            df_cat.loc[mask_cat, "estado"] = "En espera"
+        elif estado_canonico == "Negada":
+            df_cat.loc[mask_cat, "estado"] = "Disponible"
+        df_cat.to_csv(obtener_ruta_catalogo_adopciones(), index=False, encoding="utf-8-sig")
+
+    fila_actualizada = preparar_dataframe_json(df_sol.loc[[idx]]).to_dict(orient="records")[0]
+    return fila_actualizada
+
+
+def evaluar_solicitudes_automatico_airflow() -> dict:
+    """Motor automático invocado por Airflow (validate_gold) y main.py que clasifica las solicitudes
+    pendientes en 'Aceptada', 'En espera' o 'Negada' según reglas de tenencia responsable.
+    """
+    df_sol = cargar_solicitudes_adopcion()
+    df_cat = asegurar_catalogo_adopciones()
+    evaluadas_nuevas = 0
+
+    palabras_riesgo = [
+        "sin cerramiento",
+        "lote abierto",
+        "amarrado",
+        "cadena",
+        "pelea",
+        "azotea",
+        "no tengo espacio",
+        "calle",
+    ]
+
+    for idx, fila in df_sol.iterrows():
+        estado_actual = str(fila.get("estado_solicitud", "")).strip()
+        if estado_actual not in ("Aceptada", "En espera", "Negada"):
+            evaluadas_nuevas += 1
+            vivienda = str(fila.get("tipo_vivienda", "")).lower()
+            motivacion = str(fila.get("motivacion", "")).strip()
+            motivacion_low = motivacion.lower()
+            ciudad_anim = str(fila.get("ciudad_animal", "")).strip().lower()
+            ciudad_res = str(fila.get("ciudad_residencia", "")).strip().lower()
+
+            if any(p in vivienda or p in motivacion_low for p in palabras_riesgo) or len(motivacion) < 12:
+                nuevo_est = "Negada"
+                obs = (
+                    "Airflow Auto-Evaluación: Negada por condiciones de vivienda sin cerramiento "
+                    "o motivación insuficiente de tenencia responsable."
+                )
+            elif ciudad_anim and ciudad_res and ciudad_anim != ciudad_res or len(motivacion) < 30:
+                nuevo_est = "En espera"
+                obs = (
+                    "Airflow Auto-Evaluación: En espera de entrevista virtual y verificación "
+                    "domiciliaria por comité de bienestar animal."
+                )
+            else:
+                nuevo_est = "Aceptada"
+                obs = (
+                    "Airflow Auto-Evaluación: Aceptada automáticamente; cumple criterios de "
+                    "vivienda segura, misma ciudad y compromiso de cuidado."
+                )
+
+            df_sol.loc[idx, "estado_solicitud"] = nuevo_est
+            df_sol.loc[idx, "observacion_comite"] = obs
+
+        # Sincronizar animal según estado final
+        est_final = str(df_sol.loc[idx, "estado_solicitud"])
+        id_anim = str(df_sol.loc[idx, "id_animal"]).upper()
+        mask_cat = df_cat["id_animal"].astype(str).str.upper() == id_anim
+        if mask_cat.any():
+            if est_final == "Aceptada":
+                df_cat.loc[mask_cat, "estado"] = "Adoptado"
+            elif est_final == "En espera":
+                df_cat.loc[mask_cat, "estado"] = "En espera"
+            elif est_final == "Negada":
+                df_cat.loc[mask_cat, "estado"] = "Disponible"
+
+    df_sol.to_csv(obtener_ruta_solicitudes_adopcion(), index=False, encoding="utf-8-sig")
+    df_cat.to_csv(obtener_ruta_catalogo_adopciones(), index=False, encoding="utf-8-sig")
+
+    conteo = df_sol["estado_solicitud"].value_counts().to_dict() if not df_sol.empty else {}
+    return {
+        "total_solicitudes": int(len(df_sol)),
+        "evaluadas_nuevas": int(evaluadas_nuevas),
+        "aceptadas": int(conteo.get("Aceptada", 0)),
+        "en_espera": int(conteo.get("En espera", 0)),
+        "negadas": int(conteo.get("Negada", 0)),
+        "en_revision": int(conteo.get("En revisión por bienestar animal", 0)),
+    }
 
 
 def cargar_gold():
@@ -636,9 +831,43 @@ def listar_solicitudes_adopcion():
     """Consulta las solicitudes de adopción registradas a través de la API o la aplicación."""
     df_sol = cargar_solicitudes_adopcion()
     df_json = preparar_dataframe_json(df_sol)
+    conteo = df_sol["estado_solicitud"].value_counts().to_dict() if not df_sol.empty else {}
     return {
         "total_solicitudes": len(df_json),
+        "resumen_estados": {
+            "Aceptada": int(conteo.get("Aceptada", 0)),
+            "En espera": int(conteo.get("En espera", 0)),
+            "Negada": int(conteo.get("Negada", 0)),
+            "En revisión por bienestar animal": int(conteo.get("En revisión por bienestar animal", 0)),
+        },
         "solicitudes": df_json.to_dict(orient="records"),
+    }
+
+
+@app.post("/adopciones/solicitudes/{radicado}/estado", tags=["Adopciones"])
+def cambiar_estado_solicitud(radicado: str, datos: CambioEstadoSolicitudInput):
+    """Permite aceptar, poner en espera o negar manualmente una solicitud de adopción."""
+    actualizada = actualizar_estado_solicitud_adopcion(
+        radicado=radicado,
+        nuevo_estado=datos.nuevo_estado,
+        observacion=datos.observacion,
+    )
+    return {
+        "mensaje": f"Solicitud {radicado} actualizada a estado '{actualizada['estado_solicitud']}'.",
+        "solicitud": actualizada,
+    }
+
+
+@app.post("/adopciones/evaluar-airflow", tags=["Adopciones"])
+def ejecutar_evaluacion_airflow():
+    """Ejecuta el motor de reglas de Airflow para clasificar solicitudes en Aceptada, En espera o Negada."""
+    res = evaluar_solicitudes_automatico_airflow()
+    return {
+        "mensaje": (
+            f"Evaluación automática completada: {res['aceptadas']} Aceptadas, "
+            f"{res['en_espera']} En espera, {res['negadas']} Negadas."
+        ),
+        "resumen": res,
     }
 
 
@@ -663,13 +892,19 @@ def portal_ciudadano_gold_y_adopcion():
     .panel.active { display: block; }
     .grid-cards { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 16px; margin-top: 16px; }
     .card { border: 1px solid #e2e8f0; border-radius: 10px; padding: 16px; background: #ffffff; }
-    .badge { display: inline-block; padding: 3px 10px; border-radius: 999px; font-size: 12px; font-weight: 600; }
-    .badge-disp { background: #dcfce7; color: #166534; }
-    .badge-proc { background: #fef3c7; color: #92400e; }
+    .badge { display: inline-block; padding: 4px 10px; border-radius: 999px; font-size: 12px; font-weight: 700; }
+    .badge-disp, .badge-aceptada { background: #dcfce7; color: #166534; }
+    .badge-proc, .badge-espera { background: #fef3c7; color: #92400e; }
+    .badge-negada { background: #fee2e2; color: #991b1b; }
+    .badge-rev { background: #e0f2fe; color: #075985; }
     .filters { display: flex; gap: 12px; flex-wrap: wrap; margin-bottom: 16px; align-items: center; }
     select, input, textarea, button { padding: 8px 12px; border: 1px solid #cbd5e1; border-radius: 6px; font-size: 14px; }
     button.primary { background: #0f766e; color: white; border: none; font-weight: 600; cursor: pointer; }
     button.primary:hover { background: #115e59; }
+    .btn-sm { padding: 5px 10px; font-size: 12px; font-weight: 600; border: none; border-radius: 6px; cursor: pointer; margin-right: 4px; }
+    .btn-ok { background: #16a34a; color: white; }
+    .btn-wait { background: #d97706; color: white; }
+    .btn-deny { background: #dc2626; color: white; }
     table { width: 100%; border-collapse: collapse; margin-top: 12px; font-size: 13px; }
     th, td { border-bottom: 1px solid #e2e8f0; padding: 8px 10px; text-align: left; }
     th { background: #f8fafc; font-weight: 600; }
@@ -677,6 +912,9 @@ def portal_ciudadano_gold_y_adopcion():
     .alert { padding: 12px 16px; border-radius: 8px; margin-top: 14px; font-weight: 600; }
     .alert-ok { background: #dcfce7; color: #166534; }
     .alert-err { background: #fee2e2; color: #991b1b; }
+    .kpi-row { display: grid; grid-template-columns: repeat(4, 1fr); gap: 12px; margin: 14px 0; }
+    .kpi-box { padding: 12px 16px; border-radius: 10px; border: 1px solid #e2e8f0; background: #f8fafc; text-align: center; }
+    .kpi-box strong { display: block; font-size: 22px; margin-top: 4px; }
   </style>
 </head>
 <body>
@@ -690,7 +928,7 @@ def portal_ciudadano_gold_y_adopcion():
       <button class="tab-btn" onclick="mostrarTab('gold', this)">📊 Consultar Datos Gold y KPIs</button>
     </div>
 
-    <!-- PANEL 1: ADOPCIONES -->
+    <!-- PANEL 1: ADOPCIONES (SOLO VISTA PÚBLICA CIUDADANA) -->
     <div id="panel-adopcion" class="panel active">
       <h2>Animales Rescatados y Rehabilitados listos para Adopción</h2>
       <p id="alerta-etl" style="background:#fffbeb; border-left:4px solid #f59e0b; padding:10px 14px; border-radius:6px;"></p>
@@ -781,10 +1019,17 @@ def portal_ciudadano_gold_y_adopcion():
       document.getElementById('form-adopcion').scrollIntoView({ behavior: 'smooth' });
     }
 
+    function claseBadgeEstado(est) {
+      if (est === 'Aceptada' || est === 'Disponible') return 'badge-aceptada';
+      if (est === 'En espera' || est === 'En proceso de adopción') return 'badge-espera';
+      if (est === 'Negada') return 'badge-negada';
+      return 'badge-rev';
+    }
+
     async function cargarAlertaGoldAdopciones() {
       const r = await fetch('/adopciones/gold');
       const d = await r.json();
-      if (d.hallazgo_etl_2024_vs_2025 && d.hallazgo_etl_2025 !== undefined || d.hallazgo_etl_2024_vs_2025.alerta_negocio) {
+      if (d.hallazgo_etl_2024_vs_2025 && d.hallazgo_etl_2024_vs_2025.alerta_negocio) {
         document.getElementById('alerta-etl').innerText = '📌 Hallazgo del ETL Medallion: ' + d.hallazgo_etl_2024_vs_2025.alerta_negocio;
       }
     }
@@ -810,7 +1055,7 @@ def portal_ciudadano_gold_y_adopcion():
           <p style="margin:8px 0; font-size:13px; color:#334155;">${a.historia_clinica_rescate}</p>
           ${a.estado === 'Disponible'
             ? `<button class="primary" onclick="seleccionarAnimal('${a.id_animal}')">Quiero adoptar a ${a.nombre}</button>`
-            : `<button disabled>En proceso de adopción</button>`}
+            : `<button disabled>${a.estado}</button>`}
         </div>
       `).join('');
     }
@@ -866,6 +1111,135 @@ def portal_ciudadano_gold_y_adopcion():
     cargarAlertaGoldAdopciones();
     cargarAnimales();
     cargarGold();
+  </script>
+</body>
+</html>"""
+
+
+@app.get("/admin", response_class=HTMLResponse, tags=["Panel Privado Creadores"])
+def panel_privado_creadores_comite():
+    """Panel privado exclusivo para los creadores / Comité de Bienestar Animal (Aceptar, En espera, Negar + Airflow)."""
+    return """<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <title>🔐 Panel Privado Creadores y Comité — Bienestar Animal</title>
+  <style>
+    body { font-family: 'Segoe UI', Arial, sans-serif; margin: 0; background: #0f172a; color: #1e293b; }
+    header { background: linear-gradient(135deg, #1e293b, #0f766e); color: white; padding: 22px 32px; border-bottom: 3px solid #14b8a6; }
+    header h1 { margin: 0 0 6px 0; font-size: 22px; }
+    header p { margin: 0; opacity: 0.9; font-size: 13px; }
+    .container { max-width: 1240px; margin: 24px auto; padding: 0 20px; }
+    .panel { background: white; padding: 24px; border-radius: 12px; box-shadow: 0 4px 16px rgba(0,0,0,0.25); }
+    .badge { display: inline-block; padding: 4px 10px; border-radius: 999px; font-size: 12px; font-weight: 700; }
+    .badge-aceptada { background: #dcfce7; color: #166534; }
+    .badge-espera { background: #fef3c7; color: #92400e; }
+    .badge-negada { background: #fee2e2; color: #991b1b; }
+    .badge-rev { background: #e0f2fe; color: #075985; }
+    button.primary { padding: 9px 14px; background: #0f766e; color: white; border: none; border-radius: 6px; font-weight: 600; cursor: pointer; }
+    .btn-sm { padding: 5px 10px; font-size: 12px; font-weight: 600; border: none; border-radius: 6px; cursor: pointer; margin-right: 4px; }
+    .btn-ok { background: #16a34a; color: white; }
+    .btn-wait { background: #d97706; color: white; }
+    .btn-deny { background: #dc2626; color: white; }
+    table { width: 100%; border-collapse: collapse; margin-top: 12px; font-size: 13px; }
+    th, td { border-bottom: 1px solid #e2e8f0; padding: 8px 10px; text-align: left; }
+    th { background: #f8fafc; font-weight: 600; }
+    .kpi-row { display: grid; grid-template-columns: repeat(4, 1fr); gap: 12px; margin: 14px 0; }
+    .kpi-box { padding: 12px 16px; border-radius: 10px; border: 1px solid #e2e8f0; background: #f8fafc; text-align: center; }
+    .kpi-box strong { display: block; font-size: 22px; margin-top: 4px; }
+    .alert { padding: 12px 16px; border-radius: 8px; margin-top: 12px; font-weight: 600; background: #dcfce7; color: #166534; }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>🔐 Panel Privado de Creadores — Comité de Bienestar Animal (Control Manual + Airflow)</h1>
+    <p>Vista interna exclusiva para administradores | <a href="/portal" style="color:#99f6e4;">Ir al Portal Público (/portal)</a> | <a href="/docs" style="color:#99f6e4;">Swagger (/docs)</a></p>
+  </header>
+  <div class="container">
+    <div class="panel">
+      <div style="display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:10px;">
+        <h2 style="margin:0;">📋 Bandeja de Solicitudes y Comité de Bienestar Animal (Control Manual + Airflow)</h2>
+        <button class="primary" onclick="evaluarConAirflow()">⚙️ Evaluar Pendientes con Reglas Airflow</button>
+      </div>
+      <div id="mensaje-admin"></div>
+      <div id="resumen-solicitudes" class="kpi-row"></div>
+      <div style="overflow-x:auto;">
+        <table id="tabla-solicitudes">
+          <thead>
+            <tr>
+              <th>Radicado</th>
+              <th>Fecha</th>
+              <th>Animal</th>
+              <th>Solicitante</th>
+              <th>Ciudad / Vivienda</th>
+              <th>Motivación</th>
+              <th>Estado Actual</th>
+              <th>Concepto Comité / Airflow</th>
+              <th>Acciones Manuales</th>
+            </tr>
+          </thead>
+          <tbody></tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+  <script>
+    function claseBadgeEstado(est) {
+      if (est === 'Aceptada') return 'badge-aceptada';
+      if (est === 'En espera') return 'badge-espera';
+      if (est === 'Negada') return 'badge-negada';
+      return 'badge-rev';
+    }
+    async function cargarSolicitudes() {
+      const r = await fetch('/adopciones/solicitudes');
+      const d = await r.json();
+      const res = d.resumen_estados || {};
+      document.getElementById('resumen-solicitudes').innerHTML = `
+        <div class="kpi-box"><span>Total Solicitudes</span><strong>${d.total_solicitudes}</strong></div>
+        <div class="kpi-box" style="background:#f0fdf4;"><span>🟢 Aceptadas</span><strong style="color:#166534;">${res['Aceptada'] || 0}</strong></div>
+        <div class="kpi-box" style="background:#fffbeb;"><span>🟡 En Espera</span><strong style="color:#92400e;">${res['En espera'] || 0}</strong></div>
+        <div class="kpi-box" style="background:#fef2f2;"><span>🔴 Negadas</span><strong style="color:#991b1b;">${res['Negada'] || 0}</strong></div>
+      `;
+      const tbody = document.querySelector('#tabla-solicitudes tbody');
+      tbody.innerHTML = d.solicitudes.map(s => `
+        <tr>
+          <td><strong>${s.radicado}</strong></td>
+          <td>${s.fecha_solicitud}</td>
+          <td>${s.nombre_animal} (${s.id_animal})<br><small>${s.ciudad_animal}</small></td>
+          <td>${s.nombre_solicitante}<br><small>Tel: ${s.telefono}</small></td>
+          <td>${s.ciudad_residencia} - ${s.direccion_barrio}<br><small>${s.tipo_vivienda}</small></td>
+          <td>${s.motivacion}</td>
+          <td><span class="badge ${claseBadgeEstado(s.estado_solicitud)}">${s.estado_solicitud}</span></td>
+          <td><small>${s.observacion_comite || ''}</small></td>
+          <td style="white-space:nowrap;">
+            <button class="btn-sm btn-ok" onclick="cambiarEstado('${s.radicado}', 'Aceptada')">✅ Aceptar</button>
+            <button class="btn-sm btn-wait" onclick="cambiarEstado('${s.radicado}', 'En espera')">⏳ En espera</button>
+            <button class="btn-sm btn-deny" onclick="cambiarEstado('${s.radicado}', 'Negada')">❌ Negar</button>
+          </td>
+        </tr>
+      `).join('');
+    }
+    async function cambiarEstado(radicado, nuevoEstado) {
+      const r = await fetch(`/adopciones/solicitudes/${radicado}/estado`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ nuevo_estado: nuevoEstado })
+      });
+      const d = await r.json();
+      if (r.ok) {
+        document.getElementById('mensaje-admin').innerHTML = `<div class="alert">${d.mensaje}</div>`;
+        cargarSolicitudes();
+      }
+    }
+    async function evaluarConAirflow() {
+      const r = await fetch('/adopciones/evaluar-airflow', { method: 'POST' });
+      const d = await r.json();
+      if (r.ok) {
+        document.getElementById('mensaje-admin').innerHTML = `<div class="alert">🤖 ${d.mensaje}</div>`;
+        cargarSolicitudes();
+      }
+    }
+    cargarSolicitudes();
   </script>
 </body>
 </html>"""

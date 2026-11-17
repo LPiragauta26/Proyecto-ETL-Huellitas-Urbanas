@@ -7,7 +7,7 @@ Esta carpeta contiene el entorno de **Apache Airflow 3.3.2** sobre **Docker Comp
 ## 1. Estructura del Proyecto y la carpeta `airflow-medallon`
 
 ```text
-ETL_Avance_2/
+ETL_Bienestar_animal/
 ├── airflow-medallon/                        # Entorno de orquestación con Docker + Airflow 3.3.2
 │   ├── config/
 │   │   └── airflow.cfg                      # Configuración de Apache Airflow 3.3.2
@@ -87,7 +87,7 @@ ETL_Avance_2/
 Abra **Terminal** y sitúese dentro de la carpeta `airflow-medallon`:
 
 ```Terminal
-cd C:\Users\Laura\Downloads\ETL_Avance_2\airflow-medallon
+cd C:\Users\Laura\Downloads\ETL_Bienestar_animal\airflow-medallon
 ```
 
 ### Paso 1: Construir la imagen personalizada con las librerías del ETL

@@ -23,12 +23,14 @@ if str(MEDALLON_DIR) not in sys.path:
 from api.main import (  # noqa: E402
     CATALOGO_KPIS,
     SolicitudAdopcionInput,
+    actualizar_estado_solicitud_adopcion,
     app,
     asegurar_catalogo_adopciones,
     cargar_config,
     cargar_gold,
     cargar_kpi,
     cargar_solicitudes_adopcion,
+    evaluar_solicitudes_automatico_airflow,
     obtener_directorio_kpis,
     obtener_ruta_gold,
     obtener_ruta_validaciones,
@@ -405,10 +407,54 @@ def ejecutar_app_streamlit() -> None:
                     except Exception as exc:
                         st.error(f"Por favor completa todos los campos válidamente ({exc}).")
 
+        st.markdown("---")
+        st.markdown("#### 📋 Bandeja de Solicitudes y Comité de Bienestar Animal (Control Manual + Airflow)")
         df_sols = cargar_solicitudes_adopcion()
         if not df_sols.empty:
-            st.markdown("#### Solicitudes de adopción registradas")
+            conteo_est = df_sols["estado_solicitud"].value_counts().to_dict()
+            m1, m2, m3, m4 = st.columns(4)
+            m1.metric("Total Solicitudes", f"{len(df_sols)}")
+            m2.metric("🟢 Aceptadas", f"{conteo_est.get('Aceptada', 0)}")
+            m3.metric("🟡 En Espera", f"{conteo_est.get('En espera', 0)}")
+            m4.metric("🔴 Negadas", f"{conteo_est.get('Negada', 0)}")
+
             st.dataframe(df_sols, width="stretch")
+
+            st.markdown("##### ⚖️ Decisión del Comité (Aceptar / Poner en espera / Negar) o Evaluación Automática Airflow")
+            col_sel, col_obs = st.columns([1, 2])
+            opciones_rad = [
+                f"{r['radicado']} — {r['nombre_solicitante']} -> {r['nombre_animal']} (Estado: {r['estado_solicitud']})"
+                for _, r in df_sols.iterrows()
+            ]
+            with col_sel:
+                rad_sel_texto = st.selectbox("Selecciona una solicitud por radicado:", opciones_rad)
+                rad_elegido = rad_sel_texto.split(" — ")[0].strip()
+            with col_obs:
+                obs_manual = st.text_input(
+                    "Observación / motivo de la decisión (opcional):",
+                    placeholder="Ej. Aprobada tras entrevista / En espera de visita / Negada por falta de cerramiento",
+                )
+
+            b1, b2, b3, b4 = st.columns(4)
+            if b1.button("✅ Aceptar Solicitud", width="stretch"):
+                actualizar_estado_solicitud_adopcion(rad_elegido, "Aceptada", obs_manual)
+                st.success(f"Solicitud {rad_elegido} marcada como ACEPTADA (Animal pasa a Adoptado).")
+                st.rerun()
+            if b2.button("⏳ Poner en Espera", width="stretch"):
+                actualizar_estado_solicitud_adopcion(rad_elegido, "En espera", obs_manual)
+                st.warning(f"Solicitud {rad_elegido} puesta EN ESPERA de verificación.")
+                st.rerun()
+            if b3.button("❌ Negar Solicitud", width="stretch"):
+                actualizar_estado_solicitud_adopcion(rad_elegido, "Negada", obs_manual)
+                st.error(f"Solicitud {rad_elegido} NEGADA (El animal vuelve a estar Disponible).")
+                st.rerun()
+            if b4.button("🤖 Evaluar Pendientes (Airflow)", width="stretch"):
+                res_af = evaluar_solicitudes_automatico_airflow()
+                st.info(
+                    f"Airflow evaluó las solicitudes: {res_af['aceptadas']} Aceptadas, "
+                    f"{res_af['en_espera']} En espera, {res_af['negadas']} Negadas."
+                )
+                st.rerun()
 
     with tab_prio:
         df_prio, _, _ = cargar_kpi("kpi_priorizacion_territorial")

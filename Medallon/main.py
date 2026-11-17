@@ -119,6 +119,16 @@ def main() -> int:
     graficos.grafica_bogota_sesgo_uca(k_bog_sesgo, ev)
 
     fallas = reglas[reglas["estado"] == "FALLA"]
+    from api.main import evaluar_solicitudes_automatico_airflow
+
+    res_adop = evaluar_solicitudes_automatico_airflow()
+    log.info(
+        "Evaluación de solicitudes de adopción (Airflow/ETL): Total=%s | Aceptadas=%s | En espera=%s | Negadas=%s",
+        res_adop["total_solicitudes"],
+        res_adop["aceptadas"],
+        res_adop["en_espera"],
+        res_adop["negadas"],
+    )
     log.info("=== FIN PIPELINE: %s reglas OK, %s advertencias, %s fallas ===",
              (reglas["estado"] == "OK").sum(), (reglas["estado"] == "ADVERTENCIA").sum(), len(fallas))
     return 1 if len(fallas) else 0

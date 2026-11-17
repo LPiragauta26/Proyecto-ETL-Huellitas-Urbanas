@@ -344,7 +344,7 @@ def kpi_patron_semanal_cali(silver_cali: pd.DataFrame) -> pd.DataFrame:
         (3, "Jueves", "Hábil"), (4, "Viernes", "Hábil"), (5, "Sábado", "Fin de semana"), (6, "Domingo", "Fin de semana"),
     ]
     v = silver_cali[silver_cali["fecha_valida"]].copy()
-    v["dow"] = v["fecha"].dt.dayofweek
+    v["dow"] = v["fecha"].dt.day_of_week
     piv = v.pivot_table(index="dow", columns="clase", values="id", aggfunc="count", fill_value=0)
     filas = []
     tot_general = max(len(v), 1)
