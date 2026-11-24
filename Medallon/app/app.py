@@ -332,12 +332,50 @@ def ejecutar_app_streamlit() -> None:
     c3.metric("KPIs de Negocio (Gold)", f"{info['gold']['total_kpis_csv']}")
     c4.metric("Tablas en SQLite DW", f"{info['load_warehouse']['total_tablas_sqlite']}")
 
-    tab_adop, tab_prio, tab_barrios, tab_graficas = st.tabs([
+    tab_negocio, tab_adop, tab_prio, tab_barrios, tab_graficas, tab_admin = st.tabs([
+        "📈 Preguntas de Negocio (Gráficas + FAQ)",
         "🐾 Adopción de Animales Rescatados",
         "Priorización Territorial (Cali)",
         "Top Barrios Críticos (Cali)",
         "Evidencias Gráficas (PNG)",
+        "🔐 Admin / Comité (Privado)",
     ])
+
+    with tab_negocio:
+        st.subheader("📈 Preguntas de Negocio en Gráficas y Preguntas Frecuentes")
+        df_prio_neg, _, _ = cargar_kpi("kpi_priorizacion_territorial")
+        df_cambio_neg, _, _ = cargar_kpi("kpi_cambio_anual_servicios")
+        df_barrios_neg, _, _ = cargar_kpi("kpi_top_barrios_cali")
+
+        g1, g2 = st.columns(2)
+        with g1:
+            st.markdown("#### 1. ¿Dónde concentrar brigadas en Cali? (Top 10 Zonas Prioritarias)")
+            st.bar_chart(df_prio_neg.set_index("zona")["indice_priorizacion"].head(10))
+        with g2:
+            st.markdown("#### 2. ¿Cuáles son los barrios más críticos ('Hotspots') de Cali?")
+            st.bar_chart(df_barrios_neg.set_index("barrio")["casos_criticos"].head(10))
+
+        st.markdown("#### 3. ¿Cómo cambió la demanda entre 2024 y 2025 en Cali?")
+        st.dataframe(df_cambio_neg, width="stretch")
+
+        st.markdown("#### ❓ Preguntas Frecuentes de Negocio (Sin Gráficas)")
+        with st.expander("1. ¿En qué comunas hay mayor denuncia de maltrato frente a baja esterilización?"):
+            st.write(
+                "**Comuna 17** lidera en denuncias en toda Cali (112 denuncias, ratio preventivo 0,31) y "
+                "**Comuna 22** presenta 41,8% de denuncias (40,36 por 10k hab.). En cambio, **Comuna 1** "
+                "tiene alta demanda clínica con déficit de brigadas preventivas (ratio 0,69)."
+            )
+        with st.expander("2. ¿Qué días de la semana se atienden más casos y cuándo se esteriliza más?"):
+            st.write(
+                "El **80,6%** de las solicitudes ingresa de lunes a viernes (picos en martes con 3.052 y miércoles con 2.886), "
+                "mientras que el **sábado** concentra la mayor proporción relativa de **Esterilizaciones (14,5%)** por jornadas móviles."
+            )
+        with st.expander("3. ¿Cómo se recuperó la calidad geográfica (OKR 3) y qué pasa en Bogotá con Engativá?"):
+            st.write(
+                "En Cali se estandarizaron **83 → 42 zonas**, se imputaron 18 comunas por inferencia desde barrio y se "
+                "corrigieron 15 fechas (`0225 → 2025`) sin perder registros (17.642). En Bogotá, al aislar **Engativá (69,3% por sede UCA)**, "
+                "en las otras 19 localidades el **84,9%** ingresa por reporte ciudadano liderado por **infecciosos (47,1%) y politraumatismos (20,6%)**."
+            )
     with tab_adop:
         st.subheader("Portal de Adopción Responsable (Cali CBA/Uaepa & Bogotá IDPYBA)")
         st.info(
@@ -407,55 +445,6 @@ def ejecutar_app_streamlit() -> None:
                     except Exception as exc:
                         st.error(f"Por favor completa todos los campos válidamente ({exc}).")
 
-        st.markdown("---")
-        st.markdown("#### 📋 Bandeja de Solicitudes y Comité de Bienestar Animal (Control Manual + Airflow)")
-        df_sols = cargar_solicitudes_adopcion()
-        if not df_sols.empty:
-            conteo_est = df_sols["estado_solicitud"].value_counts().to_dict()
-            m1, m2, m3, m4 = st.columns(4)
-            m1.metric("Total Solicitudes", f"{len(df_sols)}")
-            m2.metric("🟢 Aceptadas", f"{conteo_est.get('Aceptada', 0)}")
-            m3.metric("🟡 En Espera", f"{conteo_est.get('En espera', 0)}")
-            m4.metric("🔴 Negadas", f"{conteo_est.get('Negada', 0)}")
-
-            st.dataframe(df_sols, width="stretch")
-
-            st.markdown("##### ⚖️ Decisión del Comité (Aceptar / Poner en espera / Negar) o Evaluación Automática Airflow")
-            col_sel, col_obs = st.columns([1, 2])
-            opciones_rad = [
-                f"{r['radicado']} — {r['nombre_solicitante']} -> {r['nombre_animal']} (Estado: {r['estado_solicitud']})"
-                for _, r in df_sols.iterrows()
-            ]
-            with col_sel:
-                rad_sel_texto = st.selectbox("Selecciona una solicitud por radicado:", opciones_rad)
-                rad_elegido = rad_sel_texto.split(" — ")[0].strip()
-            with col_obs:
-                obs_manual = st.text_input(
-                    "Observación / motivo de la decisión (opcional):",
-                    placeholder="Ej. Aprobada tras entrevista / En espera de visita / Negada por falta de cerramiento",
-                )
-
-            b1, b2, b3, b4 = st.columns(4)
-            if b1.button("✅ Aceptar Solicitud", width="stretch"):
-                actualizar_estado_solicitud_adopcion(rad_elegido, "Aceptada", obs_manual)
-                st.success(f"Solicitud {rad_elegido} marcada como ACEPTADA (Animal pasa a Adoptado).")
-                st.rerun()
-            if b2.button("⏳ Poner en Espera", width="stretch"):
-                actualizar_estado_solicitud_adopcion(rad_elegido, "En espera", obs_manual)
-                st.warning(f"Solicitud {rad_elegido} puesta EN ESPERA de verificación.")
-                st.rerun()
-            if b3.button("❌ Negar Solicitud", width="stretch"):
-                actualizar_estado_solicitud_adopcion(rad_elegido, "Negada", obs_manual)
-                st.error(f"Solicitud {rad_elegido} NEGADA (El animal vuelve a estar Disponible).")
-                st.rerun()
-            if b4.button("🤖 Evaluar Pendientes (Airflow)", width="stretch"):
-                res_af = evaluar_solicitudes_automatico_airflow()
-                st.info(
-                    f"Airflow evaluó las solicitudes: {res_af['aceptadas']} Aceptadas, "
-                    f"{res_af['en_espera']} En espera, {res_af['negadas']} Negadas."
-                )
-                st.rerun()
-
     with tab_prio:
         df_prio, _, _ = cargar_kpi("kpi_priorizacion_territorial")
         st.dataframe(df_prio, width="stretch")
@@ -466,6 +455,65 @@ def ejecutar_app_streamlit() -> None:
         rutas_png = sorted((MEDALLON_DIR / "evidencias").glob("*.png"))
         for ruta_img in rutas_png:
             st.image(str(ruta_img), caption=ruta_img.name, width="stretch")
+
+    with tab_admin:
+        st.subheader("🔐 Panel Privado de Creadores y Comité de Bienestar Animal")
+        col_u, col_p = st.columns(2)
+        with col_u:
+            usr_st = st.text_input("Usuario Administrador:", placeholder="Admin")
+        with col_p:
+            pwd_st = st.text_input("Contraseña Administrador:", type="password", placeholder="••••••••")
+
+        if usr_st.strip().lower() == "admin" and pwd_st.strip() == "admin123":
+            st.success("🔓 Sesión de Administrador activa (Creadores / Comité de Bienestar Animal)")
+            df_sols = cargar_solicitudes_adopcion()
+            if not df_sols.empty:
+                conteo_est = df_sols["estado_solicitud"].value_counts().to_dict()
+                m1, m2, m3, m4 = st.columns(4)
+                m1.metric("Total Solicitudes", f"{len(df_sols)}")
+                m2.metric("🟢 Aceptadas", f"{conteo_est.get('Aceptada', 0)}")
+                m3.metric("🟡 En Espera", f"{conteo_est.get('En espera', 0)}")
+                m4.metric("🔴 Negadas", f"{conteo_est.get('Negada', 0)}")
+
+                st.dataframe(df_sols, width="stretch")
+
+                st.markdown("##### ⚖️ Decisión del Comité (Aceptar / Poner en espera / Negar) o Evaluación Automática Airflow")
+                col_sel, col_obs = st.columns([1, 2])
+                opciones_rad = [
+                    f"{r['radicado']} — {r['nombre_solicitante']} -> {r['nombre_animal']} (Estado: {r['estado_solicitud']})"
+                    for _, r in df_sols.iterrows()
+                ]
+                with col_sel:
+                    rad_sel_texto = st.selectbox("Selecciona una solicitud por radicado:", opciones_rad)
+                    rad_elegido = rad_sel_texto.split(" — ")[0].strip()
+                with col_obs:
+                    obs_manual = st.text_input(
+                        "Observación / motivo de la decisión (opcional):",
+                        placeholder="Ej. Aprobada tras entrevista / En espera de visita / Negada por falta de cerramiento",
+                    )
+
+                b1, b2, b3, b4 = st.columns(4)
+                if b1.button("✅ Aceptar Solicitud", width="stretch"):
+                    actualizar_estado_solicitud_adopcion(rad_elegido, "Aceptada", obs_manual)
+                    st.success(f"Solicitud {rad_elegido} marcada como ACEPTADA (Animal pasa a Adoptado).")
+                    st.rerun()
+                if b2.button("⏳ Poner en Espera", width="stretch"):
+                    actualizar_estado_solicitud_adopcion(rad_elegido, "En espera", obs_manual)
+                    st.warning(f"Solicitud {rad_elegido} puesta EN ESPERA de verificación.")
+                    st.rerun()
+                if b3.button("❌ Negar Solicitud", width="stretch"):
+                    actualizar_estado_solicitud_adopcion(rad_elegido, "Negada", obs_manual)
+                    st.error(f"Solicitud {rad_elegido} NEGADA (El animal vuelve a estar Disponible).")
+                    st.rerun()
+                if b4.button("🤖 Evaluar Pendientes (Airflow)", width="stretch"):
+                    res_af = evaluar_solicitudes_automatico_airflow()
+                    st.info(
+                        f"Airflow evaluó las solicitudes: {res_af['aceptadas']} Aceptadas, "
+                        f"{res_af['en_espera']} En espera, {res_af['negadas']} Negadas."
+                    )
+                    st.rerun()
+        else:
+            st.warning("🔒 Ingresa el usuario `Admin` y la contraseña para desbloquear la bandeja del Comité de Bienestar Animal.")
 
 
 def _ejecutando_en_streamlit() -> bool:

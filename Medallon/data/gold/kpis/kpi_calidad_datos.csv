@@ -4,8 +4,8 @@ registros_duplicados_por_id,0.0,0.0,se eliminan
 registros_identicos_sin_id,4117.0,4117.0,informativo: pueden ser solicitudes distintas; no se eliminan
 pct_registros_con_comuna,89.81,89.92,meta Avance 1: 98%
 pct_registros_sin_comuna,10.19,10.08,
-pct_registros_con_barrio,55.87,55.86,meta Avance 1: 80%
-pct_registros_sin_barrio,44.13,44.14,
+pct_registros_con_barrio,55.87,55.87,meta Avance 1: 80%
+pct_registros_sin_barrio,44.13,44.13,
 valores_distintos_comuna,83.0,42.0,catalogo unico de comunas/corregimientos
 valores_distintos_clase_peticion,9.0,8.0,
 registros_con_error_de_fecha,27.0,12.0,antes: invalidas + corregibles; despues: invalidas (fecha vacia)

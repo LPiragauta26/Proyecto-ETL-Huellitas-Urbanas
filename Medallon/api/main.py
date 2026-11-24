@@ -6,7 +6,7 @@ from pydantic import BaseModel, Field
 import yaml
 
 from fastapi import FastAPI, HTTPException, Query
-from fastapi.responses import HTMLResponse
+from fastapi.responses import FileResponse, HTMLResponse
 
 ###################################################
 # Crear la ruta donde está el proyecto medallón
@@ -224,6 +224,15 @@ class SolicitudAdopcionInput(BaseModel):
 class CambioEstadoSolicitudInput(BaseModel):
     nuevo_estado: str = Field(..., description="Nuevo estado: 'Aceptada', 'En espera' o 'Negada'")
     observacion: Optional[str] = Field(None, description="Motivo o comentario del comité de bienestar animal")
+
+
+class AdminLoginInput(BaseModel):
+    usuario: str = Field(..., description="Usuario administrador (Admin)")
+    password: str = Field(..., description="Contraseña administrador (admin123)")
+
+
+class CambioEstadoAnimalInput(BaseModel):
+    nuevo_estado: str = Field(..., description="Estado del animal: 'Disponible', 'En espera' o 'Adoptado'")
 
 
 SOLICITUDES_SEMILLA = [
@@ -871,66 +880,351 @@ def ejecutar_evaluacion_airflow():
     }
 
 
+@app.get("/adopciones/consultar-mi-solicitud", tags=["Adopciones"])
+def consultar_mi_solicitud_ciudadano(
+    q: str = Query(..., description="Número de radicado (ej. ADOP-2026-0001) o documento de identidad"),
+):
+    """Permite a un ciudadano consultar únicamente el estado de su propia solicitud por radicado o cédula."""
+    df_sol = cargar_solicitudes_adopcion()
+    buscado = q.strip().upper()
+    if df_sol.empty or not buscado:
+        return {"encontrado": False, "resultados": []}
+
+    mask = (df_sol["radicado"].astype(str).str.upper() == buscado) | (
+        df_sol["documento"].astype(str).str.upper() == buscado
+    )
+    sub = preparar_dataframe_json(df_sol[mask])
+    campos_publicos = [
+        "radicado",
+        "fecha_solicitud",
+        "id_animal",
+        "nombre_animal",
+        "especie",
+        "ciudad_animal",
+        "estado_solicitud",
+        "observacion_comite",
+    ]
+    cols = [c for c in campos_publicos if c in sub.columns]
+    return {
+        "encontrado": bool(len(sub) > 0),
+        "resultados": sub[cols].to_dict(orient="records"),
+    }
+
+
+@app.post("/adopciones/animales/{id_animal}/estado", tags=["Panel Privado Creadores"])
+def cambiar_estado_animal_admin(id_animal: str, datos: CambioEstadoAnimalInput):
+    """Permite a los administradores actualizar el estado de disponibilidad de un animal."""
+    df_cat = asegurar_catalogo_adopciones()
+    mask = df_cat["id_animal"].astype(str).str.upper() == id_animal.strip().upper()
+    if not mask.any():
+        raise HTTPException(status_code=404, detail=f"No existe el animal '{id_animal}'.")
+    df_cat.loc[mask, "estado"] = datos.nuevo_estado.strip()
+    df_cat.to_csv(obtener_ruta_catalogo_adopciones(), index=False, encoding="utf-8-sig")
+    return {
+        "mensaje": f"Estado del animal {id_animal} actualizado a '{datos.nuevo_estado}'.",
+        "animal": preparar_dataframe_json(df_cat[mask]).to_dict(orient="records")[0],
+    }
+
+
+@app.post("/admin/login", tags=["Panel Privado Creadores"])
+def login_administrador(credenciales: AdminLoginInput):
+    """Valida las credenciales del Panel Privado de Creadores (Usuario: Admin | Contraseña: admin123)."""
+    usr = credenciales.usuario.strip()
+    pwd = credenciales.password.strip()
+    if usr.lower() == "admin" and pwd == "admin123":
+        return {
+            "autenticado": True,
+            "usuario": "Admin",
+            "rol": "Creador / Comité de Bienestar Animal",
+            "mensaje": "Acceso concedido al Panel Privado de Administración.",
+        }
+    raise HTTPException(
+        status_code=401,
+        detail="Credenciales incorrectas. Verifica el usuario y la contraseña de administrador.",
+    )
+
+
+@app.get("/evidencias/{nombre_archivo}", tags=["Evidencias Gráficas"])
+def obtener_grafica_evidencia(nombre_archivo: str):
+    """Sirve las 8 gráficas PNG generadas por el pipeline ETL para visualización en el portal web y admin."""
+    config = cargar_config()
+    rutas_cfg = config.get("paths") or {}
+    ev_dir = MEDALLON_DIR / rutas_cfg.get("evidencias_dir", "evidencias")
+    seguro = Path(nombre_archivo).name
+    ruta_img = ev_dir / seguro
+    if not ruta_img.exists() or ruta_img.suffix.lower() != ".png":
+        raise HTTPException(status_code=404, detail=f"La gráfica '{seguro}' no existe en evidencias/.")
+    return FileResponse(ruta_img, media_type="image/png")
+
+
 @app.get("/portal", response_class=HTMLResponse, tags=["Portal Ciudadano"])
 def portal_ciudadano_gold_y_adopcion():
-    """Interfaz web interactiva dentro de la API para consultar datos Gold y adoptar animales rescatados."""
+    """Interfaz web interactiva dentro de la API para consultar datos Gold, preguntas de negocio y adoptar animales."""
     return """<!DOCTYPE html>
 <html lang="es">
 <head>
   <meta charset="UTF-8" />
   <title>Portal Ciudadano Gold y Adopción — Bienestar Animal (Cali & Bogotá)</title>
   <style>
-    body { font-family: 'Segoe UI', Arial, sans-serif; margin: 0; background: #f4f7f9; color: #1e293b; }
-    header { background: linear-gradient(135deg, #0f766e, #1e3a8a); color: white; padding: 24px 32px; }
-    header h1 { margin: 0 0 8px 0; font-size: 24px; }
+    body { font-family: 'Segoe UI', Arial, sans-serif; margin: 0; background: #f1f5f9; color: #1e293b; }
+    header { background: linear-gradient(135deg, #0f766e, #1e3a8a); color: white; padding: 24px 32px; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 16px; }
+    header h1 { margin: 0 0 6px 0; font-size: 24px; }
     header p { margin: 0; opacity: 0.92; font-size: 14px; }
-    .container { max-width: 1200px; margin: 24px auto; padding: 0 20px; }
-    .tabs { display: flex; gap: 12px; margin-bottom: 20px; }
-    .tab-btn { padding: 10px 20px; border: none; border-radius: 8px; cursor: pointer; font-weight: 600; background: #e2e8f0; color: #334155; }
-    .tab-btn.active { background: #0f766e; color: white; }
-    .panel { display: none; background: white; padding: 24px; border-radius: 12px; box-shadow: 0 2px 10px rgba(0,0,0,0.06); }
+    .btn-admin-link { background: rgba(255,255,255,0.16); color: #ffffff; text-decoration: none; padding: 10px 16px; border-radius: 8px; font-weight: 600; font-size: 13px; border: 1px solid rgba(255,255,255,0.35); transition: 0.2s; }
+    .btn-admin-link:hover { background: rgba(255,255,255,0.28); }
+    .container { max-width: 1240px; margin: 24px auto; padding: 0 20px; }
+    .tabs { display: flex; gap: 12px; margin-bottom: 20px; flex-wrap: wrap; }
+    .tab-btn { padding: 11px 22px; border: none; border-radius: 10px; cursor: pointer; font-weight: 700; font-size: 14px; background: #e2e8f0; color: #334155; transition: 0.2s; }
+    .tab-btn.active { background: #0f766e; color: white; box-shadow: 0 4px 12px rgba(15,118,110,0.25); }
+    .panel { display: none; background: white; padding: 26px; border-radius: 14px; box-shadow: 0 4px 16px rgba(0,0,0,0.06); }
     .panel.active { display: block; }
     .grid-cards { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 16px; margin-top: 16px; }
-    .card { border: 1px solid #e2e8f0; border-radius: 10px; padding: 16px; background: #ffffff; }
+    .card { border: 1px solid #e2e8f0; border-radius: 12px; padding: 16px; background: #ffffff; transition: transform 0.15s; }
+    .card:hover { transform: translateY(-2px); box-shadow: 0 6px 14px rgba(0,0,0,0.06); }
     .badge { display: inline-block; padding: 4px 10px; border-radius: 999px; font-size: 12px; font-weight: 700; }
     .badge-disp, .badge-aceptada { background: #dcfce7; color: #166534; }
     .badge-proc, .badge-espera { background: #fef3c7; color: #92400e; }
     .badge-negada { background: #fee2e2; color: #991b1b; }
     .badge-rev { background: #e0f2fe; color: #075985; }
     .filters { display: flex; gap: 12px; flex-wrap: wrap; margin-bottom: 16px; align-items: center; }
-    select, input, textarea, button { padding: 8px 12px; border: 1px solid #cbd5e1; border-radius: 6px; font-size: 14px; }
+    select, input, textarea, button { padding: 9px 12px; border: 1px solid #cbd5e1; border-radius: 8px; font-size: 14px; }
     button.primary { background: #0f766e; color: white; border: none; font-weight: 600; cursor: pointer; }
     button.primary:hover { background: #115e59; }
-    .btn-sm { padding: 5px 10px; font-size: 12px; font-weight: 600; border: none; border-radius: 6px; cursor: pointer; margin-right: 4px; }
-    .btn-ok { background: #16a34a; color: white; }
-    .btn-wait { background: #d97706; color: white; }
-    .btn-deny { background: #dc2626; color: white; }
     table { width: 100%; border-collapse: collapse; margin-top: 12px; font-size: 13px; }
-    th, td { border-bottom: 1px solid #e2e8f0; padding: 8px 10px; text-align: left; }
+    th, td { border-bottom: 1px solid #e2e8f0; padding: 9px 10px; text-align: left; }
     th { background: #f8fafc; font-weight: 600; }
     .form-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-top: 12px; }
     .alert { padding: 12px 16px; border-radius: 8px; margin-top: 14px; font-weight: 600; }
     .alert-ok { background: #dcfce7; color: #166534; }
     .alert-err { background: #fee2e2; color: #991b1b; }
-    .kpi-row { display: grid; grid-template-columns: repeat(4, 1fr); gap: 12px; margin: 14px 0; }
-    .kpi-box { padding: 12px 16px; border-radius: 10px; border: 1px solid #e2e8f0; background: #f8fafc; text-align: center; }
-    .kpi-box strong { display: block; font-size: 22px; margin-top: 4px; }
+    /* Estilos para Preguntas de Negocio en Gráficas y FAQ */
+    .hero-stats { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 14px; margin-bottom: 24px; }
+    .stat-card { background: linear-gradient(135deg, #f8fafc, #f0fdfa); border: 1px solid #ccfbf1; border-radius: 12px; padding: 16px; text-align: center; }
+    .stat-card .num { font-size: 26px; font-weight: 800; color: #0f766e; display: block; }
+    .stat-card .lbl { font-size: 13px; color: #475569; font-weight: 600; }
+    .charts-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(520px, 1fr)); gap: 22px; margin-top: 16px; }
+    .chart-box { border: 1px solid #e2e8f0; border-radius: 12px; padding: 20px; background: #ffffff; box-shadow: 0 2px 8px rgba(0,0,0,0.03); }
+    .chart-box h3 { margin: 0 0 8px 0; color: #0f172a; font-size: 17px; }
+    .chart-box p.explain { margin: 0 0 14px 0; font-size: 13.5px; color: #475569; line-height: 1.5; }
+    .bar-row { margin-bottom: 10px; }
+    .bar-label { display: flex; justify-content: space-between; font-size: 12.5px; font-weight: 600; margin-bottom: 4px; color: #334155; }
+    .bar-track { width: 100%; background: #f1f5f9; height: 12px; border-radius: 999px; overflow: hidden; }
+    .bar-fill { height: 100%; border-radius: 999px; }
+    .img-evidencia { width: 100%; border-radius: 8px; border: 1px solid #e2e8f0; margin-top: 12px; }
+    .faq-section { margin-top: 32px; }
+    details.faq-item { border: 1px solid #cbd5e1; border-radius: 10px; padding: 14px 18px; margin-bottom: 12px; background: #f8fafc; transition: 0.2s; }
+    details.faq-item[open] { background: #ffffff; border-color: #0f766e; box-shadow: 0 4px 12px rgba(15,118,110,0.08); }
+    details.faq-item summary { font-weight: 700; font-size: 15px; color: #0f172a; cursor: pointer; list-style: none; display: flex; justify-content: space-between; align-items: center; }
+    details.faq-item summary::after { content: '➕'; font-size: 14px; color: #0f766e; }
+    details.faq-item[open] summary::after { content: '➖'; }
+    details.faq-item .faq-body { margin-top: 12px; font-size: 14px; color: #334155; line-height: 1.6; border-top: 1px solid #e2e8f0; padding-top: 10px; }
   </style>
 </head>
 <body>
   <header>
-    <h1>🐾 Portal Ciudadano: Datos Gold y Adopción Responsable (Cali CBA & Bogotá IDPYBA)</h1>
-    <p>Conectado en vivo a la API FastAPI del Pipeline ETL Medallion | <a href="/docs" style="color:#99f6e4;">Ver Swagger (/docs)</a></p>
+    <div>
+      <h1>🐾 Portal Ciudadano: Bienestar Animal, Preguntas de Negocio y Adopción (Cali & Bogotá)</h1>
+      <p>Arquitectura Medallion (Bronze → Silver → Gold) | Cali (CBA / UAEPA) & Bogotá (IDPYBA / UCA)</p>
+    </div>
+    <div>
+      <a href="/admin" class="btn-admin-link">🔐 Acceso Admin / Creadores</a>
+    </div>
   </header>
+
   <div class="container">
     <div class="tabs">
-      <button class="tab-btn active" onclick="mostrarTab('adopcion', this)">🐶 Animales para Adopción</button>
-      <button class="tab-btn" onclick="mostrarTab('gold', this)">📊 Consultar Datos Gold y KPIs</button>
+      <button class="tab-btn active" onclick="mostrarTab('negocio', this)">📈 Preguntas de Negocio (Gráficas y Preguntas Frecuentes)</button>
+      <button class="tab-btn" onclick="mostrarTab('adopcion', this)">🐶 Adoptar un Animal Rescatado</button>
+      <button class="tab-btn" onclick="mostrarTab('gold', this)">📊 Explorador de Datos Abiertos (Gold)</button>
     </div>
 
-    <!-- PANEL 1: ADOPCIONES (SOLO VISTA PÚBLICA CIUDADANA) -->
-    <div id="panel-adopcion" class="panel active">
-      <h2>Animales Rescatados y Rehabilitados listos para Adopción</h2>
+    <!-- PANEL 1: PREGUNTAS DE NEGOCIO (GRÁFICAS + FAQ CIUDADANO) -->
+    <div id="panel-negocio" class="panel active">
+      <h2 style="margin-top:0;">📈 Hallazgos y Preguntas de Negocio del Proyecto Bienestar Animal</h2>
+      <p style="color:#475569; font-size:14.5px; margin-bottom:20px;">
+        Descubre de forma visual qué revelaron los <strong>17.642 reportes de Cali</strong> y las <strong>947 urgencias veterinarias de Bogotá</strong> tras pasar por nuestro pipeline de datos Medallion:
+      </p>
+
+      <div class="hero-stats">
+        <div class="stat-card"><span class="num">17.642</span><span class="lbl">Solicitudes Procesadas en Cali (100% conservadas)</span></div>
+        <div class="stat-card"><span class="num">947</span><span class="lbl">Urgencias Veterinarias en 20 Localidades de Bogotá</span></div>
+        <div class="stat-card"><span class="num">-94,8%</span><span class="lbl">Caída de Adopciones en Cali (2024 vs 2025)</span></div>
+        <div class="stat-card"><span class="num">42 Zonas</span><span class="lbl">Comunas y Corregimientos Homologados (de 83 crudos)</span></div>
+      </div>
+
+      <h3 style="color:#0f766e; border-bottom:2px solid #ccfbf1; padding-bottom:8px;">📊 Parte 1: Preguntas de Negocio Explicadas con Gráficas</h3>
+      <div class="charts-grid">
+
+        <!-- PREGUNTA GRÁFICA 1 -->
+        <div class="chart-box">
+          <h3>1. ¿Dónde se concentran más casos y urgencias de animales en Cali?</h3>
+          <p class="explain">
+            Al cruzar los casos con la población oficial de cada comuna, creamos un <strong>Índice de Priorización (0 a 100)</strong>. La <strong>Comuna 20 (Siloé)</strong> lidera con <strong>2.310 solicitudes y puntaje 99,1</strong>, seguida de la Comuna 18 y Comuna 13. En zona rural lideran <strong>La Buitrera (213 casos)</strong> y <strong>Villacarmelo</strong>.
+          </p>
+          <div class="bar-row">
+            <div class="bar-label"><span>🥇 Comuna 20 (Urbana - Prioridad #1: 99,1 pts)</span><span>2.310 casos (156 críticos)</span></div>
+            <div class="bar-track"><div class="bar-fill" style="width:100%; background:#0f766e;"></div></div>
+          </div>
+          <div class="bar-row">
+            <div class="bar-label"><span>🥈 Comuna 18 (Urbana - Prioridad #2: 61,9 pts)</span><span>1.441 casos (96 críticos)</span></div>
+            <div class="bar-track"><div class="bar-fill" style="width:62.4%; background:#14b8a6;"></div></div>
+          </div>
+          <div class="bar-row">
+            <div class="bar-label"><span>🥉 Comuna 13 (Urbana - Prioridad #4: 47,5 pts)</span><span>1.146 casos (75 críticos)</span></div>
+            <div class="bar-track"><div class="bar-fill" style="width:49.6%; background:#0284c7;"></div></div>
+          </div>
+          <div class="bar-row">
+            <div class="bar-label"><span>4️⃣ Comuna 14 (Urbana - Prioridad #5: 46,5 pts)</span><span>1.084 casos (74 críticos)</span></div>
+            <div class="bar-track"><div class="bar-fill" style="width:46.9%; background:#38bdf8;"></div></div>
+          </div>
+          <div class="bar-row">
+            <div class="bar-label"><span>5️⃣ Comuna 21 (Urbana - Prioridad #3: 47,8 pts)</span><span>961 casos (90 críticos)</span></div>
+            <div class="bar-track"><div class="bar-fill" style="width:41.6%; background:#6366f1;"></div></div>
+          </div>
+          <img class="img-evidencia" src="/evidencias/01_casos_por_comuna.png" alt="Gráfica Top Comunas Cali" />
+        </div>
+
+        <!-- PREGUNTA GRÁFICA 2 -->
+        <div class="chart-box">
+          <h3>2. ¿Cómo cambió la atención entre 2024 y 2025 y por qué es urgente adoptar?</h3>
+          <p class="explain">
+            Entre 2024 y 2025 la atención en Cali pasó de preventiva a clínica de emergencia: las <strong>Urgencias subieron +137,7%</strong> y las <strong>Citas médicas +81,3%</strong>, pero las <strong>Esterilizaciones cayeron -91,8%</strong> y las <strong>Adopciones cayeron -94,8% (de 58 a solo 3 casos)</strong>. Por eso creamos este Portal Digital de Adopción.
+          </p>
+          <div class="bar-row">
+            <div class="bar-label"><span>🚨 Urgencias Veterinarias (2024: 260 → 2025: 618)</span><span style="color:#dc2626;">+137,7% incremento</span></div>
+            <div class="bar-track"><div class="bar-fill" style="width:92%; background:#dc2626;"></div></div>
+          </div>
+          <div class="bar-row">
+            <div class="bar-label"><span>🩺 Citas Médicas (2024: 1.581 → 2025: 2.866)</span><span style="color:#0284c7;">+81,3% incremento</span></div>
+            <div class="bar-track"><div class="bar-fill" style="width:78%; background:#0284c7;"></div></div>
+          </div>
+          <div class="bar-row">
+            <div class="bar-label"><span>✂️ Esterilizaciones (2024: 1.822 → 2025: 149)</span><span style="color:#d97706;">-91,8% caída</span></div>
+            <div class="bar-track"><div class="bar-fill" style="width:15%; background:#d97706;"></div></div>
+          </div>
+          <div class="bar-row">
+            <div class="bar-label"><span>🐾 Adopciones (2024: 58 → 2025: 3 casos)</span><span style="color:#991b1b;">-94,8% caída crítica</span></div>
+            <div class="bar-track"><div class="bar-fill" style="width:8%; background:#991b1b;"></div></div>
+          </div>
+          <img class="img-evidencia" src="/evidencias/05_cambio_mix_2024_vs_2025.png" alt="Gráfica Cambio Mix 2024 vs 2025" />
+        </div>
+
+        <!-- PREGUNTA GRÁFICA 3 -->
+        <div class="chart-box">
+          <h3>3. ¿Cuáles son los barrios más críticos ("Hotspots") de Cali?</h3>
+          <p class="explain">
+            Al bajar al nivel de barrio, descubrimos que un solo barrio —<strong>Siloé (Comuna 20)</strong>— concentra <strong>662 solicitudes y 78 casos críticos</strong> (53 urgencias + 25 denuncias), superando por sí solo a 15 comunas completas de la ciudad.
+          </p>
+          <div class="bar-row">
+            <div class="bar-label"><span>🔥 1. Siloé (Comuna 20)</span><span>662 casos | 78 críticos (53 urg / 25 den)</span></div>
+            <div class="bar-track"><div class="bar-fill" style="width:100%; background:#b91c1c;"></div></div>
+          </div>
+          <div class="bar-row">
+            <div class="bar-label"><span>🔥 2. Terrón Colorado (Comuna 1)</span><span>288 casos | 53 críticos (34 urg / 19 den)</span></div>
+            <div class="bar-track"><div class="bar-fill" style="width:68%; background:#ea580c;"></div></div>
+          </div>
+          <div class="bar-row">
+            <div class="bar-label"><span>🔥 3. Los Chorros (Comuna 18)</span><span>236 casos | 32 críticos (25 urg / 7 den)</span></div>
+            <div class="bar-track"><div class="bar-fill" style="width:41%; background:#d97706;"></div></div>
+          </div>
+          <div class="bar-row">
+            <div class="bar-label"><span>🔥 4. Manuela Beltrán (Comuna 14)</span><span>121 casos | 22 críticos (18 urg / 4 den)</span></div>
+            <div class="bar-track"><div class="bar-fill" style="width:28%; background:#0f766e;"></div></div>
+          </div>
+          <div class="bar-row">
+            <div class="bar-label"><span>🔥 5. Ciudad Córdoba (Comuna 15)</span><span>101 casos | 22 críticos (7 urg / 15 den)</span></div>
+            <div class="bar-track"><div class="bar-fill" style="width:28%; background:#0284c7;"></div></div>
+          </div>
+          <img class="img-evidencia" src="/evidencias/07_top_barrios_criticos_cali.png" alt="Gráfica Top Barrios Críticos Cali" />
+        </div>
+
+        <!-- PREGUNTA GRÁFICA 4 -->
+        <div class="chart-box">
+          <h3>4. ¿Qué ocurre en Bogotá al separar la sede UCA (Engativá) del resto de la ciudad?</h3>
+          <p class="explain">
+            <strong>Engativá concentra el 69,3% de las atenciones de Bogotá (656 de 947)</strong> porque allí está ubicada físicamente la <strong>Unidad de Cuidado Animal (UCA)</strong>. Al aislar las otras <strong>19 localidades (291 urgencias en calle)</strong>, emerge el perfil real: <strong>84,9% ingresa por reporte ciudadano</strong> y lideran las <strong>enfermedades infecciosas (47,1%)</strong> y <strong>atropellamientos/politraumatismos (20,6%)</strong>.
+          </p>
+          <div class="bar-row">
+            <div class="bar-label"><span>🏥 Engativá (Sede física UCA - 656 atenciones)</span><span>69,3% del total Bogotá</span></div>
+            <div class="bar-track"><div class="bar-fill" style="width:69.3%; background:#1e3a8a;"></div></div>
+          </div>
+          <div class="bar-row">
+            <div class="bar-label"><span>🌆 Resto de las 19 Localidades (Ciudad Bolívar, Suba, Usme, Bosa...)</span><span>30,7% (291 en calle)</span></div>
+            <div class="bar-track"><div class="bar-fill" style="width:30.7%; background:#0f766e;"></div></div>
+          </div>
+          <div class="bar-row">
+            <div class="bar-label"><span>🦠 Diagnóstico #1 en las 19 localidades: Infeccioso</span><span>47,1% (137 casos)</span></div>
+            <div class="bar-track"><div class="bar-fill" style="width:47.1%; background:#d97706;"></div></div>
+          </div>
+          <div class="bar-row">
+            <div class="bar-label"><span>🚑 Diagnóstico #2 en las 19 localidades: Politraumatismo vial</span><span>20,6% (60 casos)</span></div>
+            <div class="bar-track"><div class="bar-fill" style="width:20.6%; background:#dc2626;"></div></div>
+          </div>
+          <img class="img-evidencia" src="/evidencias/08_bogota_sesgo_uca_vs_resto.png" alt="Gráfica Bogotá Engativá vs Resto" />
+        </div>
+
+      </div>
+
+      <!-- PARTE 2: PREGUNTAS FRECUENTES (FAQ SIN GRÁFICAS) -->
+      <div class="faq-section">
+        <h3 style="color:#1e3a8a; border-bottom:2px solid #dbeafe; padding-bottom:8px;">❓ Parte 2: Preguntas Frecuentes de Negocio y Ciudadanía (Haz clic en cada pregunta)</h3>
+
+        <details class="faq-item" open>
+          <summary>1. ¿En qué zonas de Cali hay más denuncias de maltrato animal frente a baja esterilización?</summary>
+          <div class="faq-body">
+            Nuestro indicador de <strong>Brecha de Prevención (`kpi_brecha_prevencion_zona`)</strong> reveló dos perfiles distintos en Cali:<br>
+            • <strong>Comunas con alta denuncia de maltrato y baja esterilización pública:</strong> La <strong>Comuna 17</strong> es la #1 en denuncias de toda Cali (<strong>112 denuncias</strong>, 27% de sus reportes) con solo 37 esterilizaciones (ratio preventivo de <code>0,31</code>). Igual sucede en la <strong>Comuna 22</strong> (donde el <strong>41,8%</strong> de todos sus casos son denuncias de maltrato y tiene la tasa más alta: <strong>40,36 denuncias por cada 10.000 habitantes</strong>) y el corregimiento de <strong>Pance</strong> (26,8% denuncias). En estas zonas la prioridad es inspección de tenencia responsable y control policivo.<br>
+            • <strong>Comunas vulnerables con déficit de jornadas preventivas:</strong> <strong>Comuna 1 (Terrón Colorado)</strong> tiene 104 casos críticos frente a solo 72 esterilizaciones (ratio <code>0,69</code>), por lo que requiere brigadas móviles gratuitas de esterilización.
+          </div>
+        </details>
+
+        <details class="faq-item">
+          <summary>2. ¿Qué días de la semana se atienden más animales y cuándo se hacen las jornadas de esterilización?</summary>
+          <div class="faq-body">
+            Según el análisis de <strong>Patrón Semanal Operativo (`kpi_patron_semanal_cali`)</strong>:<br>
+            • El <strong>80,6% de la demanda</strong> ingresa en días hábiles (lunes a viernes), alcanzando el pico máximo los <strong>martes (3.052 casos)</strong> y <strong>miércoles (2.886 casos)</strong>.<br>
+            • Los <strong>sábados (1.856 casos)</strong> destacan porque concentran la <strong>mayor proporción relativa de Esterilizaciones de toda la semana (14,5% de los servicios del día)</strong> gracias a las jornadas comunitarias de fin de semana en barrios.
+          </div>
+        </details>
+
+        <details class="faq-item">
+          <summary>3. ¿Por qué faltaban datos de barrio o comuna en algunos registros y cómo lo corrigió el proyecto (OKR 3)?</summary>
+          <div class="faq-body">
+            La auditoría de <strong>Calidad por Clase (`kpi_calidad_por_clase`)</strong> demostró que los vacíos geográficos no son al azar:<br>
+            • El <strong>81,2% de los registros sin comuna</strong> proviene del canal administrativo de <strong>PQR</strong>.<br>
+            • En <strong>Esterilizaciones</strong> sí se registra la comuna (98,2% completas), pero el <strong>67,1% no tiene barrio</strong> porque en los operativos móviles masivos solo se anota la comuna del evento.<br>
+            • <strong>Solución de Ingeniería de Datos:</strong> Sin eliminar ni un solo registro (<strong>17.642 → 17.642</strong>), estandarizamos <strong>83 variantes mal escritas de comunas en 42 zonas oficiales</strong>, recuperamos comunas faltantes inferidas automáticamente desde el nombre del barrio (con ≥95% de acuerdo) y corregimos 15 fechas con año mal digitado (<code>0225 → 2025</code>).
+          </div>
+        </details>
+
+        <details class="faq-item">
+          <summary>4. ¿Se pueden comparar directamente todos los números de Cali (17.642) con los de Bogotá (947)?</summary>
+          <div class="faq-body">
+            No directamente en su totalidad, y por eso construimos una <strong>tabla de homologación (`dim_categoria.csv`)</strong>:<br>
+            • El dataset de <strong>Cali (CBA/Uaepa)</strong> registra <em>todas</em> las interacciones ciudadanas individuales (PQR, citas médicas, esterilizaciones, denuncias, urgencias y adopciones).<br>
+            • El dataset abierto de <strong>Bogotá (IDPYBA)</strong> reporta exclusivamente <strong>atenciones clínicas de urgencia veterinaria agregadas en las 20 localidades</strong>.<br>
+            • Al homologar ambas fuentes en la capa Gold, la categoría directamente comparable 1 a 1 es <strong>Urgencias Veterinarias</strong>: <strong>879 urgencias en Cali vs. 947 urgencias en Bogotá</strong>.
+          </div>
+        </details>
+
+        <details class="faq-item">
+          <summary>5. ¿Cómo funciona la postulación para adoptar un perro o gato rescatado en este portal?</summary>
+          <div class="faq-body">
+            1. Ve a la pestaña <strong>🐶 Adoptar un Animal Rescatado</strong> y elige uno de los animales rehabilitados por el CBA (Cali) o la UCA/IDPYBA (Bogotá).<br>
+            2. Completa el formulario con tus datos de contacto, tipo de vivienda y motivación de tenencia responsable. Recibirás un <strong>número de radicado único</strong> (ej. <code>ADOP-2026-0001</code>).<br>
+            3. Nuestro sistema automatizado en <strong>Apache Airflow</strong> y el <strong>Comité de Bienestar Animal</strong> evalúan la solicitud y la clasifican en:<br>
+            &nbsp;&nbsp;• 🟢 <strong>Aceptada:</strong> Cumple condiciones de vivienda con cerramiento seguro y tenencia responsable (el animal pasa a estado <em>Adoptado</em>).<br>
+            &nbsp;&nbsp;• 🟡 <strong>En espera:</strong> Pendiente de entrevista virtual o verificación domiciliaria/traslado.<br>
+            &nbsp;&nbsp;• 🔴 <strong>Negada:</strong> Si la vivienda no cuenta con condiciones seguras; el animal vuelve automáticamente a estar <em>Disponible</em> para otra familia.<br>
+            4. Puedes consultar el estado de tu propio trámite en cualquier momento ingresando tu radicado o cédula en la pestaña de Adopción.
+          </div>
+        </details>
+      </div>
+    </div>
+
+    <!-- PANEL 2: ADOPCIONES (VISTA PÚBLICA CIUDADANA) -->
+    <div id="panel-adopcion" class="panel">
+      <h2>🐾 Animales Rescatados y Rehabilitados listos para Adopción</h2>
       <p id="alerta-etl" style="background:#fffbeb; border-left:4px solid #f59e0b; padding:10px 14px; border-radius:6px;"></p>
       <div class="filters">
         <label>Ciudad:
@@ -969,11 +1263,20 @@ def portal_ciudadano_gold_y_adopcion():
         </div>
       </form>
       <div id="mensaje-adopcion"></div>
+
+      <hr style="margin: 28px 0; border: none; border-top: 1px solid #e2e8f0;" />
+      <h3>🔍 Consultar el Estado de mi Solicitud (Por Radicado o Documento)</h3>
+      <p style="font-size:13.5px; color:#475569; margin-top:0;">Ingresa tu número de radicado (ej. <code>ADOP-2026-0001</code>) o tu documento de identidad para conocer si tu solicitud fue <strong>Aceptada</strong>, está <strong>En espera</strong> o fue <strong>Negada</strong>:</p>
+      <div class="filters">
+        <input type="text" id="q-radicado" placeholder="Ej. ADOP-2026-0001 o tu cédula" style="min-width:260px;" />
+        <button type="button" class="primary" onclick="consultarMiSolicitud()">Consultar mi estado</button>
+      </div>
+      <div id="resultado-mi-solicitud"></div>
     </div>
 
-    <!-- PANEL 2: CONSULTA GOLD -->
+    <!-- PANEL 3: CONSULTA GOLD -->
     <div id="panel-gold" class="panel">
-      <h2>Explorador Ciudadano de la Capa Gold (`gold_final.csv`)</h2>
+      <h2>📊 Explorador Ciudadano de la Capa Gold (`gold_final.csv`)</h2>
       <div class="filters">
         <label>Ciudad:
           <select id="f-ciudad-gold" onchange="cargarGold()">
@@ -1089,6 +1392,28 @@ def portal_ciudadano_gold_y_adopcion():
       }
     }
 
+    async function consultarMiSolicitud() {
+      const q = document.getElementById('q-radicado').value.trim();
+      const cont = document.getElementById('resultado-mi-solicitud');
+      if (!q) {
+        cont.innerHTML = `<div class="alert alert-err">Por favor escribe tu número de radicado o documento.</div>`;
+        return;
+      }
+      const r = await fetch('/adopciones/consultar-mi-solicitud?q=' + encodeURIComponent(q));
+      const d = await r.json();
+      if (!d.encontrado) {
+        cont.innerHTML = `<div class="alert alert-err">No encontramos ninguna solicitud con el radicado o documento "${q}".</div>`;
+        return;
+      }
+      cont.innerHTML = d.resultados.map(s => `
+        <div class="card" style="margin-top:10px; border-left:4px solid #0f766e;">
+          <strong>Radicado: ${s.radicado}</strong> (${s.fecha_solicitud}) — Animal: <strong>${s.nombre_animal} (${s.id_animal})</strong><br>
+          <div style="margin-top:6px;">Estado actual: <span class="badge ${claseBadgeEstado(s.estado_solicitud)}">${s.estado_solicitud}</span></div>
+          <p style="margin:6px 0 0 0; font-size:13px; color:#334155;"><strong>Observación del Comité:</strong> ${s.observacion_comite || 'En evaluación'}</p>
+        </div>
+      `).join('');
+    }
+
     async function cargarGold() {
       const ciudad = document.getElementById('f-ciudad-gold').value;
       const cat = document.getElementById('f-cat-gold').value;
@@ -1118,7 +1443,7 @@ def portal_ciudadano_gold_y_adopcion():
 
 @app.get("/admin", response_class=HTMLResponse, tags=["Panel Privado Creadores"])
 def panel_privado_creadores_comite():
-    """Panel privado exclusivo para los creadores / Comité de Bienestar Animal (Aceptar, En espera, Negar + Airflow)."""
+    """Panel privado exclusivo para los creadores / Comité de Bienestar Animal protegido con contraseña (Admin / admin123)."""
     return """<!DOCTYPE html>
 <html lang="es">
 <head>
@@ -1126,17 +1451,26 @@ def panel_privado_creadores_comite():
   <title>🔐 Panel Privado Creadores y Comité — Bienestar Animal</title>
   <style>
     body { font-family: 'Segoe UI', Arial, sans-serif; margin: 0; background: #0f172a; color: #1e293b; }
-    header { background: linear-gradient(135deg, #1e293b, #0f766e); color: white; padding: 22px 32px; border-bottom: 3px solid #14b8a6; }
-    header h1 { margin: 0 0 6px 0; font-size: 22px; }
+    header { background: linear-gradient(135deg, #1e293b, #0f766e); color: white; padding: 20px 32px; border-bottom: 3px solid #14b8a6; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 12px; }
+    header h1 { margin: 0 0 4px 0; font-size: 22px; }
     header p { margin: 0; opacity: 0.9; font-size: 13px; }
-    .container { max-width: 1240px; margin: 24px auto; padding: 0 20px; }
-    .panel { background: white; padding: 24px; border-radius: 12px; box-shadow: 0 4px 16px rgba(0,0,0,0.25); }
+    .container { max-width: 1280px; margin: 24px auto; padding: 0 20px; }
+    .panel { background: white; padding: 24px; border-radius: 12px; box-shadow: 0 4px 16px rgba(0,0,0,0.25); margin-bottom: 20px; }
+    .login-box { max-width: 420px; margin: 60px auto; background: white; padding: 32px; border-radius: 14px; box-shadow: 0 10px 30px rgba(0,0,0,0.4); text-align: center; }
+    .login-box h2 { margin-top: 0; color: #0f172a; }
+    .login-box input { width: 100%; box-sizing: border-box; margin-bottom: 14px; padding: 10px 12px; border: 1px solid #cbd5e1; border-radius: 8px; font-size: 14px; }
+    .admin-tabs { display: flex; gap: 10px; margin-bottom: 18px; flex-wrap: wrap; }
+    .admin-tab-btn { padding: 10px 18px; border: none; border-radius: 8px; cursor: pointer; font-weight: 700; background: #334155; color: #e2e8f0; }
+    .admin-tab-btn.active { background: #14b8a6; color: #0f172a; }
+    .admin-section { display: none; }
+    .admin-section.active { display: block; }
     .badge { display: inline-block; padding: 4px 10px; border-radius: 999px; font-size: 12px; font-weight: 700; }
-    .badge-aceptada { background: #dcfce7; color: #166534; }
-    .badge-espera { background: #fef3c7; color: #92400e; }
-    .badge-negada { background: #fee2e2; color: #991b1b; }
+    .badge-aceptada, .badge-ok { background: #dcfce7; color: #166534; }
+    .badge-espera, .badge-adv { background: #fef3c7; color: #92400e; }
+    .badge-negada, .badge-err { background: #fee2e2; color: #991b1b; }
     .badge-rev { background: #e0f2fe; color: #075985; }
-    button.primary { padding: 9px 14px; background: #0f766e; color: white; border: none; border-radius: 6px; font-weight: 600; cursor: pointer; }
+    button.primary { padding: 9px 16px; background: #0f766e; color: white; border: none; border-radius: 8px; font-weight: 600; cursor: pointer; }
+    button.danger { padding: 8px 14px; background: #dc2626; color: white; border: none; border-radius: 8px; font-weight: 600; cursor: pointer; }
     .btn-sm { padding: 5px 10px; font-size: 12px; font-weight: 600; border: none; border-radius: 6px; cursor: pointer; margin-right: 4px; }
     .btn-ok { background: #16a34a; color: white; }
     .btn-wait { background: #d97706; color: white; }
@@ -1144,52 +1478,211 @@ def panel_privado_creadores_comite():
     table { width: 100%; border-collapse: collapse; margin-top: 12px; font-size: 13px; }
     th, td { border-bottom: 1px solid #e2e8f0; padding: 8px 10px; text-align: left; }
     th { background: #f8fafc; font-weight: 600; }
-    .kpi-row { display: grid; grid-template-columns: repeat(4, 1fr); gap: 12px; margin: 14px 0; }
-    .kpi-box { padding: 12px 16px; border-radius: 10px; border: 1px solid #e2e8f0; background: #f8fafc; text-align: center; }
+    .kpi-row { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 12px; margin: 14px 0; }
+    .kpi-box { padding: 14px 16px; border-radius: 10px; border: 1px solid #e2e8f0; background: #f8fafc; text-align: center; }
     .kpi-box strong { display: block; font-size: 22px; margin-top: 4px; }
     .alert { padding: 12px 16px; border-radius: 8px; margin-top: 12px; font-weight: 600; background: #dcfce7; color: #166534; }
+    .alert-err { background: #fee2e2; color: #991b1b; }
+    .gallery-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(460px, 1fr)); gap: 16px; margin-top: 16px; }
+    .gallery-card { border: 1px solid #e2e8f0; border-radius: 10px; padding: 12px; background: #f8fafc; }
+    .gallery-card img { width: 100%; border-radius: 6px; }
   </style>
 </head>
 <body>
   <header>
-    <h1>🔐 Panel Privado de Creadores — Comité de Bienestar Animal (Control Manual + Airflow)</h1>
-    <p>Vista interna exclusiva para administradores | <a href="/portal" style="color:#99f6e4;">Ir al Portal Público (/portal)</a> | <a href="/docs" style="color:#99f6e4;">Swagger (/docs)</a></p>
+    <div>
+      <h1>🔐 Panel Privado de Creadores y Comité de Bienestar Animal</h1>
+      <p>Control de Adopciones + Airflow + Auditoría Técnica Medallion | <a href="/portal" style="color:#99f6e4;">Ir al Portal Público (/portal)</a> | <a href="/docs" style="color:#99f6e4;">Swagger (/docs)</a></p>
+    </div>
+    <div id="zona-logout" style="display:none;">
+      <span style="margin-right:12px; font-size:13px;">👤 Sesión activa: <strong>Admin</strong></span>
+      <button class="danger" onclick="cerrarSesion()">🚪 Cerrar Sesión</button>
+    </div>
   </header>
-  <div class="container">
-    <div class="panel">
-      <div style="display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:10px;">
-        <h2 style="margin:0;">📋 Bandeja de Solicitudes y Comité de Bienestar Animal (Control Manual + Airflow)</h2>
-        <button class="primary" onclick="evaluarConAirflow()">⚙️ Evaluar Pendientes con Reglas Airflow</button>
+
+  <!-- PANTALLA DE LOGIN CON CONTRASEÑA -->
+  <div id="vista-login" class="login-box">
+    <div style="font-size:42px; margin-bottom:8px;">🔒</div>
+    <h2>Ingreso Exclusivo Creadores</h2>
+    <p style="font-size:13.5px; color:#64748b; margin-bottom:20px;">
+      Ingresa las credenciales de administrador para acceder a la Bandeja del Comité de Adopciones, Airflow y Auditoría ETL.
+    </p>
+    <form onsubmit="iniciarSesion(event)">
+      <input type="text" id="usr-admin" placeholder="Usuario (Admin)" required />
+      <input type="password" id="pwd-admin" placeholder="Contraseña" required />
+      <button type="submit" class="primary" style="width:100%; padding:11px;">Ingresar al Panel de Administración</button>
+    </form>
+    <div id="msg-login"></div>
+  </div>
+
+  <!-- CONTENIDO PRIVADO DE ADMINISTRACIÓN (OCULTO HASTA INICIAR SESIÓN) -->
+  <div id="vista-admin" class="container" style="display:none;">
+    <div class="admin-tabs">
+      <button class="admin-tab-btn active" onclick="mostrarSeccionAdmin('solicitudes', this)">📋 1. Comité de Solicitudes (Aceptar / En espera / Negar + Airflow)</button>
+      <button class="admin-tab-btn" onclick="mostrarSeccionAdmin('animales', this)">🐾 2. Gestión de Animales Rescatados</button>
+      <button class="admin-tab-btn" onclick="mostrarSeccionAdmin('calidad', this)">🏛️ 3. Monitor ETL Medallion & 14 Reglas de Calidad</button>
+      <button class="admin-tab-btn" onclick="mostrarSeccionAdmin('kpis', this)">📊 4. Explorador de los 13 KPIs y 8 Gráficas PNG</button>
+    </div>
+
+    <!-- SECCIÓN 1: BANDEJA DE SOLICITUDES -->
+    <div id="sec-solicitudes" class="admin-section active">
+      <div class="panel">
+        <div style="display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:10px;">
+          <h2 style="margin:0;">📋 Bandeja de Solicitudes y Comité de Bienestar Animal (Control Manual + Airflow)</h2>
+          <button class="primary" onclick="evaluarConAirflow()">⚙️ Evaluar Pendientes con Reglas Airflow</button>
+        </div>
+        <div id="mensaje-admin"></div>
+        <div id="resumen-solicitudes" class="kpi-row"></div>
+        <div style="margin:10px 0;">
+          <input type="text" id="obs-personalizada" placeholder="Observación opcional del Comité antes de hacer clic en Aceptar / En espera / Negar..." style="width:100%; box-sizing:border-box; padding:8px 12px; border:1px solid #cbd5e1; border-radius:6px;" />
+        </div>
+        <div style="overflow-x:auto;">
+          <table id="tabla-solicitudes">
+            <thead>
+              <tr>
+                <th>Radicado</th>
+                <th>Fecha</th>
+                <th>Animal</th>
+                <th>Solicitante y Contacto</th>
+                <th>Ciudad / Vivienda</th>
+                <th>Motivación</th>
+                <th>Estado Actual</th>
+                <th>Concepto Comité / Airflow</th>
+                <th>Acciones Manuales</th>
+              </tr>
+            </thead>
+            <tbody></tbody>
+          </table>
+        </div>
       </div>
-      <div id="mensaje-admin"></div>
-      <div id="resumen-solicitudes" class="kpi-row"></div>
-      <div style="overflow-x:auto;">
-        <table id="tabla-solicitudes">
-          <thead>
-            <tr>
-              <th>Radicado</th>
-              <th>Fecha</th>
-              <th>Animal</th>
-              <th>Solicitante</th>
-              <th>Ciudad / Vivienda</th>
-              <th>Motivación</th>
-              <th>Estado Actual</th>
-              <th>Concepto Comité / Airflow</th>
-              <th>Acciones Manuales</th>
-            </tr>
-          </thead>
-          <tbody></tbody>
-        </table>
+    </div>
+
+    <!-- SECCIÓN 2: GESTIÓN DE ANIMALES -->
+    <div id="sec-animales" class="admin-section">
+      <div class="panel">
+        <h2 style="margin-top:0;">🐾 Inventario de Animales Rescatados (Cali CBA & Bogotá IDPYBA)</h2>
+        <p style="font-size:13.5px; color:#475569;">Desde aquí los creadores pueden cambiar o liberar manualmente el estado de cualquier animal en el catálogo:</p>
+        <div style="overflow-x:auto;">
+          <table id="tabla-admin-animales">
+            <thead>
+              <tr>
+                <th>Código</th>
+                <th>Nombre / Especie</th>
+                <th>Ciudad y Zona Rescate</th>
+                <th>Entidad</th>
+                <th>Caso Origen ETL</th>
+                <th>Estado Actual</th>
+                <th>Cambiar Estado</th>
+              </tr>
+            </thead>
+            <tbody></tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+
+    <!-- SECCIÓN 3: MONITOR ETL Y 14 REGLAS DE CALIDAD -->
+    <div id="sec-calidad" class="admin-section">
+      <div class="panel">
+        <h2 style="margin-top:0;">🏛️ Estado de la Arquitectura Medallion y Data Warehouse SQLite</h2>
+        <div class="kpi-row">
+          <div class="kpi-box"><span>🥉 Bronze (Cali + Bogotá + API)</span><strong>17.642 + 20 loc.</strong><small>SHA-256 verificado</small></div>
+          <div class="kpi-box"><span>🥈 Silver (Zonas Homologadas)</span><strong>83 → 42 zonas</strong><small>0 registros perdidos</small></div>
+          <div class="kpi-box"><span>🥇 Gold (`gold_final.csv`)</span><strong>404 filas | 13 KPIs</strong><small>0 duplicados de llave</small></div>
+          <div class="kpi-box"><span>🗄️ Data Warehouse (`warehouse.db`)</span><strong>18 Tablas SQLite</strong><small>Carga idempotente</small></div>
+        </div>
+        <h3>✅ Auditoría de las 14 Reglas de Validación de Calidad (`validaciones_calidad.csv`)</h3>
+        <div style="overflow-x:auto;">
+          <table id="tabla-admin-calidad">
+            <thead>
+              <tr><th>Etapa</th><th>Regla de Calidad</th><th>Valor Observado</th><th>Umbral / Esperado</th><th>Estado</th><th>Detalle</th></tr>
+            </thead>
+            <tbody></tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+
+    <!-- SECCIÓN 4: EXPLORADOR DE LOS 13 KPIS Y 8 GRÁFICAS -->
+    <div id="sec-kpis" class="admin-section">
+      <div class="panel">
+        <h2 style="margin-top:0;">📊 Explorador Interno de las 13 Tablas KPI de Negocio</h2>
+        <div style="display:flex; gap:12px; align-items:center; flex-wrap:wrap; margin-bottom:12px;">
+          <label><strong>Seleccionar KPI:</strong></label>
+          <select id="sel-kpi-admin" onchange="cargarKpiAdmin()" style="min-width:340px; padding:8px;"></select>
+        </div>
+        <p id="desc-kpi-admin" style="font-size:13.5px; color:#0f766e; font-weight:600;"></p>
+        <div style="max-height:380px; overflow:auto;">
+          <table id="tabla-kpi-admin"><thead></thead><tbody></tbody></table>
+        </div>
+
+        <hr style="margin:28px 0; border:none; border-top:1px solid #e2e8f0;" />
+        <h3>🖼️ Galería Completa de las 8 Gráficas PNG de Evidencia (`evidencias/`)</h3>
+        <div class="gallery-grid">
+          <div class="gallery-card"><strong>01. Casos por Comuna (Cali)</strong><img src="/evidencias/01_casos_por_comuna.png" /></div>
+          <div class="gallery-card"><strong>02. Evolución Mensual 2024–2025</strong><img src="/evidencias/02_evolucion_mensual.png" /></div>
+          <div class="gallery-card"><strong>03. Urgencias Cali vs Bogotá</strong><img src="/evidencias/03_urgencias_cali_vs_bogota.png" /></div>
+          <div class="gallery-card"><strong>04. Calidad Antes vs Después (OKR 3)</strong><img src="/evidencias/04_calidad_antes_despues.png" /></div>
+          <div class="gallery-card"><strong>05. Cambio Mix 2024 vs 2025</strong><img src="/evidencias/05_cambio_mix_2024_vs_2025.png" /></div>
+          <div class="gallery-card"><strong>06. Brecha Prevención vs Críticos</strong><img src="/evidencias/06_brecha_prevencion_vs_criticos.png" /></div>
+          <div class="gallery-card"><strong>07. Top Barrios Críticos Cali</strong><img src="/evidencias/07_top_barrios_criticos_cali.png" /></div>
+          <div class="gallery-card"><strong>08. Bogotá Sesgo UCA vs Resto</strong><img src="/evidencias/08_bogota_sesgo_uca_vs_resto.png" /></div>
+        </div>
       </div>
     </div>
   </div>
+
   <script>
+    function mostrarSeccionAdmin(id, btn) {
+      document.querySelectorAll('.admin-section').forEach(s => s.classList.remove('active'));
+      document.querySelectorAll('.admin-tab-btn').forEach(b => b.classList.remove('active'));
+      document.getElementById('sec-' + id).classList.add('active');
+      btn.classList.add('active');
+    }
+
+    async function iniciarSesion(e) {
+      e.preventDefault();
+      const usuario = document.getElementById('usr-admin').value;
+      const password = document.getElementById('pwd-admin').value;
+      const r = await fetch('/admin/login', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ usuario, password })
+      });
+      const d = await r.json();
+      if (r.ok && d.autenticado) {
+        sessionStorage.setItem('admin_autenticado', '1');
+        activarVistaAdmin();
+      } else {
+        document.getElementById('msg-login').innerHTML = `<div class="alert alert-err">${d.detail || 'Usuario o contraseña incorrectos'}</div>`;
+      }
+    }
+
+    function cerrarSesion() {
+      sessionStorage.removeItem('admin_autenticado');
+      document.getElementById('vista-admin').style.display = 'none';
+      document.getElementById('zona-logout').style.display = 'none';
+      document.getElementById('vista-login').style.display = 'block';
+      document.getElementById('pwd-admin').value = '';
+    }
+
+    function activarVistaAdmin() {
+      document.getElementById('vista-login').style.display = 'none';
+      document.getElementById('vista-admin').style.display = 'block';
+      document.getElementById('zona-logout').style.display = 'block';
+      cargarSolicitudes();
+      cargarAnimalesAdmin();
+      cargarCalidadAdmin();
+      inicializarSelectorKpis();
+    }
+
     function claseBadgeEstado(est) {
-      if (est === 'Aceptada') return 'badge-aceptada';
-      if (est === 'En espera') return 'badge-espera';
-      if (est === 'Negada') return 'badge-negada';
+      if (est === 'Aceptada' || est === 'Disponible' || est === 'OK') return 'badge-aceptada';
+      if (est === 'En espera' || est === 'ADVERTENCIA') return 'badge-espera';
+      if (est === 'Negada' || est === 'FALLA') return 'badge-negada';
       return 'badge-rev';
     }
+
     async function cargarSolicitudes() {
       const r = await fetch('/adopciones/solicitudes');
       const d = await r.json();
@@ -1205,8 +1698,8 @@ def panel_privado_creadores_comite():
         <tr>
           <td><strong>${s.radicado}</strong></td>
           <td>${s.fecha_solicitud}</td>
-          <td>${s.nombre_animal} (${s.id_animal})<br><small>${s.ciudad_animal}</small></td>
-          <td>${s.nombre_solicitante}<br><small>Tel: ${s.telefono}</small></td>
+          <td><strong>${s.nombre_animal}</strong> (${s.id_animal})<br><small>${s.especie} - ${s.ciudad_animal}</small></td>
+          <td><strong>${s.nombre_solicitante}</strong><br><small>CC: ${s.documento} | Tel: ${s.telefono}<br>${s.correo}</small></td>
           <td>${s.ciudad_residencia} - ${s.direccion_barrio}<br><small>${s.tipo_vivienda}</small></td>
           <td>${s.motivacion}</td>
           <td><span class="badge ${claseBadgeEstado(s.estado_solicitud)}">${s.estado_solicitud}</span></td>
@@ -1219,27 +1712,105 @@ def panel_privado_creadores_comite():
         </tr>
       `).join('');
     }
+
     async function cambiarEstado(radicado, nuevoEstado) {
+      const obs = document.getElementById('obs-personalizada').value.trim();
+      const payload = { nuevo_estado: nuevoEstado };
+      if (obs) payload.observacion = obs;
       const r = await fetch(`/adopciones/solicitudes/${radicado}/estado`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ nuevo_estado: nuevoEstado })
+        body: JSON.stringify(payload)
       });
       const d = await r.json();
       if (r.ok) {
         document.getElementById('mensaje-admin').innerHTML = `<div class="alert">${d.mensaje}</div>`;
+        document.getElementById('obs-personalizada').value = '';
         cargarSolicitudes();
+        cargarAnimalesAdmin();
       }
     }
+
     async function evaluarConAirflow() {
       const r = await fetch('/adopciones/evaluar-airflow', { method: 'POST' });
       const d = await r.json();
       if (r.ok) {
         document.getElementById('mensaje-admin').innerHTML = `<div class="alert">🤖 ${d.mensaje}</div>`;
         cargarSolicitudes();
+        cargarAnimalesAdmin();
       }
     }
-    cargarSolicitudes();
+
+    async function cargarAnimalesAdmin() {
+      const r = await fetch('/adopciones/animales');
+      const d = await r.json();
+      const tbody = document.querySelector('#tabla-admin-animales tbody');
+      tbody.innerHTML = d.animales.map(a => `
+        <tr>
+          <td><strong>${a.id_animal}</strong></td>
+          <td>${a.especie === 'Canino' ? '🐶' : '🐱'} <strong>${a.nombre}</strong> (${a.edad_aprox}, ${a.sexo})</td>
+          <td>${a.ciudad} — ${a.zona_rescate} (${a.barrio_rescate})</td>
+          <td>${a.entidad}</td>
+          <td>ID #${a.id_caso_origen_etl}</td>
+          <td><span class="badge ${claseBadgeEstado(a.estado)}">${a.estado}</span></td>
+          <td style="white-space:nowrap;">
+            <button class="btn-sm btn-ok" onclick="cambiarEstadoAnimal('${a.id_animal}', 'Disponible')">Disponible</button>
+            <button class="btn-sm btn-wait" onclick="cambiarEstadoAnimal('${a.id_animal}', 'En espera')">En espera</button>
+            <button class="btn-sm btn-deny" onclick="cambiarEstadoAnimal('${a.id_animal}', 'Adoptado')">Adoptado</button>
+          </td>
+        </tr>
+      `).join('');
+    }
+
+    async function cambiarEstadoAnimal(idAnimal, nuevoEstado) {
+      const r = await fetch(`/adopciones/animales/${idAnimal}/estado`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ nuevo_estado: nuevoEstado })
+      });
+      if (r.ok) cargarAnimalesAdmin();
+    }
+
+    async function cargarCalidadAdmin() {
+      const r = await fetch('/calidad');
+      const d = await r.json();
+      const tbody = document.querySelector('#tabla-admin-calidad tbody');
+      tbody.innerHTML = (d.Data || []).map(f => `
+        <tr>
+          <td><strong>${f.etapa || 'ETL'}</strong></td>
+          <td>${f.regla || ''}</td>
+          <td>${f.valor_actual ?? f.valor ?? ''}</td>
+          <td>${f.umbral ?? f.esperado ?? ''}</td>
+          <td><span class="badge ${claseBadgeEstado(f.estado)}">${f.estado}</span></td>
+          <td><small>${f.detalle || ''}</small></td>
+        </tr>
+      `).join('');
+    }
+
+    async function inicializarSelectorKpis() {
+      const r = await fetch('/kpis');
+      const d = await r.json();
+      const sel = document.getElementById('sel-kpi-admin');
+      sel.innerHTML = (d.kpis || []).map(k => `<option value="${k.kpi}">${k.kpi} — ${k.descripcion}</option>`).join('');
+      cargarKpiAdmin();
+    }
+
+    async function cargarKpiAdmin() {
+      const nombre = document.getElementById('sel-kpi-admin').value;
+      if (!nombre) return;
+      const r = await fetch('/kpis/' + nombre);
+      const d = await r.json();
+      document.getElementById('desc-kpi-admin').innerText = `${d.descripcion} (${d.total_registros} registros)`;
+      const cols = d.Nombres_columnas || [];
+      document.querySelector('#tabla-kpi-admin thead').innerHTML = '<tr>' + cols.map(c => `<th>${c}</th>`).join('') + '</tr>';
+      document.querySelector('#tabla-kpi-admin tbody').innerHTML = (d.Data || []).map(row =>
+        '<tr>' + cols.map(c => `<td>${row[c] ?? ''}</td>`).join('') + '</tr>'
+      ).join('');
+    }
+
+    if (sessionStorage.getItem('admin_autenticado') === '1') {
+      activarVistaAdmin();
+    }
   </script>
 </body>
 </html>"""
