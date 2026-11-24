@@ -150,8 +150,8 @@ docker compose exec airflow-scheduler airflow dags list-import-errors
 
 ### Prueba P4: Fallo inducido, log del error y evidencia de reintento o recuperación
 El pipeline incluye un mecanismo seguro para inducir un fallo controlado sin dañar el código:
-1. En PowerShell, cree el archivo disparador de fallo en Bronze:
-   ```powershell
+1. En la Terminal, cree el archivo disparador de fallo en Bronze:
+   ```Terminal
    New-Item -Path "..\Medallon\data\bronze\FORZAR_FALLO_API.txt" -ItemType File -Force
    ```
 2. Ejecute manualmente el DAG (`Trigger DAG`) en Airflow.
@@ -159,7 +159,7 @@ El pipeline incluye un mecanismo seguro para inducir un fallo controlado sin da�
 4. Abra el **Log** de `extract_api_bronze` y tome captura del mensaje:
    `ConnectionError: Fallo simulado en extract_api_bronze: API de Datos Abiertos de Cali temporalmente inaccesible (FORZAR_FALLO_API.txt activo)`.
 5. Ahora elimine el archivo disparador para simular que la API se recuperó:
-   ```powershell
+   ```Terminal
    Remove-Item -Path "..\Medallon\data\bronze\FORZAR_FALLO_API.txt" -Force
    ```
 6. En Airflow, haga clic sobre la tarea `extract_api_bronze` → **Clear task** (o espere al reintento automático de los 5 minutos). La tarea se reejecutará y todo el flujo terminará en `success`.

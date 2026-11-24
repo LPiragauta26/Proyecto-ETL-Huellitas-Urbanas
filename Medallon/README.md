@@ -83,23 +83,34 @@ pip install -r requirements.txt
 ```
 
 ### 2.1 Ejecutar el Pipeline ETL completo
-Procesa las capas **Bronze → Silver → Gold**, genera los **13 KPIs**, pobla las **18 tablas en SQLite** (`data/gold/warehouse.db`), evalúa las **14 reglas de calidad** y exporta las **8 gráficas PNG** en `evidencias/`:
-```powershell
+Limpia el log anterior, procesa las capas **Bronze → Silver → Gold**, genera los **13 KPIs**, pobla las **18 tablas en SQLite** (`data/gold/warehouse.db`), evalúa las **14 reglas de calidad**, exporta las **8 gráficas PNG** en `evidencias/` y ejecuta el **motor automático de evaluación de solicitudes de adopción (`Aceptada`, `En espera`, `Negada`)**:
+```Terminal
+Clear-Content logs\log.txt
 python main.py
 ```
 
 ### 2.2 Ejecutar las 23 Pruebas Automatizadas (`pytest`)
-Verifica las reglas de limpieza de comunas/clases/fechas, inferencia geográfica, cuadre entre Silver y Gold, cálculo de los 13 KPIs, fallo controlado de Airflow (`P4`), estructura de carpetas y endpoints de la API:
+Verifica las reglas de limpieza de comunas/clases/fechas, inferencia geográfica, cuadre entre Silver y Gold, cálculo de los 13 KPIs, fallo controlado de Airflow (`P4`), estructura de carpetas y endpoints de la API (`23 passed, 0 warnings`):
 ```Terminal
 python -m pytest -v
 ```
 
-### 2.3 Levantar la API FastAPI + Portal Ciudadano de Consulta Gold y Adopción
+### 2.3 Levantar la API FastAPI + Portal Público Ciudadano (`/portal`) + Panel Privado Admin (`/admin`)
 ```Terminal
-uvicorn api.main:app --reload
+python -m uvicorn api.main:app --reload
 ```
 Rutas disponibles en el navegador una vez iniciado el servidor en `http://127.0.0.1:8000`:
-* **🐾 Portal Web Ciudadano (Adopción + Consulta Gold interactiva)**: `http://127.0.0.1:8000/portal`
+* **👥 Portal Web Público para Ciudadanos (`/portal`)**: `http://127.0.0.1:8000/portal`
+  * **📈 Pestaña 1 — Preguntas de Negocio (Gráficas + Preguntas Frecuentes)**: Incluye las **4 preguntas de negocio explicadas con gráficas visuales y barras dinámicas** (priorización de comunas en Cali, giro 2024 vs. 2025 y caída del -94,8% en adopciones, barrios críticos *hotspots* con Siloé #1, y sesgo de sede UCA en Engativá vs. las otras 19 localidades de Bogotá) + **5 Preguntas Frecuentes (FAQ desplegables)** para las preguntas no gráficas.
+  * **🐶 Pestaña 2 — Adoptar un Animal Rescatado**: Catálogo de animales rehabilitados en Cali y Bogotá, formulario de postulación y **buscador personal por radicado o documento** para que cada ciudadano consulte únicamente el estado de su propia solicitud (`Aceptada`, `En espera` o `Negada`).
+  * **📊 Pestaña 3 — Explorador de Datos Abiertos (`gold_final.csv`)**: Consulta interactiva con filtros por ciudad y categoría.
+* **🔐 Panel Privado de Creadores y Comité de Bienestar Animal (`/admin`)**: `http://127.0.0.1:8000/admin`
+  * **Protegido con Inicio de Sesión**: **Usuario:** `Admin` | **Contraseña:** `admin123`
+  * **4 Módulos internos para administradores**:
+    1. **📋 Comité de Solicitudes (Manual + Airflow)**: Contadores en vivo (**Total**, **🟢 Aceptadas**, **🟡 En Espera**, **🔴 Negadas**), botón **`⚙️ Evaluar Pendientes con Reglas Airflow`**, campo de observación personalizada y botones **`✅ Aceptar`**, **`⏳ En espera`**, **`❌ Negar`** por cada solicitud.
+    2. **🐾 Gestión de Animales Rescatados**: Control de disponibilidad (`Disponible`, `En espera`, `Adoptado`) vinculado al `id_caso_origen_etl`.
+    3. **🏛️ Monitor ETL Medallion & 14 Reglas de Calidad**: Estado de las 4 capas (`Bronze`, `Silver`, `Gold`, `SQLite 18 tablas`) y auditoría completa de `validaciones_calidad.csv` (`12 OK`, `2 ADVERTENCIA`, `0 FALLA`).
+    4. **📊 Explorador de los 13 KPIs y Galería de las 8 Gráficas PNG**: Visor interno de tablas KPI y galería visual completa.
 * **📘 Documentación interactiva Swagger UI**: `http://127.0.0.1:8000/docs`
 * **🏠 Portada y catálogo de endpoints**: `http://127.0.0.1:8000/`
 * **📊 Capa Gold completa (con filtros opcionales `?ciudad=`, `?tipo_zona=`, `?categoria=`, `?es_critico=`)**: `http://127.0.0.1:8000/gold`
@@ -110,13 +121,17 @@ Rutas disponibles en el navegador una vez iniciado el servidor en `http://127.0.
 * **🐶 Animales rescatados disponibles para adopción**: `http://127.0.0.1:8000/adopciones/animales`
 * **📉 Datos históricos de adopción en Gold y hallazgo 2024 vs. 2025**: `http://127.0.0.1:8000/adopciones/gold`
 * **📝 Registrar postulación de adopción (`POST`)**: `http://127.0.0.1:8000/adopciones/solicitar`
-* **📂 Ver solicitudes de adopción registradas**: `http://127.0.0.1:8000/adopciones/solicitudes`
+* **🔎 Consultar estado individual por radicado o cédula (`GET`)**: `http://127.0.0.1:8000/adopciones/consultar-mi-solicitud?q=ADOP-2026-0001`
+* **📂 Ver solicitudes y resumen por estado (`Aceptada`, `En espera`, `Negada`)**: `http://127.0.0.1:8000/adopciones/solicitudes`
+* **⚖️ Actualizar estado de una solicitud (`POST`)**: `http://127.0.0.1:8000/adopciones/solicitudes/{radicado}/estado`
+* **🤖 Ejecutar evaluación automática con reglas de Airflow (`POST`)**: `http://127.0.0.1:8000/adopciones/evaluar-airflow`
+* **🖼️ Servir cualquiera de las 8 gráficas PNG de evidencia**: ej. `http://127.0.0.1:8000/evidencias/01_casos_por_comuna.png`
 * **✅ Reporte de las 14 reglas de validación de calidad**: `http://127.0.0.1:8000/calidad`
 * **❤️ Estado de salud del servicio (`health`)**: `http://127.0.0.1:8000/health`
 
 ### 2.4 Ejecutar la Aplicación Visual en Streamlit o por Consola (`app/app.py`)
-* **Interfaz gráfica web en Streamlit** (`http://localhost:8501`) — incluye el cargador de CSV y métricas dinámicas del profesor adaptadas a Bienestar Animal + pestañas de Adopción Responsable, Priorización Territorial, Top Barrios Críticos y las 8 Gráficas de Evidencia:
-  ``Terminal
+* **Interfaz gráfica web en Streamlit** (`http://localhost:8501`) — incluye el cargador de CSV y métricas dinámicas del profesor adaptadas a Bienestar Animal + 6 pestañas (**📈 Preguntas de Negocio: Gráficas + FAQ**, **🐾 Adopción de Animales Rescatados**, **Priorización Territorial**, **Top Barrios Críticos**, **Evidencias Gráficas PNG** y **🔐 Admin / Comité Privado** protegido con usuario `Admin` y contraseña `admin123`):
+  ```Terminal
   python -m streamlit run app/app.py
   ```
 * **Reporte ejecutivo en consola** (auditoría de las 5 etapas del ETL + Top 5 comunas y barrios + estado de la API):
@@ -134,6 +149,7 @@ docker compose up -d
 ```
 * **Interfaz web de Airflow**: `http://localhost:8080` (usuario `airflow` / contraseña `airflow`)
 * **DAG**: `etl_bienestar_animal_hourly` (`[extract_api_bronze, extract_excel_bronze] >> transform_silver >> build_gold >> validate_gold`)
+* **Evaluación automática de adopciones en Airflow**: En la tarea `validate_gold`, Airflow evalúa automáticamente las solicitudes de adopción pendientes y registra en los logs cuántas quedaron **🟢 Aceptadas**, **🟡 En espera** y **🔴 Negadas**.
 * *(Consulta [`airflow-medallon/README.md`](../airflow-medallon/README.md) para el paso a paso de las pruebas **P1 a P5**).*
 
 ---
@@ -249,3 +265,35 @@ El pipeline genera automáticamente **8 gráficas PNG** y el reporte `evidencias
 6. `06_brecha_prevencion_vs_criticos.png` — Mapa de brecha preventiva vs. casos críticos por comuna.
 7. `07_top_barrios_criticos_cali.png` — Top 15 barrios críticos de Cali (desglose Urgencias vs. Denuncias).
 8. `08_bogota_sesgo_uca_vs_resto.png` — Contraste de diagnósticos y canales entre Engativá (UCA) y el resto de Bogotá.
+
+---
+
+## 8. Arquitectura de Servicio: Portal Público (`/portal`) vs. Panel Privado de Creadores (`/admin`) y Motor Airflow
+
+Para responder al hallazgo crítico de negocio (**caída del -94,8 % en las adopciones de Cali entre 2024 y 2025**), la API en FastAPI (`api/main.py`) y la aplicación en Streamlit (`app/app.py`) separan claramente la experiencia ciudadana pública del panel administrativo privado:
+
+### 8.1 Vista Pública para Todas las Personas (`http://127.0.0.1:8000/portal`)
+1. **📈 Preguntas de Negocio (Gráficas + Preguntas Frecuentes)**:
+   * **Parte 1 (Visual / Gráficas)**: Presenta las 4 preguntas principales con barras comparativas dinámicas y las gráficas oficiales del ETL (`/evidencias/*.png`): priorización territorial en Cali, cambio del mix 2024 vs. 2025, ranking de barrios críticos (*hotspots*) liderado por Siloé, y el contraste entre Engativá (sede UCA) y las otras 19 localidades de Bogotá.
+   * **Parte 2 (Preguntas Frecuentes / FAQ desplegables)**: Acordeones interactivos que explican de forma ciudadana las preguntas no gráficas (brecha entre maltrato y esterilización, patrón semanal de atención y jornadas de sábado, recuperación de calidad geográfica OKR 3 `83 → 42` zonas, homologación Cali vs. Bogotá y proceso de adopción).
+2. **🐶 Adopción Responsable y Consulta Individual**:
+   * Catálogo de animales rescatados y rehabilitados en Cali (CBA/Uaepa) y Bogotá (IDPYBA/UCA), formulario de postulación y **buscador individual por número de radicado o documento** (`/adopciones/consultar-mi-solicitud`) que muestra únicamente el estado del trámite propio sin exponer datos personales de otros ciudadanos.
+3. **📊 Explorador de Datos Abiertos Gold**:
+   * Tabla interactiva con filtros por ciudad y categoría sobre `gold_final.csv` (`404 registros`).
+
+### 8.2 Vista Privada Exclusiva para Creadores / Comité (`http://127.0.0.1:8000/admin`)
+Protegida mediante pantalla de autenticación (`POST /admin/login`):
+* **Usuario:** `Admin`
+* **Contraseña:** `admin123`
+
+Al iniciar sesión se habilitan **4 módulos internos de administración** (y la opción **`🚪 Cerrar Sesión`**):
+1. **📋 Comité de Solicitudes (Doble Control: Manual + Airflow)**:
+   * Indicadores en vivo (**Total Solicitudes**, **🟢 Aceptadas**, **🟡 En Espera**, **🔴 Negadas**).
+   * **Motor Automático de Airflow (`evaluar_solicitudes_automatico_airflow`)**: Ejecutado automáticamente en la tarea `validate_gold` del DAG `etl_bienestar_animal_hourly` (y en `python main.py` o desde el botón **`⚙️ Evaluar Pendientes con Reglas Airflow`**), evalúa vivienda, ciudad y motivación del solicitante:
+     * 🟢 **`Aceptada`**: Cumple criterios de vivienda con cerramiento seguro, misma ciudad y compromiso de tenencia responsable → el animal pasa a **`Adoptado`**.
+     * 🟡 **`En espera`**: Requiere entrevista virtual o verificación domiciliaria/traslado → el animal permanece **`En espera`**.
+     * 🔴 **`Negada`**: Vivienda sin cerramiento seguro o motivación incompatible → la solicitud se marca **`Negada`** y el animal **regresa automáticamente a estado `Disponible`**.
+   * **Botones Manuales en Vivo**: Permite al comité aprobar (**`✅ Aceptar`**), dejar en verificación (**`⏳ En espera`**) o rechazar (**`❌ Negar`**) cualquier solicitud agregando observaciones personalizadas.
+2. **🐾 Gestión de Animales Rescatados**: Tabla de control de los animales del catálogo vinculada al `id_caso_origen_etl` con cambio de estado en un clic.
+3. **🏛️ Monitor Técnico ETL Medallion & 14 Reglas de Calidad**: Resumen de las 4 capas (**Bronze → Silver → Gold → SQLite 18 tablas**) y tabla completa de auditoría de las **14 reglas de calidad (`12 OK`, `2 ADVERTENCIA`, `0 FALLA`)**.
+4. **📊 Explorador Interno de los 13 KPIs y Galería de las 8 Gráficas PNG**: Selector para inspeccionar cualquiera de las 13 tablas KPI de negocio y visualizar las 8 gráficas de evidencia.
