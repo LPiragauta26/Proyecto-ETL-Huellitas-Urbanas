@@ -253,7 +253,7 @@ SOLICITUDES_SEMILLA = [
         "tipo_vivienda": "Apartamento con mallas de protección y espacio seguro",
         "motivacion": "Contamos con mallas de seguridad en balcones, presupuesto veterinario y experiencia cuidando gatos rescatados.",
         "estado_solicitud": "Aceptada",
-        "observacion_comite": "Evaluación Airflow/Comité: Cumple criterios de tenencia responsable, misma ciudad y vivienda segura con mallas.",
+        "observacion_comite": "Cumple criterios de tenencia responsable, misma ciudad y vivienda segura con mallas.",
     },
     {
         "radicado": "ADOP-2026-0002",
@@ -272,7 +272,7 @@ SOLICITUDES_SEMILLA = [
         "tipo_vivienda": "Casa amplia con patio interno",
         "motivacion": "Deseo adoptarlo y asumir traslado, tengo patio seguro.",
         "estado_solicitud": "En espera",
-        "observacion_comite": "Evaluación Airflow/Comité: En espera de entrevista virtual y verificación de traslado interurbano (Bogotá -> Cali).",
+        "observacion_comite": "En espera de entrevista virtual y verificación de traslado interurbano (Bogotá -> Cali).",
     },
     {
         "radicado": "ADOP-2026-0003",
@@ -291,7 +291,7 @@ SOLICITUDES_SEMILLA = [
         "tipo_vivienda": "Lote sin cerramiento en terraza abierta",
         "motivacion": "Para cuidar un lote abierto en las noches.",
         "estado_solicitud": "Negada",
-        "observacion_comite": "Evaluación Airflow/Comité: Negada por condiciones sin cerramiento seguro; el animal Bruno regresa a estado Disponible.",
+        "observacion_comite": "Negada por condiciones sin cerramiento seguro; el animal Bruno regresa a estado Disponible.",
     },
 ]
 
@@ -412,7 +412,7 @@ def registrar_solicitud_adopcion(datos: SolicitudAdopcionInput) -> dict:
         "tipo_vivienda": datos.tipo_vivienda.strip(),
         "motivacion": datos.motivacion.strip(),
         "estado_solicitud": "En revisión por bienestar animal",
-        "observacion_comite": "Pendiente de evaluación (puedes usar los botones manuales o correr el DAG en Airflow)",
+        "observacion_comite": "Solicitud en revisión por el Comité de Bienestar Animal.",
     }
 
     df_sol = pd.concat([df_sol, pd.DataFrame([nueva_fila])], ignore_index=True)
@@ -520,19 +520,19 @@ def evaluar_solicitudes_automatico_airflow() -> dict:
             if any(p in vivienda or p in motivacion_low for p in palabras_riesgo) or len(motivacion) < 12:
                 nuevo_est = "Negada"
                 obs = (
-                    "Airflow Auto-Evaluación: Negada por condiciones de vivienda sin cerramiento "
+                    "Negada por condiciones de vivienda sin cerramiento "
                     "o motivación insuficiente de tenencia responsable."
                 )
             elif ciudad_anim and ciudad_res and ciudad_anim != ciudad_res or len(motivacion) < 30:
                 nuevo_est = "En espera"
                 obs = (
-                    "Airflow Auto-Evaluación: En espera de entrevista virtual y verificación "
+                    "En espera de entrevista virtual y verificación "
                     "domiciliaria por comité de bienestar animal."
                 )
             else:
                 nuevo_est = "Aceptada"
                 obs = (
-                    "Airflow Auto-Evaluación: Aceptada automáticamente; cumple criterios de "
+                    "Aceptada; cumple criterios de "
                     "vivienda segura, misma ciudad y compromiso de cuidado."
                 )
 
@@ -1023,8 +1023,8 @@ def portal_ciudadano_gold_y_adopcion():
 <body>
   <header>
     <div>
-      <h1>🐾 Portal Ciudadano: Bienestar Animal, Preguntas de Negocio y Adopción (Cali & Bogotá)</h1>
-      <p>Arquitectura Medallion (Bronze → Silver → Gold) | Cali (CBA / UAEPA) & Bogotá (IDPYBA / UCA)</p>
+      <h1>🐾 Huellitas urbanas</h1>
+      <p>🐾 Portal Ciudadano: Bienestar Animal, Preguntas de Negocio y Adopción (Cali & Bogotá)</p>
     </div>
     <div>
       <a href="/admin" class="btn-admin-link">🔐 Acceso Admin / Creadores</a>
@@ -1492,7 +1492,7 @@ def panel_privado_creadores_comite():
   <header>
     <div>
       <h1>🔐 Panel Privado de Creadores y Comité de Bienestar Animal</h1>
-      <p>Control de Adopciones + Airflow + Auditoría Técnica Medallion | <a href="/portal" style="color:#99f6e4;">Ir al Portal Público (/portal)</a> | <a href="/docs" style="color:#99f6e4;">Swagger (/docs)</a></p>
+      <p>Control de Adopciones | <a href="/portal" style="color:#99f6e4;">Ir al Portal Público (/portal)</a> | <a href="/docs" style="color:#99f6e4;">Swagger (/docs)</a></p>
     </div>
     <div id="zona-logout" style="display:none;">
       <span style="margin-right:12px; font-size:13px;">👤 Sesión activa: <strong>Admin</strong></span>

@@ -1,5 +1,5 @@
 ﻿id_animal,nombre,especie,sexo,edad_aprox,talla,ciudad,entidad,zona_rescate,barrio_rescate,historia_clinica_rescate,esterilizado,vacunado,estado,id_caso_origen_etl
-CBA-CALI-001,Bruno,Canino,Macho,2 años,Mediano,Cali,Centro de Bienestar Animal (CBA - UAEPA),Comuna 20,Siloé,"Atendido por urgencia veterinaria en brigada de Comuna 20; rehabilitado, vacunado y esterilizado.",Sí,Sí,Disponible,2090
+CBA-CALI-001,Bruno,Canino,Macho,2 años,Mediano,Cali,Centro de Bienestar Animal (CBA - UAEPA),Comuna 20,Siloé,"Atendido por urgencia veterinaria en brigada de Comuna 20; rehabilitado, vacunado y esterilizado.",Sí,Sí,En espera,2090
 CBA-CALI-002,Luna,Canino,Hembra,1 año,Mediana,Cali,Centro de Bienestar Animal (CBA - UAEPA),Comuna 18,Los Chorros,Rescatada tras reporte ciudadano en Los Chorros (Comuna 18). Recuperada nutricionalmente y esterilizada.,Sí,Sí,En espera,1816
 CBA-CALI-003,Simón,Felino,Macho,8 meses,Pequeño,Cali,Centro de Bienestar Animal (CBA - UAEPA),Comuna 1,Terrón Colorado,"Ingresó por atención médica en Terrón Colorado (Comuna 1). Dado de alta, desparasitado y esterilizado.",Sí,Sí,Adoptado,9271
 CBA-CALI-004,Canela,Canino,Hembra,3 años,Grande,Cali,Centro de Bienestar Animal (CBA - UAEPA),Comuna 14,José Manuel Marroquín II,"Rescatada tras denuncia de abandono en Comuna 14. Muy dócil, sociable con niños y esterilizada.",Sí,Sí,Disponible,10206
