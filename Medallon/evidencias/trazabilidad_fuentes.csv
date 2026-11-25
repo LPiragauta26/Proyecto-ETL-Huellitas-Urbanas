@@ -1,4 +1,4 @@
 ﻿fuente,formato,ruta_bronze,filas_bronze,filas_silver,sha256,fecha_ejecucion
-Cali - Solicitudes CBA / Uaepa,excel,data/bronze/Dataset_cali.xlsx,17642,17642,b3dda41a1f7fc2ce,2026-11-24 14:24:10
-Bogotá - Urgencias IDPYBA,geojson,data/bronze/dataset_bogota.geojson,20,20,1ced21585f46f559,2026-11-24 14:24:10
-Cali - Proyecciones Población API CKAN,json_api,data/bronze/poblacion_comunas_api.json,41,37,bb9587887bbb8855,2026-11-24 14:24:10
+Cali - Solicitudes CBA / Uaepa,excel,data/bronze/Dataset_cali.xlsx,17642,17642,b3dda41a1f7fc2ce,2026-11-25 03:00:07
+Bogotá - Urgencias IDPYBA,geojson,data/bronze/dataset_bogota.geojson,20,20,1ced21585f46f559,2026-11-25 03:00:07
+Cali - Proyecciones Población API CKAN,json_api,data/bronze/poblacion_comunas_api.json,41,37,bb9587887bbb8855,2026-11-25 03:00:07

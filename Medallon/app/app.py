@@ -377,11 +377,12 @@ def ejecutar_app_streamlit() -> None:
                 "en las otras 19 localidades el **84,9%** ingresa por reporte ciudadano liderado por **infecciosos (47,1%) y politraumatismos (20,6%)**."
             )
     with tab_adop:
-        st.subheader("Portal de Adopción Responsable (Cali CBA/Uaepa & Bogotá IDPYBA)")
+        st.subheader("🐾 Animales Rescatados y Rehabilitados listos para Adopción")
         st.info(
-            "📌 **Hallazgo del ETL**: Las solicitudes de adopción en Cali cayeron un **-94,8 %** entre 2024 (58 casos) "
-            "y 2025 (3 casos). Aquí puedes conocer los animales rescatados y rehabilitados en las zonas críticas "
-            "del ETL y postularte para adoptarlos."
+            "📌 **Hallazgo identificado:** Las solicitudes de adopción en Cali disminuyeron un 94,8 %, pasando de 58 casos en 2024 "
+            "a 3 casos en 2025. Ante esta reducción significativa, se habilita este módulo digital de adopción ciudadana, con el "
+            "objetivo de facilitar la adopción responsable de animales y brindarles una segunda oportunidad para disfrutar de una "
+            "vida digna, segura y llena de bienestar."
         )
         df_animales = asegurar_catalogo_adopciones()
         f1, f2 = st.columns(2)

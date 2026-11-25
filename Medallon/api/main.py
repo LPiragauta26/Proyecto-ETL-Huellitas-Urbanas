@@ -778,8 +778,10 @@ def consultar_adopciones_en_gold():
                 "adopciones_2025": int(r["casos_2025"]),
                 "variacion_pct_2024_vs_2025": float(r["variacion_pct"]),
                 "alerta_negocio": (
-                    "Las solicitudes de adopción en Cali cayeron un -94.8% entre 2024 (58 casos) y 2025 (3 casos). "
-                    "Por ello se habilita este módulo digital de adopción ciudadana conectado a la capa Gold."
+                    "Las solicitudes de adopción en Cali disminuyeron un 94,8 %, pasando de 58 casos en 2024 a 3 casos en 2025. "
+                    "Ante esta reducción significativa, se habilita este módulo digital de adopción ciudadana, con el objetivo de "
+                    "facilitar la adopción responsable de animales y brindarles una segunda oportunidad para disfrutar de una vida "
+                    "digna, segura y llena de bienestar."
                 ),
             }
     except Exception:
@@ -1333,7 +1335,7 @@ def portal_ciudadano_gold_y_adopcion():
       const r = await fetch('/adopciones/gold');
       const d = await r.json();
       if (d.hallazgo_etl_2024_vs_2025 && d.hallazgo_etl_2024_vs_2025.alerta_negocio) {
-        document.getElementById('alerta-etl').innerText = '📌 Hallazgo del ETL Medallion: ' + d.hallazgo_etl_2024_vs_2025.alerta_negocio;
+        document.getElementById('alerta-etl').innerText = '📌 Hallazgo identificado: ' + d.hallazgo_etl_2024_vs_2025.alerta_negocio;
       }
     }
 
